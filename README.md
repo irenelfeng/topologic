@@ -1,8 +1,10 @@
 #topologic
 
 ##INSTALL INSTRUCTIONS:
-1. Install npm
+1. Install npm and cd to topologic main folder
 2. `sudo npm install -g browserify`
-3. `sudo npm install --save react react-dom babelify babel-preset-react`
-4. `browserify -t [ babelify --presets [ react ] ] app/main.js -o bundle.js`
-5. View application by browsing to app/index.html 
+3. `sudo npm i`
+
+##RUNNING THE BUILD
+1. just type in `npm run build` and you are good to go! 
+2. View application by browsing to app/index.html 
