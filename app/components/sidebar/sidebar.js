@@ -1,11 +1,28 @@
-"use strict";
+import React from 'react';
+import Sidebar from 'react-sidebar';
 
-var React = require('react');
+// import icons 
+import GroupIcon from './icons/groups'
+import TaskIcon from './icons/tasks'
 
-export default class Sidebar extends React.Component { 
-	render(){
-		return(
-			<div>Hello my name is Irene</div>
-		); //need semicolon
-	}
+export default class SidebarIcons extends React.Component { 
+
+  constructor() {
+    super();
+      this.state = {sidebarDocked: true};
+    }
+
+  render() {
+
+    var sidebarContent = <div><b>Sidebar content</b><GroupIcon /></div>;
+
+    return(
+      <div>
+      <Sidebar sidebar={sidebarContent}
+        children="MAIN CONTENT"
+        docked={this.state.sidebarDocked} />
+          </div>
+
+    ); //need semicolon
+  }
 } 

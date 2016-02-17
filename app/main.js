@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Sidebar from './components/sidebar'
+import SidebarIcons from './components/sidebar/sidebar'
 
 // import all of our javascript files
 
@@ -9,14 +9,12 @@ import Sidebar from './components/sidebar'
 class Main extends React.Component { 
 	constructor() {
 		super();
-		this.me = [1,2,3,4];
-		this.me.filter((num) => num > 2);
 	}
 
 	render() {
 		return (
 			<div>
-				<Sidebar/>
+				<SidebarIcons/>
 
 			</div>
 		); //need semicolon
@@ -24,6 +22,8 @@ class Main extends React.Component {
 } 
 
 
+
+//do not change - changes the index.html file
 ReactDOM.render(
   <Main/>,
   document.getElementById('example')
