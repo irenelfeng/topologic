@@ -7,19 +7,24 @@ import SidebarIcons from './components/sidebar/sidebar'
 // components here. 
 
 class Main extends React.Component { 
-	constructor() {
-		super();
-		this.state = { activeIcon: "tasks" } ;
-	}
+  constructor() {
+    super();
+    this.state = { activeIcon: "tasks" } ;
+  }
 
-	render() {
-		return (
-			<div>
-				<SidebarIcons activeIcon={this.state.activeIcon} />
+  changeActive(activeIcon) {
+    this.setState({activeIcon});
+  }
 
-			</div>
-		); //need semicolon
-	}
+  render() {
+    return (
+      <div>
+        Clicked: {this.state.activeIcon}
+        <SidebarIcons changeActive={this.changeActive.bind(this)} activeIcon={this.state.activeIcon}>
+        </SidebarIcons>
+      </div>
+    ); //need semicolon
+  }
 } 
 
 

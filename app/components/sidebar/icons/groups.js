@@ -3,13 +3,19 @@ import React from 'react';
 export default class GroupIcon extends React.Component { 
   constructor() {
     super();
-      this.icon_name = "groups";
+      this.icon = "groups";
   }
 
   clicked(e) {
     console.log(this.icon_name);
-
+    if(this.icon== this.props.activeIcon){
+      // don't do anything, already clicked it
+    }else{
+      //pass to the sidebar
+      this.props.changeActive(this.icon);
+    }
   }
+  
   render() {
     // var group;
     // console.log(group);

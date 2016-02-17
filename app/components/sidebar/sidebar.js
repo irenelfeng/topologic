@@ -9,8 +9,8 @@ export default class SidebarIcons extends React.Component {
 
   constructor() {
     super();
-      //this.state = {sidebarDocked: true};
-    }
+    //this.state = {sidebarDocked: true};
+  }
 
   render() {
 
@@ -24,10 +24,9 @@ export default class SidebarIcons extends React.Component {
       //   docked={this.state.sidebarDocked} />
       <div>
         <b>Sidebar content</b>
-        <GroupIcon />
-        <
+        <GroupIcon changeActive ={this.props.changeActive} activeIcon={this.props.activeIcon}/>
+        <TaskIcon changeActive = {this.props.changeActive} activeIcon={this.props.activeIcon}/>
       </div>
-
-    ); //need semicolon
-  }
+    );
+  };
 } 
