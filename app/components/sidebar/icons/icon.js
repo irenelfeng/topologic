@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default class SidebarIcons extends React.Component { 
-	
+export default class Icons extends React.Component { 
+
 }

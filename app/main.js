@@ -9,12 +9,13 @@ import SidebarIcons from './components/sidebar/sidebar'
 class Main extends React.Component { 
 	constructor() {
 		super();
+		this.state = { activeIcon: "tasks" } ;
 	}
 
 	render() {
 		return (
 			<div>
-				<SidebarIcons/>
+				<SidebarIcons activeIcon={this.state.activeIcon} />
 
 			</div>
 		); //need semicolon
