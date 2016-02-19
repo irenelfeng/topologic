@@ -2,3 +2,4 @@ node_modules/
 bundle.js
 style.css
 build/
+.DS_Store
