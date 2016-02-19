@@ -24,7 +24,7 @@
   "scripts": {
     "build": "gulp build",
     "watch": "gulp watch",
-    "bw": "gulp",
+    "bw": "gulp bw",
     "clean": "rm -rf ./build && rm -rf ./node_modules"
   }
 }
