@@ -27,5 +27,5 @@ class Main extends React.Component {
 //do not change - changes the index.html file
 ReactDOM.render(
   <Main/>,
-  document.getElementById('example')
+  document.getElementById('app')
 );

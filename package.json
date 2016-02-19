@@ -47,7 +47,7 @@
     ]
   },
   "scripts": {
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] app/main.js -o bundle.js",
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] app/main.js -o bundle.js && stylus app/style.styl -o style.css",
     "watch": "watchify -t [ babelify --presets [ es2015 react ] ] app/main.js -o bundle.js",
     "bw": "npm run build && npm run watch"
   }

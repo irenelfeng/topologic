@@ -14,3 +14,5 @@ npm i
 
 ##DEV MODE
 Run `npm run bw` to avoid having to run `npm run build` over and over again.
+
+Note: at the moment, `npm run bw` / `npm run watch` does not rebuild the stylus

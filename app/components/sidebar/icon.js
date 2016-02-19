@@ -12,11 +12,11 @@ export default class Icon extends React.Component {
   }
 
   render() {
-    var opacity = (this.props.icon == this.props.active) ? 1 : .5;
+    var selected = (this.props.icon == this.props.active) ? 'selected' : '';
     return (
-      <div>
-        <button onClick={this.onClick.bind(this)} style={{opacity : opacity}} >
-          <img src = {'./img/' + this.props.icon + '.png'} />
+      <div className="icon-div">
+        <button className={"icon-btn " + selected} onClick={this.onClick.bind(this)} >
+          <img className="icon-img" src = {'./img/' + this.props.icon + '.png'} />
         </button>
       </div>
     );
