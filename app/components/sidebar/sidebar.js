@@ -1,32 +1,19 @@
 import React from 'react';
-//import Sidebar from 'react-sidebar';
+import Icon from './icon'
 
-// import icons 
-import GroupIcon from './icons/groups'
-import TaskIcon from './icons/tasks'
-
-export default class SidebarIcons extends React.Component { 
+export default class Sidebar extends React.Component { 
 
   constructor() {
     super();
-    //this.state = {sidebarDocked: true};
   }
 
   render() {
-
-    // var sidebarContent = <div><b>Sidebar content</b><GroupIcon /></div>;
-
-    return(
-      
-      // downloaded sidebar let's not do that
-      // <Sidebar sidebar={sidebarContent}
-      //   children="MAIN CONTENT"
-      //   docked={this.state.sidebarDocked} />
+    return (
       <div>
         <b>Sidebar content</b>
-        <GroupIcon changeActive ={this.props.changeActive} activeIcon={this.props.activeIcon}/>
-        <TaskIcon changeActive = {this.props.changeActive} activeIcon={this.props.activeIcon}/>
+        <Icon setActive ={this.props.setActive} active={this.props.active} icon='tasks'/>
+        <Icon setActive ={this.props.setActive} active={this.props.active} icon='groups'/>
       </div>
     );
-  };
-} 
+  }
+}
