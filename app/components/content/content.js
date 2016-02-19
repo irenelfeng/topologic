@@ -17,7 +17,7 @@ export default class Content extends React.Component {
 
   render() {
     var views = {
-      tasks: (<TaskView  />),
+      tasks: (<TaskView  tasks={[]}/>),
       groups: (<GroupView  />)
     };
 
