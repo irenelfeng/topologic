@@ -26,6 +26,7 @@ export default class Panel extends React.Component {
 
   render() {
     var itemsToPass = this.props.items[this.props.active];
+
     return (
       <div id="panel">
         <div id="panel-header-container">
