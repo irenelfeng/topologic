@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Sidebar from './components/sidebar/sidebar';
 import Panel from './components/panel/panel';
+import Content from './components/content/content';
 
 class Main extends React.Component { 
   constructor() {
@@ -20,6 +21,7 @@ class Main extends React.Component {
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel active={this.state.active} />
+        <Content active={this.state.active} />
       </div>
     );
   }

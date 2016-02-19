@@ -18,7 +18,7 @@ export default class Panel extends React.Component {
   }
 
   render() {
-    //           <ListContainer active={this.props.active} filterFn={this.state.filterFn} items={this.props.items[this.props.active]} />
+              // <ListContainer active={this.props.active} filterFn={this.state.filterFn} items={this.props.items[this.props.active]} />
     return (
       <div id="panel">
         <div id="panel-header-container">
