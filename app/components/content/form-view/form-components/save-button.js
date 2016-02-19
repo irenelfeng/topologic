@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class SaveButtonComponent extends React.Component { 
+export default class SaveButton extends React.Component { 
   constructor() {
     super();
   }

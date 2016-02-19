@@ -1,30 +1,37 @@
 import React from 'react';
-import TitleComponent from '../form-components/title-component';
-import DeadlineComponent from '../form-components/deadline-component';
-import LocationComponent from '../form-components/location-component';
-import DescriptionComponent from '../form-components/description-component';
-import GroupSelectComponent from '../form-components/group-select-component';
-import NotifySelectComponent from '../form-components/notify-select-component';
-import SaveButtonComponent from '../form-components/save-button-component';
-import CancelButtonComponent from '../form-components/cancel-button-component';
+import Title from '../form-components/title';
+import Deadline from '../form-components/deadline';
+import Location from '../form-components/location';
+import Description from '../form-components/description';
+import GroupSelect from '../form-components/group-select';
+import NotifySelect from '../form-components/notify-select';
+import SaveButton from '../form-components/save-button';
+import CancelButton from '../form-components/cancel-button';
 
-export default class NewTaskForm extends React.Component { 
+export default class NewTaskForm extends React.Component {
   constructor() {
     super();
+    this.state = {
+      deadline: false
+    };
+  }
+
+  setDeadline(checked) {
+    this.setState({deadline: checked});
   }
 
   render() {
     return (
       <div id="form-container">
-        <TitleComponent />
-        <DeadlineComponent />
-        <LocationComponent />
-        <DescriptionComponent />
-        <GroupSelectComponent />
-        <NotifySelectComponent />
+        <Title />
+        <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
+        <Location />
+        <Description />
+        <GroupSelect />
+        <NotifySelect deadline={this.state.deadline}/>
         <div className="form-group">
-          <SaveButtonComponent />
-          <CancelButtonComponent />
+          <CancelButton />
+          <SaveButton />
         </div>
       </div>
     );
