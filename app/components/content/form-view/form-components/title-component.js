@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class TitleComponent extends React.Component { 
+export default class TitleComponent extends React.Component {
   constructor() {
     super();
   }
