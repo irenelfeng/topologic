@@ -7,7 +7,14 @@ export default class Panel extends React.Component {
     super();
     this.state = {
       filterFn: () => true
+      //plusFn: () => true
     };
+
+    this.headerImgs = {
+      tasks: ("./img/plus.png"),
+      groups: ("./img/plus.png"),
+      notifications: ("./img/sort.png"),
+    }
   }
 
   setFilter(fn) {
@@ -26,12 +33,13 @@ export default class Panel extends React.Component {
 
   render() {
     var itemsToPass = this.props.items[this.props.active];
-
+    var href = this.headerImgs[this.props.active];
+    
     return (
       <div id="panel">
         <div id="panel-header-container">
           <div id="panel-header"> {this.props.active} </div>
-          <img id="panel-plus" src="./img/plus.png" />
+          <img id="panel-plus" src={href} />
         </div>
         <ListFilter active={this.props.active} setFilter={this.setFilter.bind(this)} />
         <ListContainer active={this.props.active} filterFn={this.state.filterFn} items={itemsToPass} />
