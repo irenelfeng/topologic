@@ -10,6 +10,8 @@ export default class TaskView extends React.Component {
     if (this.props.tasks.length == 0)
       return (<FormView type='newtask' />);
 
-    
+    return (
+      <div> </div>
+    );
   }
 }
