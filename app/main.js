@@ -52,7 +52,7 @@ class Main extends React.Component {
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content active={this.state.active} />
+        <Content active={this.state.active} items={this.state.items} />
       </div>
     );
   }
