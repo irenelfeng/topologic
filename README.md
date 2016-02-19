@@ -5,6 +5,7 @@ Install npm and cd to topologic main folder
 ```
 sudo npm install -g browserify
 sudo npm install -g watchify
+sudo npm install -g stylus
 npm i
 ```
 
