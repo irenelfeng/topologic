@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class GroupView extends React.Component { 
+export default class GroupView extends React.Component {
   constructor() {
     super();
   }

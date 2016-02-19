@@ -1,7 +1,7 @@
 import React from 'react';
 import ListFilter from './list-filter/list-filter';
 
-export default class Panel extends React.Component { 
+export default class Panel extends React.Component {
   constructor() {
     super();
     this.state = {
