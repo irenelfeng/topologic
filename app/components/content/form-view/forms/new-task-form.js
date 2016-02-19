@@ -30,8 +30,8 @@ export default class NewTaskForm extends React.Component {
         <GroupSelect />
         <NotifySelect deadline={this.state.deadline}/>
         <div className="form-group">
-          <SaveButtonComponent setForm = {this.props.setForm} />
-          <CancelButtonComponent setForm = {this.props.setForm} />
+          <SaveButton setForm = {this.props.setForm} />
+          <CancelButton setForm = {this.props.setForm} />
         </div>
       </div>
     );
