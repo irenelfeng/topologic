@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class DescriptionComponent extends React.Component { 
+export default class Description extends React.Component { 
   constructor() {
     super();
   }
@@ -8,7 +8,7 @@ export default class DescriptionComponent extends React.Component {
   render() {
     return (
       <div id="description-container" className="form-group">
-        <div className="form-aligned-col1"> Description: </div> 
+        <div className="form-aligned-col1"> Description: </div>
         <textarea id="task-description" className="form-aligned-col2" />
       </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class TitleComponent extends React.Component { 
+export default class Title extends React.Component { 
   constructor() {
     super();
   }
@@ -8,7 +8,7 @@ export default class TitleComponent extends React.Component {
   render() {
     return (
       <div id="group-select" className="form-group">
-        <div className="form-aligned-col1"> Group: </div> 
+        <div className="form-aligned-col1"> Group: </div>
         <div id="group-dropdown" className="form-aligned-col2">
           Sample Group
         </div>

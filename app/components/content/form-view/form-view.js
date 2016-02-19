@@ -1,7 +1,7 @@
 import React from 'react';
 import NewTaskForm from './forms/new-task-form';
 
-export default class FormView extends React.Component { 
+export default class FormView extends React.Component {
   constructor() {
     super();
     console.log("formView");
