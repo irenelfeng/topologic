@@ -16,7 +16,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="main">
         Clicked: {this.state.active}
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
       </div>

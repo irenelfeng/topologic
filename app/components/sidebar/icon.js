@@ -15,9 +15,7 @@ export default class Icon extends React.Component {
     var selected = (this.props.icon == this.props.active) ? 'selected' : '';
     return (
       <div className="icon-div">
-        <button className={"icon-btn " + selected} onClick={this.onClick.bind(this)} >
-          <img className="icon-img" src = {'./img/' + this.props.icon + '.png'} />
-        </button>
+        <img className={"icon-img " + selected} onClick={this.onClick.bind(this)} src = {'./img/' + this.props.icon + '.png'} />
       </div>
     );
   }
