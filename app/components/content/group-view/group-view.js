@@ -8,7 +8,7 @@ export default class GroupView extends React.Component {
   render() {
     return (
       <div id="group-creation">
-      Hello! I'm the GroupView!
+      Hello! Im the GroupView!
       </div>
     );
   }
