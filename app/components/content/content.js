@@ -17,8 +17,8 @@ export default class Content extends React.Component {
 
   render() {
     var views = {
-      tasks: (<TaskView  tasks={this.props.items.groups} />),
-      groups: (<GroupView groups={this.props.items.tasks} />)
+      tasks: (<TaskView setForm = {this.props.setForm} form={this.props.form} tasks={this.props.items.groups} />),
+      groups: (<GroupView setForm = {this.props.setForm} form={this.props.form} groups={this.props.items.tasks} />)
     };
 
     return (

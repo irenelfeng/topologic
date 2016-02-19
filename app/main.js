@@ -35,7 +35,8 @@ class Main extends React.Component {
             name: 'Friendly Vibrant Monkey Man',
             members: 'Bo Stalion Greyman Frankdick'.split(' ')
           }]
-      }
+      },
+      form: false,
     };
 
     this.state.items.tasks.forEach(t => t.id = t.title);
@@ -47,12 +48,18 @@ class Main extends React.Component {
     this.panelRef.resetFilter();
   }
 
+  setForm(bool) {
+    this.setState({form: bool}); //will change later for toggling
+    // when the sidebar icon changes will the form change back to false
+  }
+
+
   render() {
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
-        <Panel active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content active={this.state.active} items={this.state.items} />
+        <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
+        <Content setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
       </div>
     );
   }

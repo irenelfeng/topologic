@@ -23,8 +23,8 @@ export default class NewTaskForm extends React.Component {
         <GroupSelectComponent />
         <NotifySelectComponent />
         <div className="form-group">
-          <SaveButtonComponent />
-          <CancelButtonComponent />
+          <SaveButtonComponent setForm = {this.props.setForm} />
+          <CancelButtonComponent setForm = {this.props.setForm} />
         </div>
       </div>
     );

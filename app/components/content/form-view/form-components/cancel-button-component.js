@@ -7,7 +7,7 @@ export default class CancelButtonComponent extends React.Component {
 
   render() {
     return (
-      <a onClick={this.props.onClick} className="form-button" id="cancel-button">
+      <a onClick={() => this.props.setForm(false)} className="form-button" id="cancel-button">
         Cancel
       </a>
     );
