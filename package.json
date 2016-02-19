@@ -31,7 +31,24 @@
       ]
     ]
   },
+  "watchify": {
+    "extension": [
+      "jsx"
+    ],
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
   "scripts": {
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] app/main.js -o bundle.js"
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] app/main.js -o bundle.js",
+    "watch": "watchify -t [ babelify --presets [ es2015 react ] ] app/main.js -o bundle.js",
+    "bw": "npm run build && npm run watch"
   }
 }
