@@ -17,7 +17,7 @@ export default class TaskFilter extends React.Component {
   onClick(e) {
     var option = e.target.id.split('-')[2];
     this.setState({ selected: option });
-    this.props.setFilter(this.filterFns[this.state.selected]);
+    this.props.setFilter(this.filterFns[option]);
   }
 
   render() {
@@ -25,7 +25,7 @@ export default class TaskFilter extends React.Component {
 
     return (
       <div id="task-filter-container">
-        <div id="task-filter-options" className={'task-filter-option ' + s('important')} onClick={this.onClick.bind(this)}>
+        <div id="task-filter-important" className={'task-filter-option ' + s('important')} onClick={this.onClick.bind(this)}>
           <img id="task-filter-important-img" src="./img/important.png" />
         </div>
         <div id="task-filter-progress" className={'task-filter-option ' + s('progress')} onClick={this.onClick.bind(this)}> In Progress </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import ListFilter from './list-filter/list-filter';
+import ListContainer from './list-container/list-container';
 
 export default class Panel extends React.Component {
   constructor() {
@@ -24,18 +25,16 @@ export default class Panel extends React.Component {
     }
   }
 
-  // setPlus(fn) {
-  //   if (fn != this.state.plusFn) {
-  //     this.setState({
-  //       plusFn: fn
-  //     });
-  //   }
-  // }
+  resetFilter() {
+    this.setState({
+      filterFn: () => true
+    });
+  }
 
   render() {
-
+    var itemsToPass = this.props.items[this.props.active];
     var href = this.headerImgs[this.props.active];
-              // <ListContainer active={this.props.active} filterFn={this.state.filterFn} items={this.props.items[this.props.active]} />
+
     return (
       <div id="panel">
         <div id="panel-header-container">
@@ -43,6 +42,7 @@ export default class Panel extends React.Component {
           <img id="panel-plus" src={href} />
         </div>
         <ListFilter active={this.props.active} setFilter={this.setFilter.bind(this)} />
+        <ListContainer active={this.props.active} filterFn={this.state.filterFn} items={itemsToPass} />
       </div>
     );
   }

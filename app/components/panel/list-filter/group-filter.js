@@ -6,8 +6,8 @@ export default class GroupFilter extends React.Component {
   }
 
   onChange(e) {
-    var text = e.target.value;
-    this.props.setFilter((group) => group.name.indexOf(text) > -1);
+    var text = e.target.value.toLowerCase();
+    this.props.setFilter((group) => group.name.toLowerCase().indexOf(text) > -1);
   }
 
   render() {
