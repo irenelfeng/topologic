@@ -3,17 +3,13 @@
 ##INSTALL INSTRUCTIONS:
 Install npm and cd to topologic main folder
 ```
-sudo npm install -g browserify
-sudo npm install -g watchify
-sudo npm install -g stylus
+sudo npm install -g gulp
 npm i
 ```
 
 ##RUNNING THE BUILD
-1. Run `npm run build` inside the directory topologic
+1. Run `gulp build` inside the directory topologic
 2. View application by opening app/index.html
 
 ##DEV MODE
-Run `npm run bw` to avoid having to run `npm run build` over and over again.
-
-Note: at the moment, `npm run bw` / `npm run watch` does not rebuild the stylus
+Run `gulp bw` to avoid having to run `gulp build` over and over again.
