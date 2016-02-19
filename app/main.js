@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Sidebar from './components/sidebar/sidebar'
+import Sidebar from './components/sidebar/sidebar';
+import Panel from './components/panel/panel';
 
 class Main extends React.Component { 
   constructor() {
@@ -17,8 +18,8 @@ class Main extends React.Component {
   render() {
     return (
       <div id="main">
-        Clicked: {this.state.active}
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
+        <Panel active={this.state.active} />
       </div>
     );
   }
