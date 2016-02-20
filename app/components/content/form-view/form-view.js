@@ -11,7 +11,7 @@ export default class FormView extends React.Component {
 
   render() {
     var forms = {
-      'newtask': (<NewTaskForm setForm={this.props.setForm}/>)
+      'new': (<NewTaskForm setForm={this.props.setForm}/>)
     };
 
     return (

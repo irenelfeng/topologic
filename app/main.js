@@ -7,34 +7,40 @@ import Content from './components/content/content';
 class Main extends React.Component { 
   constructor() {
     super();
+
+    var sampleProject = {
+      tasks: [{
+          title: 'Done Important Task',
+          done: true,
+          important: true
+        }, {
+          title: 'Not Done Important Task',
+          done: false,
+          important: true
+        }, {
+          title: 'Not Done Not Important Task',
+          done: false,
+          important: false
+        }, {
+          title: 'Done Not Important Task',
+          done: true,
+          important: false
+        }],
+      name: 'Sample Project'
+    }
+
     this.state = { 
-      active: 'tasks',
+      active: 'projects',
       items: {
-        tasks: [{
-            title: 'Done Important Task',
-            done: true,
-            important: true
-          }, {
-            title: 'Not Done Important Task',
-            done: false,
-            important: true
-          }, {
-            title: 'Not Done Not Important Task',
-            done: false,
-            important: false
-          }, {
-            title: 'Done Not Important Task',
-            done: true,
-            important: false
-          }],
+        projects: [sampleProject] ,
         groups: [{
-            name: 'Sample Group',
-            members: 'John Stacy Phil George Alfred Joseph'.split(' ')
-          },
-          {
-            name: 'Friendly Vibrant Monkey Man',
-            members: 'Bo Stalion Greyman Frankdick'.split(' ')
-          }]
+          name: 'Sample Group',
+          members: 'John Stacy Phil George Alfred Joseph'.split(' ')
+        },
+        {
+          name: 'Friendly Vibrant Monkey Man',
+          members: 'Bo Stalion Greyman Frankdick'.split(' ')
+        }],
       },
       form: false,
     };
@@ -48,11 +54,13 @@ class Main extends React.Component {
     this.panelRef.resetFilter();
   }
 
+  /**
+   * When the sidebar icon changes will the form change back to false
+   * @param {Boolean} bool whether form view is currently active
+   */
   setForm(bool) {
-    this.setState({form: bool}); //will change later for toggling
-    // when the sidebar icon changes will the form change back to false
+    this.setState({form: bool});
   }
-
 
   render() {
     return (
@@ -65,7 +73,9 @@ class Main extends React.Component {
   }
 } 
 
-//do not change - changes the index.html file
+/**
+ * Render the main app
+ */
 ReactDOM.render(
   <Main/>,
   document.getElementById('app')
