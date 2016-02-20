@@ -6,7 +6,6 @@ export default class ProjectHeader extends React.Component {
   }
 
   render() {
-    debugger;
     var completeds = this.props.project.tasks.filter(task => task.done);
     var notcompleteds = this.props.project.tasks.filter(task => !task.done);
 
