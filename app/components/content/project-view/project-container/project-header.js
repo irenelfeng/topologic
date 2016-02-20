@@ -6,17 +6,18 @@ export default class ProjectHeader extends React.Component {
   }
 
   render() {
+    debugger;
     var completeds = this.props.project.tasks.filter(task => task.done);
     var notcompleteds = this.props.project.tasks.filter(task => !task.done);
 
     var progressBar = [];
 
-    completeds.forEach(task => {
-      progressBar.push((<div className="progress-bar-item done"> </div>));
+    completeds.forEach((task, i) => {
+      progressBar.push((<div className="progress-bar-item done" key={'bar-item-' + i.toString()}> </div>));
     });
 
-    notcompleteds.forEach(task => {
-      progressBar.push((<div className="progress-bar-item notdone"> </div>))
+    notcompleteds.forEach((task, i) => {
+      progressBar.push((<div className="progress-bar-item notdone" key={'bar-item-' + i.toString()}> </div>))
     });
 
     return (

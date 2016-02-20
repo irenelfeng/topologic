@@ -1,4 +1,5 @@
 import React from 'react';
+import NewGroupForm from '../form-view/forms/new-group-form';
 
 export default class GroupView extends React.Component {
   constructor() {
@@ -6,9 +7,13 @@ export default class GroupView extends React.Component {
   }
 
   render() {
+    var forms = {
+      'newgroup': (<NewGroupForm setForm={this.props.setForm} />)
+    };
+
     return (
       <div id="group-creation">
-      Hello! Im the GroupView!
+        {forms[this.props.type]}
       </div>
     );
   }

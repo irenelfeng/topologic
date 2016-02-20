@@ -14,7 +14,7 @@ export default class ListContainer extends React.Component {
   render() {
     var items = [];
     if (this.props.active == 'projects') {
-      projects.forEach(p => {
+      this.props.items.forEach(p => {
         p.tasks.forEach(t => {
           items.push(t);
         });

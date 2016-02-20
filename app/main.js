@@ -45,13 +45,19 @@ class Main extends React.Component {
       form: false,
     };
 
-    this.state.items.tasks.forEach(t => t.id = t.title);
+    this.state.items.projects.forEach(p => {
+      p.tasks.forEach(t => {
+        t.id = t.title;
+      });
+    });
+    
     this.state.items.groups.forEach(g => g.id = g.name);
   }
 
   setActive(icon) {
     this.setState({active: icon});
     this.panelRef.resetFilter();
+    this.setForm(false); // when the sidebar icon changes the form changes back to false
   }
 
   /**
@@ -63,6 +69,8 @@ class Main extends React.Component {
   }
 
   render() {
+    console.log("main changed");
+    console.log(this.state.form);
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
