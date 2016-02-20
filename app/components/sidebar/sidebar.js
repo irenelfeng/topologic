@@ -10,7 +10,7 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <div id='sidebar'>
-        <Icon setActive ={this.props.setActive} active={this.props.active} icon='tasks'/>
+        <Icon setActive ={this.props.setActive} active={this.props.active} icon='projects'/>
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='groups'/>
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='notifications'/>
       </div>
