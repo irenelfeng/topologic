@@ -88,8 +88,8 @@ class Main extends React.Component {
    * @param {p} the project
    */
   newProject(p) {
-    project['tasks'] = [];
-    this.state.items.projects.push(project);
+    p['tasks'] = [];
+    this.state.items.projects.push(p);
 
   }
 
@@ -99,7 +99,7 @@ class Main extends React.Component {
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
+        <Content newProject={this.newProject.bind(this)} newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
       </div>
     );
   }

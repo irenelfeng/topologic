@@ -14,6 +14,18 @@ export default class NewProjectForm extends React.Component {
 
   }
 
+  save() {
+    var data = {
+      title: document.querySelector('#form-title').value,
+      //description: document.querySelector('#task-description').value,
+      //group: document.querySelector('#group-dropdown').value,
+      //notify: document.querySelector('#notify-select').value
+    };
+
+    this.props.newProject(data);
+    this.props.setForm(false);
+  }
+
 
   render() {
     return (
@@ -25,7 +37,7 @@ export default class NewProjectForm extends React.Component {
         <NotifySelect />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
-          <SaveButton setForm = {this.props.setForm} />
+          <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>
       </div>
     );
