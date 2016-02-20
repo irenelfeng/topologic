@@ -18,8 +18,10 @@ export default class Deadline extends React.Component {
     return (
       <div id="deadline-container" className="form-group">
         <div className="form-aligned-col1"> Time/Deadline: </div>
-        <input type="checkbox" className="form-aligned-col2" onClick={this.onClick.bind(this)}/>
-        { deadlineEls }
+        <div className="form-aligned-col2">
+          <input type="checkbox" onClick={this.onClick.bind(this)}/>
+          { deadlineEls }
+        </div>
       </div>
     );
   }

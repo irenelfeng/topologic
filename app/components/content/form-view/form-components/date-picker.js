@@ -7,7 +7,7 @@ export default class Deadline extends React.Component {
 
   render() {
     return (
-      <input />
+      <input placeholder="Pick a date" readOnly />
     );
   }
 }

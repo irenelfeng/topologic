@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class CancelButton extends React.Component { 
+export default class CancelButton extends React.Component {
   constructor() {
     super();
   }
