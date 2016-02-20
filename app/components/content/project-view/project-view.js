@@ -1,8 +1,8 @@
 import React from 'react';
 import FormView from '../form-view/form-view';
-import TaskCircle from './task-circle';
+import ProjectContainer from './project-container/project-container';
 
-export default class TaskView extends React.Component { 
+export default class ProjectView extends React.Component { 
   constructor() {
     super();
   }
@@ -11,11 +11,11 @@ export default class TaskView extends React.Component {
     if (this.props.form)
       return (<FormView setForm = {this.props.setForm} type='newtask' />);
 
-    var tasks = this.props.tasks.map((t, i) => (<TaskCircle key={i} />));
+    var projects = this.props.projects.map((p, i) => (<ProjectContainer key={i} project={p} />));
 
     return (
       <div> 
-        {tasks}
+        {projects}
       </div>
     );
   }

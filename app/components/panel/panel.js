@@ -11,7 +11,7 @@ export default class Panel extends React.Component {
     };
 
     this.headerImgs = {
-      tasks: ("./img/plus.png"),
+      projects: ("./img/plus.png"),
       groups: ("./img/plus.png"),
       notifications: ("./img/sort.png"),
     }

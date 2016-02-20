@@ -7,39 +7,50 @@ import Content from './components/content/content';
 class Main extends React.Component { 
   constructor() {
     super();
+
+    var sampleProject = {
+      tasks: [{
+          title: 'Done Important Task',
+          done: true,
+          important: true
+        }, {
+          title: 'Not Done Important Task',
+          done: false,
+          important: true
+        }, {
+          title: 'Not Done Not Important Task',
+          done: false,
+          important: false
+        }, {
+          title: 'Done Not Important Task',
+          done: true,
+          important: false
+        }],
+      name: 'Sample Project'
+    }
+
     this.state = { 
-      active: 'tasks',
+      active: 'projects',
       items: {
-        tasks: [{
-            title: 'Done Important Task',
-            done: true,
-            important: true
-          }, {
-            title: 'Not Done Important Task',
-            done: false,
-            important: true
-          }, {
-            title: 'Not Done Not Important Task',
-            done: false,
-            important: false
-          }, {
-            title: 'Done Not Important Task',
-            done: true,
-            important: false
-          }],
+        projects: [sampleProject] ,
         groups: [{
-            name: 'Sample Group',
-            members: 'John Stacy Phil George Alfred Joseph'.split(' ')
-          },
-          {
-            name: 'Friendly Vibrant Monkey Man',
-            members: 'Bo Stalion Greyman Frankdick'.split(' ')
-          }]
+          name: 'Sample Group',
+          members: 'John Stacy Phil George Alfred Joseph'.split(' ')
+        },
+        {
+          name: 'Friendly Vibrant Monkey Man',
+          members: 'Bo Stalion Greyman Frankdick'.split(' ')
+        }],
       },
       form: false,
     };
 
-    this.state.items.tasks.forEach(t => t.id = t.title);
+    this.state.items.projects.forEach(p => {
+      p.tasks.forEach(t => {
+        t.id = t.title;
+      });
+    });
+    
     this.state.items.groups.forEach(g => g.id = g.name);
   }
 
@@ -49,10 +60,13 @@ class Main extends React.Component {
     this.setForm(false); // when the sidebar icon changes the form changes back to false
   }
 
+  /**
+   * When the sidebar icon changes will the form change back to false
+   * @param {Boolean} bool whether form view is currently active
+   */
   setForm(bool) {
     this.setState({form: bool});
   }
-
 
   render() {
     console.log("main changed");
@@ -67,7 +81,9 @@ class Main extends React.Component {
   }
 } 
 
-//do not change - changes the index.html file
+/**
+ * Render the main app
+ */
 ReactDOM.render(
   <Main/>,
   document.getElementById('app')

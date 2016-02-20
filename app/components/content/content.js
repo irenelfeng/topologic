@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskView from './task-view/task-view';
+import ProjectView from './project-view/project-view';
 import GroupView from './group-view/group-view';
 
 export default class Content extends React.Component { 
@@ -16,9 +16,10 @@ export default class Content extends React.Component {
   }
 
   render() {
+    debugger;
     var views = {
-      tasks: (<TaskView setForm = {this.props.setForm} form={this.props.form} tasks={this.props.items.groups} />),
-      groups: (<GroupView setForm = {this.props.setForm} form={this.props.form} groups={this.props.items.tasks} />)
+      projects: (<ProjectView setForm = {this.props.setForm} form={this.props.form} projects={this.props.items.projects} />),
+      groups: (<GroupView setForm = {this.props.setForm} form={this.props.form} groups={this.props.items.groups} />)
     };
 
     return (
