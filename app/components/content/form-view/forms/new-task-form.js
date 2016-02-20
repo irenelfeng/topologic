@@ -12,6 +12,7 @@ import CancelButton from '../form-components/cancel-button';
 export default class NewTaskForm extends React.Component {
   constructor() {
     super();
+    this.type = 'task';
     this.state = {
       deadline: false
     };
@@ -21,10 +22,24 @@ export default class NewTaskForm extends React.Component {
     this.setState({deadline: checked});
   }
 
+  save() {
+    var data = {
+      title: document.querySelector('#form-title').value,
+      deadline: document.querySelector('.form-title').value,
+      location: document.querySelector('#form-location').value,
+      description: document.querySelector('#task-description').value,
+      group: document.querySelector('#group-dropdown').value,
+      notify: document.querySelector('#notify-select').value
+    };
+
+    this.props.newTask(data);
+    this.props.setForm(false);
+  }
+
   render() {
     return (
       <div id="form-container">
-        <TaskOrProject changeForm={this.props.changeForm} />
+        <TaskOrProject type = {this.type} changeForm={this.props.changeForm} />
         <Title />
         <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
         <Location />
@@ -33,7 +48,7 @@ export default class NewTaskForm extends React.Component {
         <NotifySelect deadline={this.state.deadline}/>
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
-          <SaveButton setForm = {this.props.setForm} />
+          <SaveButton onClick={this.save.bind(this)}/>
         </div>
       </div>
     );
