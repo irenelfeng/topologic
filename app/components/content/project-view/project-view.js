@@ -9,7 +9,7 @@ export default class ProjectView extends React.Component {
 
   render() {
     if (this.props.form)
-      return (<FormView setForm = {this.props.setForm} type='newtask' />);
+      return (<FormView newTask = {this.props.newTask} newProject={this.props.newProject} setForm = {this.props.setForm} type='newtask' />);
 
     var projects = this.props.projects.map((p, i) => (<ProjectContainer key={i} project={p} />));
 

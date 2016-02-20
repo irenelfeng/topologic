@@ -29,10 +29,15 @@ class Main extends React.Component {
       name: 'Sample Project'
     }
 
+    var nullProject = {
+      tasks : [],
+      name: null
+    }
+
     this.state = { 
       active: 'projects',
       items: {
-        projects: [sampleProject] ,
+        projects: [sampleProject, nullProject] ,
         groups: [{
           name: 'Sample Group',
           members: 'John Stacy Phil George Alfred Joseph'.split(' ')
@@ -57,7 +62,7 @@ class Main extends React.Component {
   setActive(icon) {
     this.setState({active: icon});
     this.panelRef.resetFilter();
-    this.setForm(false); // when the sidebar icon changes the form changes back to false
+    this.setForm(false); 
   }
 
   /**
@@ -68,14 +73,33 @@ class Main extends React.Component {
     this.setState({form: bool});
   }
 
+  /**
+   * Adds a new task to a certain project
+   * @param {data} all the data of the task
+   */
+  newTask(data, projectName) {
+    var project = this.state.items.projects.filter(p => p.name == projectName)[0];
+    project['tasks'].push(data);
+    
+  }
+
+  /**
+   * Adds a new project, no tasks essentially
+   * @param {p} the project
+   */
+  newProject(p) {
+    p['tasks'] = [];
+    this.state.items.projects.push(p);
+
+  }
+
   render() {
-    console.log("main changed");
-    console.log(this.state.form);
+
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
+        <Content newProject={this.newProject.bind(this)} newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
       </div>
     );
   }

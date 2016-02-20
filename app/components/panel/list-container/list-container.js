@@ -1,13 +1,17 @@
 import React from 'react';
 import TaskItem from './list-item/task-item';
 import GroupItem from './list-item/group-item';
+import NotifyItem from './list-item/notify-item';
+import TutorialItem from './list-item/tutorial-item';
 
-export default class ListContainer extends React.Component { 
+export default class ListContainer extends React.Component {
   constructor() {
     super();
     this.itemComponents = {
       projects: (item) => (<TaskItem key={item.id} task={item} />),
-      groups: (item) => (<GroupItem key={item.id} group={item} />)
+      groups: (item) => (<GroupItem key={item.id} group={item} />),
+      notifications: (item) => (<NotifyItem key={item.id} notification={item} />),
+      tutorials: (item) => (<TutorialItem key={item.id} tutorial={item} />)
     }
   }
 
@@ -22,6 +26,14 @@ export default class ListContainer extends React.Component {
     }
 
     if (this.props.active == 'groups') {
+      items = this.props.items;
+    }
+
+    if (this.props.active == 'notifications') {
+      items = this.props.items;
+    }
+
+    if (this.props.active == 'tutorials') {
       items = this.props.items;
     }
 
