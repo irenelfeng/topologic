@@ -12,7 +12,7 @@ export default class GroupView extends React.Component {
 
     return (
       <div id="group-creation">
-        {forms[this.props.type]}
+        
       </div>
     );
   }
