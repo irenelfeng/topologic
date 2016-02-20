@@ -3,7 +3,6 @@ import NewTaskForm from './forms/new-task-form';
 import NewProjectForm from './forms/new-project-form';
 import NewGroupForm from './forms/new-group-form';
 
-
 export default class FormView extends React.Component {
   constructor() {
     super();
