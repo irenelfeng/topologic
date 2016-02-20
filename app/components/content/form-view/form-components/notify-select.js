@@ -23,7 +23,7 @@ export default class NotifySelect extends React.Component {
       <div>
         <div id="notify-select" className="form-group">
           <div className="form-aligned-col1"> Notify me... </div>
-          <div className="form-algined-col2-list">
+          <div className="form-aligned-col2-list">
             <div className="form-aligned-col2-list-item">
               <input type="checkbox" className="form-aligned-col2-check" />
               <div className="form-aligned-col2-text"> When task is completed </div>
