@@ -63,23 +63,38 @@
       justify-content(space-between)
       padding-bottom 5px
 
-#task-or-proj-container
+#task-or-project-container
   padding-top 5px
+  margin-right 50px
+  margin-right 50px
   width 100%
   flexbox(flex)
-  flex-direction(row)
-  flex-wrap(nowrap)
-  text-align center
-
-  .option
+  flex-direction(column)
+  
+  #task-or-project-header
+    flexbox(flex)
+    justify-content(center)
+    align-items(center)
+    height 80px
     background-color lighten(#29C8E1, 80%)
-    width 100%
-    height 60px
     border 1px solid darken(#9FBFE4, 20%)
-    cursor pointer
 
-    &.selected
-      background-color darken(#9FBFE4, 20%)
+  #option-containers
+    flexbox(flex)
+    flex-direction(row)
+
+    .option
+      background-color lighten(#29C8E1, 80%)
+      width 100%
+      height 30px
+      border 1px solid darken(#9FBFE4, 20%)
+      cursor pointer
+      flexbox(flex)
+      justify-content(center)
+      align-items(center)
+
+      &.selected
+        background-color darken(#9FBFE4, 20%)
 
 .form-title-container
   padding-top 30px
