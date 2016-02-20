@@ -18,11 +18,9 @@ export default class DatePicker extends React.Component {
     else pickerEls = '';
 
     return (
-      <div className="form-aligned-col2-text">
-        <div className="form-aligned-col2-pick">
-          <input className="record-text" placeholder="Pick a date" readOnly />
-          <img className="icon-img" onClick={this.onClick.bind(this)} src='./img/calendar.png' />
-        </div>
+      <div className="form-aligned-col2-pick">
+        <input className="record-text" placeholder="Pick a date" readOnly />
+        <img className="icon-img" onClick={this.onClick.bind(this)} src='./img/calendar.png' />
         { pickerEls }
       </div>
     );
