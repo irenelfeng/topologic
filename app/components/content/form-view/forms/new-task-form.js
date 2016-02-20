@@ -41,7 +41,7 @@ export default class NewTaskForm extends React.Component {
   render() {
     return (
       <div id="form-container">
-        <TaskOrProject type = {this.type} changeForm={this.props.changeForm} />
+        <TaskOrProject type={this.type} changeForm={this.props.changeForm} />
         <Title />
         <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
         <Location />
