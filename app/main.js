@@ -46,15 +46,17 @@ class Main extends React.Component {
   setActive(icon) {
     this.setState({active: icon});
     this.panelRef.resetFilter();
+    this.setForm(false); // when the sidebar icon changes the form changes back to false
   }
 
   setForm(bool) {
-    this.setState({form: bool}); //will change later for toggling
-    // when the sidebar icon changes will the form change back to false
+    this.setState({form: bool});
   }
 
 
   render() {
+    console.log("main changed");
+    console.log(this.state.form);
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />

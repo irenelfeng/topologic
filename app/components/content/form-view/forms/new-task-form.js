@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskOrProject from '../form-components/task-or-project';
 import Title from '../form-components/title';
 import Deadline from '../form-components/deadline';
 import Location from '../form-components/location';
@@ -23,6 +24,7 @@ export default class NewTaskForm extends React.Component {
   render() {
     return (
       <div id="form-container">
+        <TaskOrProject changeForm={this.props.changeForm} />
         <Title />
         <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
         <Location />
