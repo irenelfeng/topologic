@@ -30,9 +30,11 @@ export default class NewTaskForm extends React.Component {
       //description: document.querySelector('#task-description').value,
       //group: document.querySelector('#group-dropdown').value,
       //notify: document.querySelector('#notify-select').value
+      done: false,
+      important: true
     };
 
-    this.props.newTask(data);
+    this.props.newTask(data, null); //project is null
     this.props.setForm(false);
   }
 

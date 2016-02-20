@@ -29,10 +29,15 @@ class Main extends React.Component {
       name: 'Sample Project'
     }
 
+    var nullProject = {
+      tasks : [],
+      name: null
+    }
+
     this.state = { 
       active: 'projects',
       items: {
-        projects: [sampleProject] ,
+        projects: [sampleProject, nullProject] ,
         groups: [{
           name: 'Sample Group',
           members: 'John Stacy Phil George Alfred Joseph'.split(' ')
@@ -69,32 +74,27 @@ class Main extends React.Component {
   }
 
   /**
-   * Adds a new task as a nullProject (abandoned orphan project at first). add important and done fields too
-   * @param {data} all the data in a dictionary
+   * Adds a new task to a certain project
+   * @param {data} all the data of the task
    */
-  newTask(data) {
-    data['done'] = false;
-    data['important'] = true;
-    var nullProject = {
-      tasks: [ data ],
-      name: null
-    }
-    this.state.items.projects.push(nullProject);
+  newTask(data, projectName) {
+    var project = this.state.items.projects.filter(p => p.name == projectName)[0];
+    project['tasks'].push(data);
+    
   }
 
   /**
-   * Adds a new project 
-   * @param {data} all the data in a dictionary
+   * Adds a new project, no tasks essentially
+   * @param {p} the project
    */
-  newProject() {
-
-    
+  newProject(p) {
+    project['tasks'] = [];
+    this.state.items.projects.push(project);
 
   }
 
   render() {
-    console.log("main changed");
-    console.log(this.state.form);
+
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
