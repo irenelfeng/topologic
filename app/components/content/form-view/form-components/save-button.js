@@ -7,7 +7,7 @@ export default class SaveButton extends React.Component {
 
   render() {
     return (
-      <a onClick={this.props.closeForm} className="form-button" id="save-button">
+      <a onClick={this.props.onClick} className="form-button" id="save-button">
         Save
       </a>
     );
