@@ -12,16 +12,22 @@
     text-align center
     cursor pointer
 
-  textarea, input
+  input
+    height 20px
+    font-size 1em
+    background-color lighten(grey, 80%)
+
+  textarea
+    height 40px
+    font-size 1em
     background-color lighten(grey, 80%)
 
   .form-aligned-col1
-    flex-grow 1
-    width 100%
+    font-size 1em
+    width 30%
 
   .form-aligned-col2
-    flex-grow 2
-    width 100%
+    width 70%
     flexbox(flex)
     flex-direction(row)
     justify-content(space-between)
@@ -30,28 +36,45 @@
     width 10%
 
   .form-aligned-col2-text
+    text-size 1em
     width 90%
 
-    .form-aligned-col2-pick
+  .form-aligned-col2-pick
+    width 90%
+    border 1px solid grey
+    background-color lighten(gray, 80%)
+    flexbox(flex)
+    flex-direction(row)
+    justify-content(space-between)
+
+    .record-text
+      outline none
+      border none
+      height 100%
       width 90%
-      border 1px solid grey
-      background-color lighten(gray, 80%)
-      flexbox(flex)
-      flex-direction(row)
-      justify-content(space-between)
 
-      .record-text
-        outline none
-        border none
-        height 100%
-        width 90%
+    .icon-img
+      height 100%
+      width 10%
 
-      .icon-img
-        height 100%
-        width 10%
+  .form-aligned-col2-notif
+    width 90%
+    height 40px
+    flexbox(flex)
+    flex-direction(row)
+    justify-content(space-between)
+
+    .notif-num
+      width 12%
+
+    .notif-dropdown
+      width 40%
+
+    .notif-text
+      width 40%
 
   .form-aligned-col2-list
-    width 100%
+    width 70%
     flexbox(flex)
     flex-direction(column)
     justify-content(space-between)
