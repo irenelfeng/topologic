@@ -57,7 +57,7 @@ class Main extends React.Component {
   setActive(icon) {
     this.setState({active: icon});
     this.panelRef.resetFilter();
-    this.setForm(false); // when the sidebar icon changes the form changes back to false
+    this.setForm(false); 
   }
 
   /**
@@ -68,6 +68,30 @@ class Main extends React.Component {
     this.setState({form: bool});
   }
 
+  /**
+   * Adds a new task as a nullProject (abandoned orphan project at first). add important and done fields too
+   * @param {data} all the data in a dictionary
+   */
+  newTask(data) {
+    data['done'] = false;
+    data['important'] = true;
+    var nullProject = {
+      tasks: [ data ],
+      name: null
+    }
+    this.state.items.projects.push(nullProject);
+  }
+
+  /**
+   * Adds a new project 
+   * @param {data} all the data in a dictionary
+   */
+  newProject() {
+
+    
+
+  }
+
   render() {
     console.log("main changed");
     console.log(this.state.form);
@@ -75,7 +99,7 @@ class Main extends React.Component {
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
+        <Content newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
       </div>
     );
   }

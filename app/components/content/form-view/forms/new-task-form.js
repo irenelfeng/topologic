@@ -25,11 +25,11 @@ export default class NewTaskForm extends React.Component {
   save() {
     var data = {
       title: document.querySelector('#form-title').value,
-      deadline: document.querySelector('.form-title').value,
-      location: document.querySelector('#form-location').value,
-      description: document.querySelector('#task-description').value,
-      group: document.querySelector('#group-dropdown').value,
-      notify: document.querySelector('#notify-select').value
+      //deadline: document.querySelector('.form-title').value,
+      //location: document.querySelector('#form-location').value,
+      //description: document.querySelector('#task-description').value,
+      //group: document.querySelector('#group-dropdown').value,
+      //notify: document.querySelector('#notify-select').value
     };
 
     this.props.newTask(data);
