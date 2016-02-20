@@ -7,7 +7,7 @@ export default class Deadline extends React.Component {
 
   render() {
     return (
-      <input placeholder="Pick a date" readOnly />
+      <input className="form-aligned-col2-text" placeholder="Pick a date" readOnly />
     );
   }
 }

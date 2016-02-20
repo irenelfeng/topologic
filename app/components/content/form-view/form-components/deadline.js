@@ -19,7 +19,7 @@ export default class Deadline extends React.Component {
       <div id="deadline-container" className="form-group">
         <div className="form-aligned-col1"> Time/Deadline: </div>
         <div className="form-aligned-col2">
-          <input type="checkbox" onClick={this.onClick.bind(this)}/>
+          <input type="checkbox" className="form-aligned-col2-check" onClick={this.onClick.bind(this)}/>
           { deadlineEls }
         </div>
       </div>
