@@ -4,22 +4,23 @@ export default class TaskOrProject extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      selected: 'task'
-    };
+    // this.state = {
+    //   selected: 'task'
+    // };
   }
 
   onClick(e) {
     var option = e.target.id.split('-')[0];
-    this.setState({ selected: option });
+    // this.setState({ selected: option });
     //change the form
-    //this.props.changeForm("new"+option);
+    var type = 'new'+option
+    this.props.changeForm(type);
     
   }
 
   render() {
 
-    var s = (type) => this.state.selected == type ? 'selected' : '';
+    var s = (type) => this.props.type == type ? 'selected' : '';
 
     return (
       <div id="task-or-proj-container">

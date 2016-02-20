@@ -10,6 +10,7 @@ import CancelButton from '../form-components/cancel-button';
 export default class NewProjectForm extends React.Component {
   constructor() {
     super();
+    this.type = 'project';
 
   }
 
@@ -17,7 +18,7 @@ export default class NewProjectForm extends React.Component {
   render() {
     return (
       <div id="form-container" >
-          <TaskOrProject changeForm = {this.props.changeForm}/>
+          <TaskOrProject type = {this.type} changeForm = {this.props.changeForm}/>
         <Title />
         <Description />
         <GroupSelect />
