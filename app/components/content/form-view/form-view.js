@@ -9,10 +9,14 @@ export default class FormView extends React.Component {
     super();
   }
 
+  changeForm(key) {
+    console.log("changing the form!!");
+  }
+
   render() {
     var forms = {
-      'newtask': (<NewTaskForm setForm={this.props.setForm} />),
-      'newproject': (<NewProjectForm setForm={this.props.setForm} />),
+      'newtask': (<NewTaskForm changeForm ={this.changeForm.bind(this)} setForm={this.props.setForm} />),
+      'newproject': (<NewProjectForm changeForm = {this.props.changeForm} setForm={this.props.setForm} />),
       'newgroup': (<NewGroupForm setForm={this.props.setForm} />)
     };
 

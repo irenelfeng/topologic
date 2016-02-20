@@ -12,8 +12,8 @@ export default class TaskOrProject extends React.Component {
   onClick(e) {
     var option = e.target.id.split('-')[0];
     this.setState({ selected: option });
-    //do props to change the form
-    this.props.changeForm(option);
+    //change the form
+    //this.props.changeForm("new"+option);
     
   }
 
