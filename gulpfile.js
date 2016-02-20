@@ -15,7 +15,7 @@ var b = browserify({
 /*
  * JS build task
  */
-gulp.task('js', function () {
+gulp.task('buildjs', function () {
   return b.bundle()
     .pipe(source('./app/main.js'))
     .pipe(buffer())
@@ -24,10 +24,11 @@ gulp.task('js', function () {
     .pipe(gulp.dest('./build'));
 });
 
+
 /*
  * Styl build task
  */
-gulp.task('styl', function () {
+gulp.task('buildstyl', function () {
   return gulp.src('./app/style.styl')
     .pipe(stylus())
     .pipe(gulp.dest('./build'));
@@ -37,12 +38,12 @@ gulp.task('styl', function () {
  * Watch
  */
 gulp.task('watch', function() {
-  gulp.watch('app/**.js', ['js']);
-  gulp.watch('app/**.styl', ['styl']);
+  gulp.watch('app/**/*.js', ['buildjs']);
+  gulp.watch('app/**/*.styl', ['buildstyl']);
 });
 
 /*
  * Default
  */
-gulp.task('build', ['js', 'styl']);
-gulp.task('bw', ['js', 'styl', 'watch']);
+gulp.task('build', ['buildjs', 'buildstyl']);
+gulp.task('bw', ['buildjs', 'buildstyl', 'watch']);
