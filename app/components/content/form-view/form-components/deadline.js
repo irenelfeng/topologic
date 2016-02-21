@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePicker from './date-picker.js'
+import Calendar from './date-picker.js'
 
 export default class Deadline extends React.Component {
   constructor() {
@@ -12,7 +12,7 @@ export default class Deadline extends React.Component {
 
   render() {
     if (this.props.deadline)
-      var deadlineEls = (<DatePicker />);
+      var deadlineEls = (<Calendar />);
     else deadlineEls = '';
 
     return (
