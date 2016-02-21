@@ -32,7 +32,7 @@ export default class Panel extends React.Component {
   }
 
   // on click for the header panel image
-  onClick() {
+  onHeader() {
     this.props.setForm(true);
   }
 
@@ -44,7 +44,7 @@ export default class Panel extends React.Component {
       <div id="panel">
         <div id="panel-header-container">
           <div id="panel-header"> {this.props.active} </div>
-          <img id="panel-plus" src={href} onClick={this.onClick.bind(this)} />
+          <img id="panel-plus" src={href} onClick={this.onHeader.bind(this)} />
         </div>
         <ListFilter active={this.props.active} setFilter={this.setFilter.bind(this)} />
         <ListContainer active={this.props.active} filterFn={this.state.filterFn} items={itemsToPass} />

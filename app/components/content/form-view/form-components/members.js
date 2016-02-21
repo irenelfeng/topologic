@@ -6,8 +6,9 @@ export default class Members extends React.Component {
   }
 
   render() {
+    var members = this.props.members;
     return (
-    	<div></div>
+      <div></div>
     );
   }
 }

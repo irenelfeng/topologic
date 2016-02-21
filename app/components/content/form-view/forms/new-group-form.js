@@ -11,6 +11,9 @@ import Members from  '../form-components/members';
 export default class NewGroupForm extends React.Component {
   constructor() {
     super();
+  }
+
+  save() {
 
   }
 
@@ -20,11 +23,12 @@ export default class NewGroupForm extends React.Component {
       <div id="form-container">
         <Title />
         <Description />
-        <GroupAvatar /> 
+        <GroupAvatar />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
-          <SaveButton setForm = {this.props.setForm} />
+          <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>
+        <Members members={this.props.members} />
       </div>
     );
   }

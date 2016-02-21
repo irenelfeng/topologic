@@ -6,25 +6,19 @@ import NewGroupForm from './forms/new-group-form';
 export default class FormView extends React.Component {
   constructor() {
     super();
-    this.state = {
-      type: 'newtask'
-    };
-  }
-
-  changeForm(key) {
-    this.setState({type: key});
   }
 
   render() {
+
     var forms = {
-      'newtask': (<NewTaskForm newTask={this.props.newTask} changeForm ={this.changeForm.bind(this)} setForm={this.props.setForm} />),
-      'newproject': (<NewProjectForm newProject={this.props.newProject} changeForm = {this.changeForm.bind(this)} setForm={this.props.setForm} />),
-      'newgroup': (<NewGroupForm setForm={this.props.setForm} />)
+      'newtask': (<NewTaskForm newTask={this.props.newTask} changeForm ={this.props.changeForm} setForm={this.props.setForm} />),
+      'newproject': (<NewProjectForm newProject={this.props.newProject} changeForm = {this.props.changeForm} setForm={this.props.setForm} />),
+      'newgroup': (<NewGroupForm setForm={this.props.setForm} members = {this.props.members} />)
     };
 
     return (
-      <div id={'form-'+ this.state.type}>
-        {forms[this.state.type]}
+      <div id={'form-'+ this.props.type}>
+        {forms[this.props.type]}
       </div>
     );
   }
