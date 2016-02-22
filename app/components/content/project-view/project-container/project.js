@@ -2,11 +2,12 @@ import React from 'react';
 import d3 from 'd3';
 import TaskCircle from './task-circle';
 import DragLine from './drag-line';
+import common from './common';
 
 var taskProps = 'title done important'.split(' ');
 var numTicks = 10000;
-var xRadius = 50;
-var yRadius = 40;
+var xRadius = common.xRadius;
+var yRadius = common.yRadius;
 
 export default class ProjectContainer extends React.Component { 
   constructor() {
@@ -19,20 +20,38 @@ export default class ProjectContainer extends React.Component {
   }
 
   setDragging(data) {
-    console.log('Got dragging data:'); console.log(data);
     this.setState({dragging: data});
   }
 
-  configureTasks() {
-    this.tasks = this.props.project.tasks.map((t, idx) => {
-      var copy = {};
-      taskProps.forEach(prop => copy[prop] = t[prop]);
-      copy.x = idx * 5; copy.px = idx * 5;
-      copy.y = idx * 5; copy.py = idx * 5;
-      return copy;
-    });
+  onMouseMove(ev) {
+    if (this.state.dragging) {
+      var parent = document.querySelector(('#project-' + this.props.project.name).replace(' ','_')).getBoundingClientRect();
+      var f = this.state.dragging.from;
+      var t = {
+        x: ev.clientX - parent.left,
+        y: ev.clientY - parent.top
+      };
+      this.setState({dragging: {from: f, to: t}});
+    }
+  }
 
-    this.links = []; // TO DO – figure out how dependencies are stored and make them edges
+  onMouseUp(ev) {
+    if (this.state.dragging) {
+      this.setState({dragging: null});
+    }
+  }
+
+  dragEnded(endTask) {
+    if (this.state.dragging) {
+      this.setState({dragging: null});
+      this.props.addLink(this.props.project.name, this.state.dragging.from, endTask);
+    }
+  }
+
+  configureData() {
+    this.tasks = this.props.project.tasks;
+    this.links = this.props.project.links;
+
     this.width = 400;
     this.height = 800;
   }
@@ -66,35 +85,32 @@ export default class ProjectContainer extends React.Component {
     this.force.stop();
   }
 
-  render() {
+  taskWithTitle(title) {
+    return this.tasks.filter(t => t.title == title)[0];
+  }
+
+  render() {    
     if (!this.laidOut) {
-      this.configureTasks();
+      this.configureData();
       this.configureForce();
       this.runForce();
       this.laidOut = true;
     }
 
-    var taskCircles = this.tasks.map(t => (<TaskCircle task={t} key={'task-circle-' + t.title} setDragging={this.setDragging.bind(this)} />));
+    var taskCircles = this.tasks.map(t => (<TaskCircle task={t} key={'task-circle-' + t.title} setDragging={this.setDragging.bind(this)} dragEnded={this.dragEnded.bind(this)} />));
 
     var arrows = this.links.map(l => {
-      var f = {
-        x: l.source.x,
-        y: l.source.y
-      };
-      var t = {
-        x: l.target.x,
-        y: l.target.y
-      };
-      return (<DragLine from={f} to={t} />);
+      var idString = 'link-' + l.source.title + '-' + l.target.title;
+      return (<DragLine source={l.source} target={l.target} key={idString} ref={idString} />);
     });
 
     var dragline = '';
     if (this.state.dragging) {
-      dragline = (<DragLine from={this.state.dragging.from} to={this.state.dragging.to} />);
+      dragline = (<DragLine source={this.state.dragging.from} target={this.state.dragging.to} />);
     }
 
     return (
-      <div className="project" style={{width: this.width - (xRadius / 2) , height: this.height - (yRadius / 2)}}>
+      <div id={('project-' + this.props.project.name).replace(' ', '_')} className="project" style={{width: this.width - (xRadius / 2) , height: this.height - (yRadius / 2)}} onMouseMove={this.onMouseMove.bind(this)} onMouseUp={this.onMouseUp.bind(this)} >
         {taskCircles}
         {arrows}
         {dragline}

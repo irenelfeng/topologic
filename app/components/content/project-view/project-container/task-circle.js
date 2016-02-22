@@ -1,6 +1,7 @@
 import React from 'react';
-var xRadius = 50;
-var yRadius = 40;
+import common from './common';
+var xRadius = common.xRadius;
+var yRadius = common.yRadius;
 
 export default class TaskCircle extends React.Component { 
   constructor() {
@@ -9,22 +10,24 @@ export default class TaskCircle extends React.Component {
 
   startDrag(ev) {
     var parent = ev.target.offsetParent.getBoundingClientRect();
-    debugger;
     this.props.setDragging({
-      from: {
-        x: this.props.task.x + (xRadius / 2),
-        y: this.props.task.y + (yRadius / 2)
-      },
+      from: this.props.task,
       to: {
         x: ev.clientX - parent.left,
-        y: ev.clientY - parent.right
+        y: ev.clientY - parent.top
       }
     });
   }
 
+  endDrag(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.props.dragEnded(this.props.task);
+  }
+
   render() {
     return (
-      <div className="task-circle" style={{left: this.props.task.x, top: this.props.task.y}} onMouseDown={this.startDrag.bind(this)} >
+      <div className="task-circle" style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} onMouseDown={this.startDrag.bind(this)} onMouseUp={this.endDrag.bind(this)} >
 
         <div className="task-description" >
           {this.props.task.title}

@@ -26,13 +26,15 @@ class Main extends React.Component {
           done: true,
           important: false
         }],
-      name: 'Sample Project'
-    }
+      name: 'Sample Project',
+      links: []
+    };
 
     var nullProject = {
       tasks : [],
-      name: null
-    }
+      name: null,
+      links: []
+    };
 
     //var sampleTutorial = {
     //  tutorials :[
@@ -54,7 +56,6 @@ class Main extends React.Component {
           name: 'Friendly Vibrant Monkey Man',
           members: 'Bo Stalion Greyman Frankdick'.split(' ')
         }],
-        links: [],
         tutorials: [
           {name: 'Stickies'},
           {name: 'Getting started with topologic'},
@@ -140,9 +141,14 @@ class Main extends React.Component {
     group['members'].push(data);
   }
 
-  addLink(fromTitle, toTitle) {
-    this.state.items.links.push({from: fromTitle, to: toTitle});
+  addLink(projectName, source, target) {
+    var project = this.state.items.projects.filter(p => p.name == projectName)[0];
+    if (project.links.filter(l => l.source == source && l.target == target).length > 0) return;
+
+    project.links.push({source: source, target: target});
+    this.forceUpdate();
   }
+
   render() {
     return (
       <div id="main">

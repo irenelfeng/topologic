@@ -15,7 +15,7 @@ export default class ProjectContainer extends React.Component {
         <ProjectHeader project={this.props.project} />
 
         <div id={'project-box-' + this.props.project.name} className="project-box">
-          <Project project={this.props.project} />
+          <Project project={this.props.project} addLink={this.props.addLink} />
         </div>
       </div>
     );

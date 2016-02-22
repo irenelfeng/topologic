@@ -1,47 +1,56 @@
 import React from 'react';
 import d3 from 'd3';
+import common from './common';
+var xRadius = common.xRadius;
+var yRadius = common.yRadius;
 
-export default class ProjectHeader extends React.Component { 
+export default class DragLine extends React.Component { 
   constructor() {
     super();
   }
 
 
   render() {
-    var f = this.props.from, t = this.props.to;
+    var s = this.props.source, t = this.props.target;
     
-    var left = Math.min(f.x, t.x);
-    var top = Math.min(f.y, t.y);
-    var right = Math.max(f.x, t.x);
-    var bottom = Math.max(f.y, t.y);
+    var left = Math.min(s.x, t.x);
+    var top = Math.min(s.y, t.y);
+    var right = Math.max(s.x, t.x);
+    var bottom = Math.max(s.y, t.y);
 
     var width = right - left;
     var height = bottom - top;
 
     var a = {};
     // if top left to bottom right
-    if (top == f.y && left == f.x) {
+    if (top == s.y && left == s.x) {
       a.x1 = 0; a.y1 = 0;
-      a.x2 = width; a.x2 = height;
+      a.x2 = width; a.y2 = height;
     }
     // if bottom left to top right
-    else if (bottom == f.y && left == f.x) {
+    else if (bottom == s.y && left == s.x) {
       a.x1 = 0; a.y1 = height;
       a.x2 = width; a.y2 = 0;
     }
     // if top right to bottom left
-    else if (top == f.y && right == f.x) {
+    else if (top == s.y && right == s.x) {
       a.x1 = width; a.y1 = 0;
       a.x2 = 0; a.y2 = height;
     }
     // if bottom right to top left
-    else if (bottom == f.y && right == f.y) {
-      a.x1 = width; a.y2 = height;
+    else if (bottom == s.y && right == s.x) {
+      a.x1 = width; a.y1 = height;
       a.x2 = 0; a.y2 = 0;
     }
 
+    debugger;
+    a.x1 -= xRadius / 2; a.y1 -= yRadius / 2;
+    if (this.props.target.name != null) {
+      a.x2 -= xRadius / 2; x.y2 -= yRadius / 2;
+    }
+
     return (
-      <svg className="arrow-container" id={'link-' + Math.round(f.x) + '-' + Math.round(t.x)} style={{left: left, top: top, width: width, height: height}}> 
+      <svg className="arrow-container" id={'link-' + Math.round(s.x) + '-' + Math.round(t.x)} style={{left: left, top: top, width: width, height: height}}> 
         <line className="arrow" x1={a.x1} y1={a.y1} x2={a.x2} y2={a.y2} />
       </svg>
     );
