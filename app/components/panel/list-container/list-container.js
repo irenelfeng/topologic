@@ -8,8 +8,8 @@ export default class ListContainer extends React.Component {
   constructor() {
     super();
     this.itemComponents = {
-      projects: (item) => (<TaskItem key={item.id} task={item} />),
-      groups: (item) => (<GroupItem key={item.id} group={item} />),
+      projects: (item) => (<TaskItem key={item.title} task={item} />),
+      groups: (item) => (<GroupItem key={item.name} group={item} />),
       notifications: (item) => (<NotifyItem key={item.id} notification={item} />),
       tutorials: (item) => (<TutorialItem key={item.id} tutorial={item} />)
     }
@@ -34,7 +34,11 @@ export default class ListContainer extends React.Component {
     }
 
     if (this.props.active == 'tutorials') {
-      items = this.props.items;
+      this.props.items.forEach(p => {
+        p.tasks.forEach(t => {
+          items.push(t);
+        });
+      });
     }
 
     var items = items.filter(this.props.filterFn).map((item) => this.itemComponents[this.props.active](item));

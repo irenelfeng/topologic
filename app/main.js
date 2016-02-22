@@ -4,7 +4,7 @@ import Sidebar from './components/sidebar/sidebar';
 import Panel from './components/panel/panel';
 import Content from './components/content/content';
 
-class Main extends React.Component { 
+class Main extends React.Component {
   constructor() {
     super();
 
@@ -34,7 +34,15 @@ class Main extends React.Component {
       name: null
     }
 
-    this.state = { 
+    //var sampleTutorial = {
+    //  tutorials :[
+    //    {title: 'Stickies'},
+    //    {title: 'Getting started with topologic'},
+    //    {title: 'Creating Groups'}
+    //  ]
+    //}
+
+    this.state = {
       active: 'projects',
       items: {
         projects: [sampleProject, nullProject] ,
@@ -46,23 +54,20 @@ class Main extends React.Component {
           name: 'Friendly Vibrant Monkey Man',
           members: 'Bo Stalion Greyman Frankdick'.split(' ')
         }],
+        tutorials: [
+          {name: 'Stickies'},
+          {name: 'Getting started with topologic'},
+          {name: 'Creating Groups'}
+          ]
       },
       form: false,
     };
-
-    this.state.items.projects.forEach(p => {
-      p.tasks.forEach(t => {
-        t.id = t.title;
-      });
-    });
-    
-    this.state.items.groups.forEach(g => g.id = g.name);
   }
 
   setActive(icon) {
     this.setState({active: icon});
     this.panelRef.resetFilter();
-    this.setForm(false); 
+    this.setForm(false);
   }
 
   /**
@@ -80,7 +85,7 @@ class Main extends React.Component {
   newTask(data, projectName) {
     var project = this.state.items.projects.filter(p => p.name == projectName)[0];
     project['tasks'].push(data);
-    
+
   }
 
   /**
@@ -113,7 +118,7 @@ class Main extends React.Component {
       </div>
     );
   }
-} 
+}
 
 /**
  * Render the main app

@@ -1,5 +1,4 @@
 import React from 'react';
-import FormView from '../form-view/form-view';
 
 export default class TaskCircle extends React.Component { 
   constructor() {
@@ -8,7 +7,13 @@ export default class TaskCircle extends React.Component {
 
   render() {
     return (
-      <div className="task-circle"> </div>
+      <div className="task-circle" style={{left: this.props.task.x, top: this.props.task.y}}>
+
+        <div className="task-description" >
+          {this.props.task.title}
+        </div>
+
+      </div>
     );
   }
 }
