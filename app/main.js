@@ -128,10 +128,10 @@ class Main extends React.Component {
     if (type == 'group') {
       var idx = null;
       this.state.items.groups.forEach((g, i) => {
-        if (g.name == g.name) idx = i;
+        if (g.name == object.name) idx = i;
       });
-      if (idx != null)  this.state.items.g.splice(idx, 1); //if already exists, remove (prevents editing from making a double)
-      this.state.items.g.push(object); 
+      if (idx != null)  this.state.items.groups.splice(idx, 1); //if already exists, remove (prevents editing from making a double)
+      this.state.items.groups.push(object); 
     }
   }
 

@@ -15,14 +15,15 @@ export default class NewProjectForm extends React.Component {
   }
 
   save() {
+
     var data = {
-      title: document.querySelector('#form-title').value,
+      name: document.querySelector('#form-title').value,
       //description: document.querySelector('#task-description').value,
       //group: document.querySelector('#group-dropdown').value,
       //notify: document.querySelector('#notify-select').value
     };
 
-    this.props.saveObject(object, this.type);
+    this.props.saveObject(data, this.type);
     this.props.setForm(null);
   }
 
