@@ -49,14 +49,6 @@ class Main extends React.Component {
       },
       form: false,
     };
-
-    this.state.items.projects.forEach(p => {
-      p.tasks.forEach(t => {
-        t.id = t.title;
-      });
-    });
-    
-    this.state.items.groups.forEach(g => g.id = g.name);
   }
 
   setActive(icon) {

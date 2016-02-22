@@ -8,8 +8,8 @@ export default class ListContainer extends React.Component {
   constructor() {
     super();
     this.itemComponents = {
-      projects: (item) => (<TaskItem key={item.id} task={item} />),
-      groups: (item) => (<GroupItem key={item.id} group={item} />),
+      projects: (item) => (<TaskItem key={item.title} task={item} />),
+      groups: (item) => (<GroupItem key={item.name} group={item} />),
       notifications: (item) => (<NotifyItem key={item.id} notification={item} />),
       tutorials: (item) => (<TutorialItem key={item.id} tutorial={item} />)
     }

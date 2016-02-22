@@ -12,11 +12,11 @@ export default class ProjectHeader extends React.Component {
     var progressBar = [];
 
     completeds.forEach((task, i) => {
-      progressBar.push((<div className="progress-bar-item done" key={'bar-item-' + i.toString()}> </div>));
+      progressBar.push((<div className="progress-bar-item done" key={'filledbar-item-' + this.props.project.name + '-' + i.toString()}> </div>));
     });
 
     notcompleteds.forEach((task, i) => {
-      progressBar.push((<div className="progress-bar-item notdone" key={'bar-item-' + i.toString()}> </div>))
+      progressBar.push((<div className="progress-bar-item notdone" key={'unfilledbar-item-' + this.props.project.name + '-' + i.toString()}> </div>))
     });
 
     return (
