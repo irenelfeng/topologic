@@ -34,13 +34,13 @@ class Main extends React.Component {
       name: null
     }
 
-    var sampleTutorial = {
-      tutorials :[
-        {title: 'Stickies'},
-        {title: 'Getting started with topologic'},
-        {title: 'Creating Groups'}
-      ]
-    }
+    //var sampleTutorial = {
+    //  tutorials :[
+    //    {title: 'Stickies'},
+    //    {title: 'Getting started with topologic'},
+    //    {title: 'Creating Groups'}
+    //  ]
+    //}
 
     this.state = {
       active: 'projects',
@@ -54,24 +54,40 @@ class Main extends React.Component {
           name: 'Friendly Vibrant Monkey Man',
           members: 'Bo Stalion Greyman Frankdick'.split(' ')
         }],
-        links: []
+        links: [],
+        tutorials: [
+          {name: 'Stickies'},
+          {name: 'Getting started with topologic'},
+          {name: 'Creating Groups'}
+          ]
       },
-      form: false,
+      form: {
+        projects: null,
+        groups: null
+      },
     };
   }
 
+  /*
+  * Sidebar icon clicked, setform to null, change the icon.
+  */
   setActive(icon) {
     this.setState({active: icon});
     this.panelRef.resetFilter();
-    this.setForm(false);
+    this.setForm(null);
   }
 
   /**
    * When the sidebar icon changes will the form change back to false
-   * @param {Boolean} bool whether form view is currently active
+   * @param {item} either null, {} (meaning new form), { ... } editForm
    */
-  setForm(bool) {
-    this.setState({form: bool});
+  setForm(item) {
+    var form = {
+      projects: null,
+      groups: null
+    };
+    form[this.state.active] = item; //changes active tab to the item given
+    this.setState({form: form});
   }
 
   /**
@@ -91,7 +107,17 @@ class Main extends React.Component {
   newProject(p) {
     p['tasks'] = [];
     this.state.items.projects.push(p);
+  }
 
+  newGroup(group) { 
+
+    this.state.items.groups.push(group);
+  }
+
+
+  addMember(member, groupName){
+    var group = this.state.items.groups.filter(p => p.name == groupName)[0];
+    group['members'].push(data);
   }
 
   addLink(fromTitle, toTitle) {

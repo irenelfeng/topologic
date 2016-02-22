@@ -11,24 +11,37 @@ import Members from  '../form-components/members';
 export default class NewGroupForm extends React.Component {
   constructor() {
     super();
+    this.state = {
+      members: [],
+    }
   }
 
   save() {
 
   }
 
+  addMember(member) { 
+    this.state.members.push(member);
+    this.forceUpdate();
+  }
+
+  removeMember(member){
+
+  }
+
 
   render() {
+    debugger;
     return (
       <div id="form-container">
         <Title />
         <Description />
         <GroupAvatar />
+        <Members members={this.state.members} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>
-        <Members members={this.props.members} />
       </div>
     );
   }
