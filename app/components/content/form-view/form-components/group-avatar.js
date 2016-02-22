@@ -20,7 +20,6 @@ export default class GroupAvatar extends React.Component {
       self.setState({
           fileURL:upload.target.result,
         });
-        debugger;
     }
 
     reader.readAsDataURL(file);

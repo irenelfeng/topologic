@@ -6,6 +6,7 @@ import ReactSelectize from 'react-selectize';
 export default class GroupSelect extends React.Component { 
   constructor() {
     super();
+
   }
 
   render() {
@@ -19,6 +20,7 @@ export default class GroupSelect extends React.Component {
         <div className="form-aligned-col1"> Group: </div>
         <div id="group-dropdown" className="form-aligned-col2">
           <SimpleSelect 
+            defaultValue = {{label: "testing", value: "testing"}}
             options = {options} 
             placeholder = "Select a group"
             />

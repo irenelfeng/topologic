@@ -19,11 +19,9 @@ export default class NewGroupForm extends React.Component {
   save() {
     var data = {
       name: document.querySelector('#form-title').value,
-      //deadline: document.querySelector('.form-title').value,
+      deadline: document.querySelector('.form-title').value,
       //location: document.querySelector('#form-location').value,
-      //description: document.querySelector('#task-description').value,
-      //group: document.querySelector('#group-dropdown').value,
-      //notify: document.querySelector('#notify-select').value
+      description: document.querySelector('#task-description').value,
       members: members,
 
     };
@@ -39,17 +37,13 @@ export default class NewGroupForm extends React.Component {
   }
 
   removeMember(idx){
-    // var idx = null;
-    // this.state.members.forEach((m, i) => {
-    //   if (m == member) idx = i;
-    // });
+
     this.state.members.splice(idx, 1);
     this.forceUpdate();
   }
 
 
   render() {
-    debugger;
     return (
       <div id="form-container">
         <Title />

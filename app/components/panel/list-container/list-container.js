@@ -17,6 +17,7 @@ export default class ListContainer extends React.Component {
 
   render() {
     var items = [];
+    
     if (this.props.active == 'projects') {
       this.props.items.forEach(p => {
         p.tasks.forEach(t => {
@@ -41,7 +42,7 @@ export default class ListContainer extends React.Component {
       });
     }
 
-    var items = items.filter(this.props.filterFn).map((item) => this.itemComponents[this.props.active](item));
+    items = items.filter(this.props.filterFn).map((item) => this.itemComponents[this.props.active](item));
 
     return (
       <div id="list-container">

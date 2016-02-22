@@ -19,7 +19,7 @@ export default class NewProjectForm extends React.Component {
     var data = {
       name: document.querySelector('#form-title').value,
       //description: document.querySelector('#task-description').value,
-      //group: document.querySelector('#group-dropdown').value,
+      group: document.querySelector(".simple-value").firstChild.innerHTML,
       //notify: document.querySelector('#notify-select').value
     };
 
@@ -29,9 +29,13 @@ export default class NewProjectForm extends React.Component {
 
 
   render() {
+
+    if (this.props.form.isEmpty){
+      var toggleTask = (<TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>);
+    }
     return (
       <div id="form-container" >
-          <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
+        <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
         <Title object={this.props.form} />
         <Description object={this.props.form} />
         <GroupSelect object={this.props.form} />
