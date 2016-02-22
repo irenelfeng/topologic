@@ -3,3 +3,4 @@ bundle.js
 style.css
 build/
 .DS_Store
+**/.DS_Store
