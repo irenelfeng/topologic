@@ -2,7 +2,6 @@ import React from 'react';
 import Icon from './icon'
 
 export default class Sidebar extends React.Component {
-
   constructor() {
     super();
   }
@@ -13,6 +12,7 @@ export default class Sidebar extends React.Component {
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='projects'/>
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='groups'/>
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='notifications'/>
+        <Icon setActive ={this.props.setActive} active={this.props.active} icon='tutorial'/>
       </div>
     );
   }
