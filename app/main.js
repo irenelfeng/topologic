@@ -34,13 +34,13 @@ class Main extends React.Component {
       name: null
     }
 
-    var sampleTutorial = {
-      tutorials :[
-        {title: 'Stickies'},
-        {title: 'Getting started with topologic'},
-        {title: 'Creating Groups'}
-      ]
-    }
+    //var sampleTutorial = {
+    //  tutorials :[
+    //    {title: 'Stickies'},
+    //    {title: 'Getting started with topologic'},
+    //    {title: 'Creating Groups'}
+    //  ]
+    //}
 
     this.state = {
       active: 'projects',
@@ -54,6 +54,11 @@ class Main extends React.Component {
           name: 'Friendly Vibrant Monkey Man',
           members: 'Bo Stalion Greyman Frankdick'.split(' ')
         }],
+        tutorials: [
+          {name: 'Stickies'},
+          {name: 'Getting started with topologic'},
+          {name: 'Creating Groups'}
+          ]
       },
       form: false,
     };
