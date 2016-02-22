@@ -43,7 +43,6 @@ export default class DragLine extends React.Component {
       a.x2 = 0; a.y2 = 0;
     }
 
-    debugger;
     a.x1 -= xRadius / 2; a.y1 -= yRadius / 2;
     if (this.props.target.name != null) {
       a.x2 -= xRadius / 2; x.y2 -= yRadius / 2;
