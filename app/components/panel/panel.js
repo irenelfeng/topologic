@@ -7,7 +7,6 @@ export default class Panel extends React.Component {
     super();
     this.state = {
       filterFn: () => true
-      //plusFn: () => true
     };
 
     this.headerImgs = {
@@ -15,6 +14,8 @@ export default class Panel extends React.Component {
       groups: ("./img/plus.png"),
       notifications: ("./img/sort.png"),
     }
+
+    this.firstRender = true;
   }
 
   setFilter(fn) {
@@ -39,6 +40,14 @@ export default class Panel extends React.Component {
   render() {
     var itemsToPass = this.props.items[this.props.active];
     var href = this.headerImgs[this.props.active];
+
+    if (this.firstRender) {
+      this.state.filterFn = {
+        projects: (task) => !task.done,
+        groups: (group) => true
+      }[this.props.active];  
+      this.firstRender = false;    
+    }
     
     return (
       <div id="panel">
