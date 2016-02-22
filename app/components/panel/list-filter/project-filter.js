@@ -21,7 +21,6 @@ export default class ProjectFilter extends React.Component {
   }
 
   render() {
-    this.props.setFilter(this.filterFns[this.state.selected]);
     var s = (type) => this.state.selected == type ? 'selected' : '';
 
     return (

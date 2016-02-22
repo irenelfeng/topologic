@@ -54,6 +54,7 @@ class Main extends React.Component {
           name: 'Friendly Vibrant Monkey Man',
           members: 'Bo Stalion Greyman Frankdick'.split(' ')
         }],
+        links: [],
         tutorials: [
           {name: 'Stickies'},
           {name: 'Getting started with topologic'},
@@ -91,29 +92,6 @@ class Main extends React.Component {
 
     form[this.state.active] = item; //changes active tab to the item given
     this.setState({form: form});
-  }
-
-  /**
-   * Adds a new task to a certain project
-   * @param {data} all the data of the task
-   */
-  newTask(data, projectName) {
-    var project = this.state.items.projects.filter(p => p.name == projectName)[0];
-    project['tasks'].push(data);
-
-  }
-
-  /**
-   * Adds a new project, no tasks essentially
-   * @param {p} the project
-   */
-  newProject(p) {
-    p['tasks'] = [];
-    this.state.items.projects.push(p);
-  }
-
-  newGroup(group) { 
-    this.state.items.groups.push(group);
   }
 
   /*
@@ -162,14 +140,16 @@ class Main extends React.Component {
     group['members'].push(data);
   }
 
+  addLink(fromTitle, toTitle) {
+    this.state.items.links.push({from: fromTitle, to: toTitle});
+  }
   render() {
-        // <Content newProject={this.newProject.bind(this)} newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
-
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content saveObject={this.saveObject.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
+        <Content saveObject={this.saveObject.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} addLink={this.addLink.bind(this)} />
+
       </div>
     );
   }
