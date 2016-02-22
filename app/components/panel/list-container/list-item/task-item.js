@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class TaskItem extends React.Component { 
+export default class TaskItem extends React.Component {
   constructor() {
     super();
   }

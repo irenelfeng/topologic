@@ -1,5 +1,5 @@
 import React from 'react';
-import Calendar from './date-picker.js'
+import Calendar from './calendar.js'
 
 export default class Deadline extends React.Component {
   constructor() {
