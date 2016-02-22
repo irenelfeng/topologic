@@ -5,10 +5,25 @@ export default class Members extends React.Component {
     super();
   }
 
+  addMember() {
+    var test = "member 1";
+    this.props.addMember(test);
+  }
+
   render() {
-    var members = this.props.members;
+    var members;
+    if(this.props.members)
+      members = this.props.members.map((m) => (<div>{m}</div>));
+
     return (
-      <div></div>
+      <div>
+        <div className="add-box" onClick={this.addMember.bind(this)} >
+          Add Member
+        </div>
+        <div id="members-box">
+          {members}
+        </div>
+      </div>
     );
   }
 }

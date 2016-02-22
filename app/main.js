@@ -90,7 +90,17 @@ class Main extends React.Component {
   newProject(p) {
     p['tasks'] = [];
     this.state.items.projects.push(p);
+  }
 
+  newGroup(group) { 
+
+    this.state.items.groups.push(group);
+  }
+
+
+  addMember(member, groupName){
+    var group = this.state.items.groups.filter(p => p.name == groupName)[0];
+    group['members'].push(data);
   }
 
   render() {
