@@ -6,9 +6,21 @@ export default class TaskItem extends React.Component {
   }
 
   render() {
+    var projectSection = '';
+    var br = '';
+    if (this.props.task.p) {
+      projectSection = (<span className="project-title"> {this.props.task.p.name} </span>);
+    }
+
     return (
       <div className="list-item task-item">
-        <span> {this.props.task.title} </span>
+        <div className="icons-container">
+          <img className="person-container" src="./img/person.png"/>
+        </div>
+        <div className="text-container">
+          {projectSection}
+          <span className="task-title"> {this.props.task.title} </span>
+        </div>
       </div>
     );
   }

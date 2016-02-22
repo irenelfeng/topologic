@@ -21,11 +21,18 @@ export default class ProjectHeader extends React.Component {
 
     return (
       <div className="project-header">
-        <img src={this.props.project.imgSrc} />
-        <span> {this.props.project.name} </span>
-        <div className="progress-bar"> 
-          {progressBar}
+
+        <div className="img-container">
+          <img src={this.props.project.imgSrc} />
         </div>
+
+        <div className="non-picture-els">
+          <span> {this.props.project.name} </span>
+          <div className="progress-bar"> 
+            {progressBar}
+          </div>
+        </div>
+
       </div>
     );
   }

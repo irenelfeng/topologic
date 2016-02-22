@@ -1,13 +1,25 @@
 .project-header
-  width 300px
+  width 100%
+  height 40px
+  background-color lighten(#29C8E1, 10%)
+  flexbox(flex)
   
+  .img-container
+    width 20%
+    
+    img
+      width 50%
 
-  .progress-bar
-    flexbox(flex)
-    flex-direction(row)
+  .non-picture-els
+    width 80%
 
-    .progress-bar-item
-      width 100%
-      
-      &.done
-        background-color blue
+    .progress-bar
+      flexbox(flex)
+      flex-direction(row)
+      border 1px solid black
+
+      .progress-bar-item
+        width 100%
+        
+        &.done
+          background-color black

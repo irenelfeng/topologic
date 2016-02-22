@@ -11,7 +11,7 @@ export default class GroupView extends React.Component {
       return (<FormView saveObject={this.props.saveObject} setForm={this.props.setForm} type='group' members={this.props.members}/>);
 
     return (
-      <div id="group-creation">
+      <div id="group-view">
         
       </div>
     );
