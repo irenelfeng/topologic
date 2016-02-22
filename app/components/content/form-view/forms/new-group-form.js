@@ -20,6 +20,7 @@ export default class NewGroupForm extends React.Component {
     var data = {
       name: document.querySelector('#form-title').value,
       description: document.querySelector('#task-description').value,
+      avatar: 
       members: this.state.members,
 
     };

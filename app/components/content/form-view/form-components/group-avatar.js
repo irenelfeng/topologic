@@ -3,9 +3,7 @@ import React from 'react';
 export default class GroupAvatar extends React.Component {
   constructor() {
     super();
-    this.state = {
-      fileURL: './img/groups.png'
-    }
+
   }
 
   /*
@@ -29,7 +27,7 @@ export default class GroupAvatar extends React.Component {
     return (
       <div id="group-avatar" className="form-group">
         <div className="form-aligned-col1"> Group Avatar: </div>
-        <img className="hoverInput avatar-img" src={this.state.fileURL} >
+        <img className="hoverInput avatar-img" src={this.props.avatar} >
         </img>
         <input type="file" onChange={this.changeAvatar.bind(this)} id="avatar" accept="image/*" />
       </div>
