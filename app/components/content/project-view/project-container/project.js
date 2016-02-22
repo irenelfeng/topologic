@@ -1,6 +1,7 @@
 import React from 'react';
 import d3 from 'd3';
 import TaskCircle from './task-circle';
+import DragLine from './drag-line';
 
 var taskProps = 'title done important'.split(' ');
 var numTicks = 10000;
@@ -11,6 +12,15 @@ export default class ProjectContainer extends React.Component {
   constructor() {
     super();
     this.force = d3.layout.force();
+    this.state = {
+      dragging: null
+    };
+    this.laidOut = false;
+  }
+
+  setDragging(data) {
+    console.log('Got dragging data:'); console.log(data);
+    this.setState({dragging: data});
   }
 
   configureTasks() {
@@ -22,7 +32,7 @@ export default class ProjectContainer extends React.Component {
       return copy;
     });
 
-    this.links = {}; // TO DO – figure out how dependencies are stored and make them edges
+    this.links = []; // TO DO – figure out how dependencies are stored and make them edges
     this.width = 400;
     this.height = 800;
   }
@@ -57,15 +67,37 @@ export default class ProjectContainer extends React.Component {
   }
 
   render() {
-    this.configureTasks();
-    this.configureForce();
-    this.runForce();
+    if (!this.laidOut) {
+      this.configureTasks();
+      this.configureForce();
+      this.runForce();
+      this.laidOut = true;
+    }
 
-    var taskCircles = this.tasks.map(t => (<TaskCircle task={t} key={'task-circle-' + t.title}/>));
+    var taskCircles = this.tasks.map(t => (<TaskCircle task={t} key={'task-circle-' + t.title} setDragging={this.setDragging.bind(this)} />));
+
+    var arrows = this.links.map(l => {
+      var f = {
+        x: l.source.x,
+        y: l.source.y
+      };
+      var t = {
+        x: l.target.x,
+        y: l.target.y
+      };
+      return (<DragLine from={f} to={t} />);
+    });
+
+    var dragline = '';
+    if (this.state.dragging) {
+      dragline = (<DragLine from={this.state.dragging.from} to={this.state.dragging.to} />);
+    }
 
     return (
       <div className="project" style={{width: this.width - (xRadius / 2) , height: this.height - (yRadius / 2)}}>
         {taskCircles}
+        {arrows}
+        {dragline}
       </div>
     );
   }

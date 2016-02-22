@@ -54,6 +54,7 @@ class Main extends React.Component {
           name: 'Friendly Vibrant Monkey Man',
           members: 'Bo Stalion Greyman Frankdick'.split(' ')
         }],
+        links: []
       },
       form: false,
     };
@@ -93,13 +94,16 @@ class Main extends React.Component {
 
   }
 
-  render() {
+  addLink(fromTitle, toTitle) {
+    this.state.items.links.push({from: fromTitle, to: toTitle});
+  }
 
+  render() {
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content newProject={this.newProject.bind(this)} newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
+        <Content newProject={this.newProject.bind(this)} newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} addLink={this.addLink.bind(this)} />
       </div>
     );
   }
