@@ -7,7 +7,7 @@ export default class TaskOrProject extends React.Component {
 
   onClick(e) {
     var option = e.target.id.split('-')[0];
-    var type = 'new' + option;
+    var type = option;
     this.props.changeForm(type);
   }
 

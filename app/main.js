@@ -65,6 +65,7 @@ class Main extends React.Component {
         groups: null
       },
     };
+
   }
 
   /*
@@ -77,7 +78,8 @@ class Main extends React.Component {
   }
 
   /**
-   * When the sidebar icon changes will the form change back to false
+   * A crazy function that does a lot of things: changes the view
+   * When the sidebar icon changes will change the form to null view
    * @param {item} either null, {} (meaning new form), { ... } editForm
    */
   setForm(item) {
@@ -85,6 +87,8 @@ class Main extends React.Component {
       projects: null,
       groups: null
     };
+    debugger;
+
     form[this.state.active] = item; //changes active tab to the item given
     this.setState({form: form});
   }
@@ -109,8 +113,47 @@ class Main extends React.Component {
   }
 
   newGroup(group) { 
-
     this.state.items.groups.push(group);
+  }
+
+  /*
+  * saves objects depending on its type. project index
+  */ 
+  saveObject(object, type, project = null) {
+
+    if (type == 'task') {
+      if (project == null) { 
+        //determine nullproject index, set project to that index.
+        this.state.items.projects.forEach((p, i) => {
+          if (p.name == null) project = i;
+        });
+      }
+      var idx = null;
+      this.state.items.projects[project].tasks.forEach((t, i) => {
+        if (t.title == object.title) idx = i;
+      });
+
+      if (idx != null) this.state.items.projects[project].tasks.splice(idx, 1);
+      this.state.items.projects[project].tasks.push(object);
+    }
+
+    if (type == 'project') {
+      var idx = null;
+      this.state.items.projects.forEach((p, i) => {
+        if (p.name == object.name) idx = i;
+      });
+      if (idx != null)  this.state.items.projects.splice(idx, 1); //if already exists, remove (prevents editing from making a double)
+      this.state.items.projects.push(object); 
+    }
+
+    if (type == 'group') {
+      var idx = null;
+      this.state.items.groups.forEach((g, i) => {
+        if (g.name == g.name) idx = i;
+      });
+      if (idx != null)  this.state.items.g.splice(idx, 1); //if already exists, remove (prevents editing from making a double)
+      this.state.items.g.push(object); 
+    }
   }
 
 
@@ -120,12 +163,13 @@ class Main extends React.Component {
   }
 
   render() {
+        // <Content newProject={this.newProject.bind(this)} newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
 
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content newProject={this.newProject.bind(this)} newTask = {this.newTask.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
+        <Content saveObject={this.saveObject.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} />
       </div>
     );
   }

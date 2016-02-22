@@ -6,20 +6,20 @@ export default class ProjectView extends React.Component {
   constructor() {
     super();
     this.state = {
-      type: 'newtask'
+      type: 'task'
     }
   } 
 
   /*
-  * changes the form only from newtask -> newproject. 
+  * changes the form only from task -> project. 
   */ 
   changeForm(key) {
     this.setState({type: key});
   }
 
   render() {
-    if (this.props.form)
-      return (<FormView changeForm={this.changeForm.bind(this)} newTask={this.props.newTask} newProject={this.props.newProject} setForm = {this.props.setForm} type={this.state.type} />);
+    if (this.props.form[this.props.active] != null)
+      return (<FormView saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} setForm = {this.props.setForm} type={this.state.type} />);
 
     var projects = this.props.projects.map((p, i) => (<ProjectContainer key={i} project={p} />));
 

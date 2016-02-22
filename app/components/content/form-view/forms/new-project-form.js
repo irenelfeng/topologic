@@ -22,22 +22,22 @@ export default class NewProjectForm extends React.Component {
       //notify: document.querySelector('#notify-select').value
     };
 
-    this.props.newProject(data);
-    this.props.setForm(false);
+    this.props.saveObject(object, this.type);
+    this.props.setForm(null);
   }
 
 
   render() {
     return (
       <div id="form-container" >
-          <TaskOrProject type = {this.type} changeForm = {this.props.changeForm}/>
-        <Title />
-        <Description />
-        <GroupSelect />
-        <NotifySelect />
+          <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
+        <Title object={this.props.form} />
+        <Description object={this.props.form} />
+        <GroupSelect object={this.props.form} />
+        <NotifySelect object={this.props.form} />
         <div className="form-group">
-          <CancelButton setForm = {this.props.setForm} />
-          <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
+          <CancelButton setForm = {this.props.setForm} object={this.props.form} />
+          <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
         </div>
       </div>
     );

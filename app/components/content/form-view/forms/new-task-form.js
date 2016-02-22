@@ -34,8 +34,8 @@ export default class NewTaskForm extends React.Component {
       important: true
     };
 
-    this.props.newTask(data, null); //project is null
-    this.props.setForm(false);
+    this.props.saveObject(data, this.type);
+    this.props.setForm(null);
   }
 
   render() {

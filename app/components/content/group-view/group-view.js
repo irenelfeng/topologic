@@ -7,8 +7,8 @@ export default class GroupView extends React.Component {
   }
 
   render() {
-    if (this.props.form)
-      return (<FormView setForm = {this.props.setForm} type='newgroup' members={this.props.members}/>);
+    if (this.props.form[this.props.active])
+      return (<FormView saveObject={this.props.saveObject} setForm={this.props.setForm} type='group' members={this.props.members}/>);
 
     return (
       <div id="group-creation">
