@@ -34,7 +34,11 @@ export default class ListContainer extends React.Component {
     }
 
     if (this.props.active == 'tutorials') {
-      items = this.props.items;
+      this.props.items.forEach(p => {
+        p.tasks.forEach(t => {
+          items.push(t);
+        });
+      });
     }
 
     var items = items.filter(this.props.filterFn).map((item) => this.itemComponents[this.props.active](item));
