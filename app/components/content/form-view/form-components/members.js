@@ -13,7 +13,7 @@ export default class Members extends React.Component {
   render() {
     var members;
     if(this.props.members)
-      members = this.props.members.map((m) => (<div>{m}</div>));
+      members = this.props.members.map((m, i) => (<div>{m}<span className="remove-member" onClick={this.props.removeMember(i)}>x</span></div>));
 
     return (
       <div>

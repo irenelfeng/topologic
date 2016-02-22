@@ -22,7 +22,11 @@ export default class NewGroupForm extends React.Component {
 
   addMember(member) { 
     this.state.members.push(member);
-    this.setState();
+    this.forceUpdate();
+  }
+
+  removeMember(member){
+
   }
 
 
@@ -33,7 +37,7 @@ export default class NewGroupForm extends React.Component {
         <Title />
         <Description />
         <GroupAvatar />
-        <Members members={this.state.members} addMember={this.addMember.bind(this)} />
+        <Members members={this.state.members} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
