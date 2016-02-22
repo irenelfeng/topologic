@@ -19,10 +19,8 @@ export default class NewGroupForm extends React.Component {
   save() {
     var data = {
       name: document.querySelector('#form-title').value,
-      deadline: document.querySelector('.form-title').value,
-      //location: document.querySelector('#form-location').value,
       description: document.querySelector('#task-description').value,
-      members: members,
+      members: this.state.members,
 
     };
 

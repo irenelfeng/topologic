@@ -89,7 +89,6 @@ class Main extends React.Component {
       projects: null,
       groups: null
     };
-    debugger;
 
     form[this.state.active] = item; //changes active tab to the item given
     this.setState({form: form});

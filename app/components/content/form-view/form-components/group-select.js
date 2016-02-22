@@ -1,6 +1,5 @@
 import React from 'react';
 
-var rs = require('react-selectize');
 import ReactSelectize from 'react-selectize';
 
 export default class GroupSelect extends React.Component { 

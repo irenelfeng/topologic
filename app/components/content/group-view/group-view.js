@@ -12,7 +12,7 @@ export default class GroupView extends React.Component {
 
     return (
       <div id="group-view">
-        
+        Select a group on the panel to view.... 
       </div>
     );
   }
