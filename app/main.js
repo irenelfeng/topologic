@@ -60,22 +60,33 @@ class Main extends React.Component {
           {name: 'Creating Groups'}
           ]
       },
-      form: false,
+      form: {
+        projects: null,
+        groups: null
+      },
     };
   }
 
+  /*
+  * Sidebar icon clicked, setform to null, change the icon.
+  */
   setActive(icon) {
     this.setState({active: icon});
     this.panelRef.resetFilter();
-    this.setForm(false);
+    this.setForm(null);
   }
 
   /**
    * When the sidebar icon changes will the form change back to false
-   * @param {Boolean} bool whether form view is currently active
+   * @param {item} either null, {} (meaning new form), { ... } editForm
    */
-  setForm(bool) {
-    this.setState({form: bool});
+  setForm(item) {
+    var form = {
+      projects: null,
+      groups: null
+    };
+    form[this.state.active] = item; //changes active tab to the item given
+    this.setState({form: form});
   }
 
   /**
