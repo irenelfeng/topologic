@@ -17,6 +17,7 @@ export default class NewGroupForm extends React.Component {
   }
 
   save() {
+    debugger;
     var data = {
       name: document.querySelector('#form-title').value,
       description: document.querySelector('#task-description').value,
@@ -30,17 +31,6 @@ export default class NewGroupForm extends React.Component {
 
   }
 
-  addMember(member) { 
-    this.state.members.push(member);
-    this.forceUpdate();
-  }
-
-  removeMember(idx){
-
-    this.state.members.splice(idx, 1);
-    this.forceUpdate();
-  }
-
   fileUpload(upload){
     this.state.avatar = upload;
     this.props.form['avatar'] = upload;
@@ -49,6 +39,8 @@ export default class NewGroupForm extends React.Component {
 
 
   render() {
+
+    //make a copy of members to pass 
 
     if(Object.keys(this.props.form['groups']).length == 0){
       //if new form
@@ -61,7 +53,7 @@ export default class NewGroupForm extends React.Component {
         <Title />
         <Description />
         <GroupAvatar object={this.props.form} fileUpload={this.fileUpload.bind(this)} />
-        <Members ref={(ref) => this.membersRef = ref} members={[]} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
+        <Members ref={(ref) => this.membersRef = ref} members={[]} />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
@@ -69,13 +61,15 @@ export default class NewGroupForm extends React.Component {
       </div>
       );
     }
+
+    var members = this.props.form['groups'].members.slice();
     return (
       //if edit form
       <div id="form-container">
         <Title title={this.props.form['groups'].name} />
         <Description desc={this.props.form['groups'].description} />
         <GroupAvatar avatar={this.props.form['groups'].avatar} fileUpload={this.fileUpload.bind(this)} />
-        <Members ref={(ref) => this.membersRef = ref} members={this.props.form['groups'].members} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
+        <Members ref={(ref) => this.membersRef = ref} members={members} />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
