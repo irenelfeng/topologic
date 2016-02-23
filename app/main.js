@@ -111,8 +111,8 @@ class Main extends React.Component {
         if (t.title == object.title) idx = i;
       });
 
-      if (idx != null) this.state.items.projects[project].tasks.splice(idx, 1);
-      this.state.items.projects[project].tasks.push(object);
+      if (idx != null) this.state.items.projects[project].tasks.splice(idx, 1, object);
+      else this.state.items.projects[project].tasks.push(object);
     }
 
     if (type == 'project') {
@@ -120,8 +120,8 @@ class Main extends React.Component {
       this.state.items.projects.forEach((p, i) => {
         if (p.name == object.name) idx = i;
       });
-      if (idx != null)  this.state.items.projects.splice(idx, 1); //if already exists, remove (prevents editing from making a double)
-      this.state.items.projects.push(object); 
+      if (idx != null)  this.state.items.projects.splice(idx, 1, object); //if already exists, remove (prevents editing from making a double)
+      else this.state.items.projects.push(object); 
     }
 
     if (type == 'group') {
@@ -129,8 +129,8 @@ class Main extends React.Component {
       this.state.items.groups.forEach((g, i) => {
         if (g.name == object.name) idx = i;
       });
-      if (idx != null)  this.state.items.groups.splice(idx, 1); //if already exists, remove (prevents editing from making a double)
-      this.state.items.groups.push(object); 
+      if (idx != null)  this.state.items.groups.splice(idx, 1, object); //if already exists, remove (prevents editing from making a double)
+      else this.state.items.groups.push(object); 
     }
   }
 

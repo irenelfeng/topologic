@@ -53,11 +53,15 @@ export default class NewGroupForm extends React.Component {
     if(Object.keys(this.props.form['groups']).length == 0){
       //if new form
       return (
+
       <div id="form-container">
+        <div id="new-container">
+         <div className="text-container">New Group </div>
+         </div>
         <Title />
         <Description />
         <GroupAvatar object={this.props.form} fileUpload={this.fileUpload.bind(this)} />
-        <Members members={this.state.members} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
+        <Members ref={(ref) => this.membersRef = ref} members={[]} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />

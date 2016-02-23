@@ -30,6 +30,7 @@ export default class Panel extends React.Component {
     this.setState({
       filterFn: () => true
     });
+    this.listContainer.clearSelect();
   }
 
   // on click for the header panel image
