@@ -5,6 +5,11 @@ export default class TaskItem extends React.Component {
     super();
   }
 
+  selected(e){
+    var item = this.props.task;
+    this.props.editItem(this.props.task.title, item, this.type);
+  }
+
   render() {
     var projectSection = '';
     var br = '';
@@ -13,7 +18,7 @@ export default class TaskItem extends React.Component {
     }
 
     return (
-      <div className="list-item task-item">
+      <div className={'list-item task-item ' +this.props.selected} onClick={this.selected.bind(this)}>
         <div className="icons-container">
           <img className="person-container" src="./img/person.png"/>
         </div>

@@ -39,20 +39,34 @@ export default class NewTaskForm extends React.Component {
   }
 
   render() {
-    return (
-      <div id="form-container">
-        <TaskOrProject type={this.type} changeForm={this.props.changeForm} />
-        <Title />
-        <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
-        <Location />
-        <Description />
-        <GroupSelect />
-        <NotifySelect deadline={this.state.deadline}/>
-        <div className="form-group">
-          <CancelButton setForm = {this.props.setForm} />
-          <SaveButton onClick={this.save.bind(this)}/>
+    if(Object.keys(this.props.form['projects']).length == 0){
+      return (
+        <div id="form-container">
+          <TaskOrProject type={this.type} changeForm={this.props.changeForm} />
+          <Title />
+          <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
+          <Location />
+          <Description />
+          <GroupSelect />
+          <NotifySelect deadline={this.state.deadline}/>
+          <div className="form-group">
+            <CancelButton setForm = {this.props.setForm} />
+            <SaveButton onClick={this.save.bind(this)}/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }else{
+      //edit task 
+      return (
+          <div id="form-container">
+            <Title title={this.props.form['projects'].title} />
+            <Description desc={this.props.form['projects'].desc} />
+            <div className="form-group">
+              <CancelButton setForm = {this.props.setForm} />
+              <SaveButton onClick={this.save.bind(this)}/>
+            </div>
+          </div>
+        );
+    }
   }
 }

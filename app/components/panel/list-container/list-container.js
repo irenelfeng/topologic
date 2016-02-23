@@ -20,6 +20,10 @@ export default class ListContainer extends React.Component {
     this.props.setForm(item);
   }
 
+  clearSelect(){
+    this.setState({selected: ''});
+  }
+
   render() {
     var items = [];
     

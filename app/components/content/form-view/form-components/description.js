@@ -9,7 +9,7 @@ export default class Description extends React.Component {
     return (
       <div id="description-container" className="form-group">
         <div className="form-aligned-col1"> Description: </div>
-        <textarea id="task-description" className="form-aligned-col2" placeholder="(optional)" defaultValue={this.props.description} />
+        <textarea id="task-description" className="form-aligned-col2" placeholder="(optional)" initialValue={this.props.desc} />
       </div>
     );
   }

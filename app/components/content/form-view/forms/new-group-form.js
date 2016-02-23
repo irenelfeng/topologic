@@ -49,7 +49,6 @@ export default class NewGroupForm extends React.Component {
 
 
   render() {
-    debugger; 
 
     if(Object.keys(this.props.form['groups']).length == 0){
       //if new form
