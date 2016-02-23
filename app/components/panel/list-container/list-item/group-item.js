@@ -3,11 +3,18 @@ import React from 'react';
 export default class GroupItem extends React.Component {
   constructor() {
     super();
+    this.type = 'group'
+  }
+
+  selected(e) {
+    var item = this.props.group;
+    this.props.editItem(this.props.group.name,item, this.type);
   }
 
   render() {
+    console.log("rerender group item");
     return (
-      <div className="list-item group-item">
+      <div className={'list-item group-item ' + this.props.selected} onClick={this.selected.bind(this)} >
         <div className="icons-container">
           <img className="person-container" src={this.props.group.imgSrc}/>
         </div>

@@ -7,12 +7,17 @@ import TutorialItem from './list-item/tutorial-item';
 export default class ListContainer extends React.Component {
   constructor() {
     super();
-    this.itemComponents = {
-      projects: (item) => (<TaskItem key={item.title} task={item} />),
-      groups: (item) => (<GroupItem key={item.name} group={item} />),
-      notifications: (item) => (<NotifyItem key={item.id} notification={item} />),
-      tutorials: (item) => (<TutorialItem key={item.id} tutorial={item} />)
+
+    this.state = {
+      selected: '',
     }
+
+  }
+
+  editItem(key, item, type) {
+    this.setState({selected: key});
+    //pass to main to change the content
+    this.props.setForm(item);
   }
 
   render() {
@@ -43,9 +48,21 @@ export default class ListContainer extends React.Component {
       });
     }
 
-    items = items.filter(this.props.filterFn).map((item) => this.itemComponents[this.props.active](item));
+    var s = (item) => this.state.selected == item ? 'selected' : '';
+    
+    var itemComponents = {
+        projects: (item) => (<TaskItem selected={s(item.title)} editItem={this.editItem.bind(this)} key={item.title} task={item}/>),
+        groups: (item) => (<GroupItem selected={s(item.name)} editItem={this.editItem.bind(this)} key={item.name} group={item} />),
+        notifications: (item) => (<NotifyItem selected={s(item.id)} editItem={this.props.editItem} key={item.id} notification={item} />),
+        tutorials: (item) => (<TutorialItem selected={s(item.id)} editItem={this.props.editItem} key={item.id} tutorial={item} />)
+      }
 
+    // filtered items map to the current active icon items HTML
+    items = items.filter(this.props.filterFn).map((item) => itemComponents[this.props.active](item));
+
+    
     return (
+
       <div id="list-container">
         {items}
       </div>

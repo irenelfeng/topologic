@@ -12,7 +12,7 @@ export default class NewGroupForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      members: [],
+      avatar: ''
     }
   }
 
@@ -20,8 +20,8 @@ export default class NewGroupForm extends React.Component {
     var data = {
       name: document.querySelector('#form-title').value,
       description: document.querySelector('#task-description').value,
-      avatar: 
-      members: this.state.members,
+      avatar: this.state.avatar,
+      members: this.membersRef.getMembers(),
 
     };
 
@@ -41,19 +41,44 @@ export default class NewGroupForm extends React.Component {
     this.forceUpdate();
   }
 
+  fileUpload(upload){
+    this.state.avatar = upload;
+    this.props.form['avatar'] = upload;
+    this.forceUpdate(); 
+  }
+
 
   render() {
-    return (
+    debugger; 
+
+    if(Object.keys(this.props.form['groups']).length == 0){
+      //if new form
+      return (
       <div id="form-container">
         <Title />
         <Description />
-        <GroupAvatar />
+        <GroupAvatar object={this.props.form} fileUpload={this.fileUpload.bind(this)} />
         <Members members={this.state.members} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
         <div className="form-group">
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>
       </div>
+      );
+    }
+    return (
+      //if edit form
+      <div id="form-container">
+        <Title title={this.props.form['groups'].name} />
+        <Description desc={this.props.form['groups'].description} />
+        <GroupAvatar avatar={this.props.form['groups'].avatar} fileUpload={this.fileUpload.bind(this)} />
+        <Members ref={(ref) => this.membersRef = ref} members={this.props.form['groups'].members} addMember={this.addMember.bind(this)} removeMember={this.removeMember.bind(this)} />
+        <div className="form-group">
+          <CancelButton setForm = {this.props.setForm} />
+          <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
+        </div>
+      </div>
+        
     );
   }
 }

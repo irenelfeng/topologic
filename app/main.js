@@ -135,10 +135,6 @@ class Main extends React.Component {
   }
 
 
-  addMember(member, groupName){
-    var group = this.state.items.groups.filter(p => p.name == groupName)[0];
-    group['members'].push(data);
-  }
 
   addLink(projectName, source, target) {
     var project = this.state.items.projects.filter(p => p.name == projectName)[0];

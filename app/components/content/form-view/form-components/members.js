@@ -24,19 +24,24 @@ export default class Members extends React.Component {
                 return {label: val, value: val}
             });
     this.state = {
-      adding: false
-
+      adding: false,
+      members: []
     }
+
+    this.firstRender = true;
   }
 
   addMember() {
     var member = document.querySelector(".simple-value").firstChild.innerHTML;
-    this.props.addMember(member);
+    this.state.members.push(member);
+    //this.forceUpdate();
     this.closeModal();
   }
 
   removeMember(i, e){
-    this.props.removeMember(i);
+    // this.props.removeMember(i);
+    this.state.members.splice(i, 1);
+    this.forceUpdate();
   }
 
   openModal(){
@@ -47,11 +52,25 @@ export default class Members extends React.Component {
     this.setState({adding:false});
   }
 
+  // clear 
+  getMembers(){
+    var members = this.state.members;
+    this.setState({members: []});
+    return members;
+  }
+
   render() {
     var SimpleSelect = ReactSelectize.SimpleSelect;
+    
     var members;
-    if(this.props.members)
+
+    if(this.firstRender){
+      this.state.members = this.props.members; 
+    }
+
+    if(this.props.members){
       members = this.props.members.map((m, i) => (<div>{m}<span className="remove-member" onClick={this.removeMember.bind(this, i)}>x</span></div>));
+    }
 
     if(this.state.adding)
       var adding = (<Modal isOpen={this.state.adding} onRequestClose={this.closeModal} style={this.customStyles}> 
@@ -63,6 +82,7 @@ export default class Members extends React.Component {
         <a className="form-button" onClick={this.closeModal.bind(this)}>Cancel</a>
         </div>
        </Modal>);
+
     return (
       <div>
         <div className="add-box" onClick={this.openModal.bind(this)} >
