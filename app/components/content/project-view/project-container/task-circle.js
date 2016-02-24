@@ -25,6 +25,11 @@ export default class TaskCircle extends React.Component {
     this.props.dragEnded(this.props.task);
   }
 
+  addSticky(e){
+
+
+  }
+
   render() {
     var important = this.props.task.important ? (<img src="./img/important.png" />) : '';
 
@@ -40,7 +45,7 @@ export default class TaskCircle extends React.Component {
           {this.props.task.title}
 
           <div className="sticky-plus">
-            <img src="./img/fatplus.png" />
+            <img src="./img/fatplus.png" onClick={this.addSticky.bind(this)} />
           </div>
         </div>
 

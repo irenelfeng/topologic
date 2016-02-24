@@ -39,6 +39,7 @@ export default class NewTaskForm extends React.Component {
   }
 
   render() {
+    debugger;
     if(Object.keys(this.props.form['projects']).length == 0){
       return (
         <div id="form-container">
@@ -47,7 +48,7 @@ export default class NewTaskForm extends React.Component {
           <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
           <Location />
           <Description />
-          <GroupSelect />
+          <GroupSelect groups={this.props.items.groups}/>
           <NotifySelect deadline={this.state.deadline}/>
           <div className="form-group">
             <CancelButton setForm = {this.props.setForm} />

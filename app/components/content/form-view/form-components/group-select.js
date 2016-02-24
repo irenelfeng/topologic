@@ -10,8 +10,8 @@ export default class GroupSelect extends React.Component {
 
   render() {
     var SimpleSelect = ReactSelectize.SimpleSelect;
-    var options = ["testing", "this", "whee"].map(function(val){
-                return {label: val, value: val}
+    var options = this.props.groups.map(function(group){
+                return {label: group.name, value: group.name}
             });
 
     return (
@@ -19,7 +19,7 @@ export default class GroupSelect extends React.Component {
         <div className="form-aligned-col1"> Group: </div>
         <div id="group-dropdown" className="form-aligned-col2">
           <SimpleSelect 
-            defaultValue = {{label: "testing", value: "testing"}}
+            defaultValue = {{label: "Personal", value: null}}
             options = {options} 
             placeholder = "Select a group"
             />

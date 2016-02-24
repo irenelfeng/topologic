@@ -17,7 +17,7 @@ export default class Content extends React.Component {
 
   render() {
     var views = {
-      projects: (<ProjectView active={this.props.active} saveObject={this.props.saveObject} setForm = {this.props.setForm} form={this.props.form} projects={this.props.items.projects} addLink={this.props.addLink} />),
+      projects: (<ProjectView active={this.props.active} saveObject={this.props.saveObject} setForm = {this.props.setForm} form={this.props.form} items={this.props.items} projects={this.props.items.projects} addLink={this.props.addLink} />),
       groups: (<GroupView active={this.props.active} saveObject={this.props.saveObject} setForm = {this.props.setForm} form={this.props.form} groups={this.props.items.groups} />)
     };
 
