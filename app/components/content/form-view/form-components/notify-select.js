@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactSelectize from 'react-selectize';
 
 export default class NotifySelect extends React.Component {
   constructor() {
@@ -6,13 +7,22 @@ export default class NotifySelect extends React.Component {
   }
 
   render() {
+    var SimpleSelect = ReactSelectize.SimpleSelect;
+    var options = ["minutes", "hours", "days"].map(function(val){
+      return {label: val, value: val}
+    });
+
     if (this.props.deadline) {
       var deadlineEls =
       (<div className="form-aligned-col2-list-item">
         <input type="checkbox" className="form-aligned-col2-check" />
         <div className="form-aligned-col2-notif">
           <input className="notif-num" placeholder="15" />
-          <div className="notif-dropdown"> minutes </div>
+          <SimpleSelect
+              defaultValue = {{label: "minutes", value: "minutes"}}
+              options = {options}
+              placeholder = "Select a unit of time"
+          />
           <div className="notif-text"> before the deadline </div>
         </div>
       </div>)
