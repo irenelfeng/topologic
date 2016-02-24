@@ -42,7 +42,6 @@ export default class NewTaskForm extends React.Component {
   }
 
   save() {
-    debugger; 
     var data = {
       title: this.n().find('.form-title').val(),
       deadline: this.n().find('.date').val(),
@@ -59,9 +58,7 @@ export default class NewTaskForm extends React.Component {
   }
 
   render() {
-
-    if(Object.keys(this.props.form['projects']).length == 0){
-
+    if (this.props.form.projects.title == null) {
       return (
         <div className="form-container" id={this.id()}>
 

@@ -16,7 +16,6 @@ export default class ListContainer extends React.Component {
 
   editItem(key, item, type) {
     this.setState({selected: key});
-    //pass to main to change the content
     this.props.setForm(item);
   }
 

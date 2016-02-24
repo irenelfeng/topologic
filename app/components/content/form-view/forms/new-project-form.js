@@ -12,18 +12,9 @@ export default class NewProjectForm extends React.Component {
   constructor() {
     super();
     this.type = 'project';
-  }
-
-  save() {
-    var data = {
-      name: $(this.id()).find('.form-title').val(),
-      description: $(this.id()).find('.task-description').val(),
-      group: $(this.id()).find('.simple-value').firstChild.innerHTML,
-      //notify: document.querySelector('#notify-select').value
-    };
-
-    this.props.saveObject(data, this.type);
-    this.props.setForm(null);
+    this.state = {
+      type: 'new'
+    }
   }
 
   id(includeStar) {
@@ -37,24 +28,58 @@ export default class NewProjectForm extends React.Component {
     return includeStar ? '#' + id : id;
   }
 
+  n() {
+    return $(this.id(true));
+  }
+
+  save() {
+    var data = {
+      name: this.n().find('.form-title').val(),
+      description: this.n().find('.task-description').val(),
+      group: this.state.type == 'edit' ? this.n().find('#group-dropdown').html() : this.n().find('.simple-value').children(":first").html(),
+      //notify: document.querySelector('#notify-select').value
+      tasks: [],
+      links: []
+    };
+
+    this.props.saveObject(data, this.type);
+    this.props.setForm(null);
+  }
 
   render() {
+    var me = this.props.form.projects;
 
-    if (this.props.form.isEmpty){
-      var toggleTask = (<TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>);
-    }
-    return (
-      <div className="form-container" id={this.id()} >
-        <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
-        <Title object={this.props.form} />
-        <Description object={this.props.form} />
-        <GroupSelect object={this.props.form} />
-        <NotifySelect object={this.props.form} />
-        <div className="form-group">
-          <CancelButton setForm = {this.props.setForm} object={this.props.form} />
-          <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
+    if (me.name == null) {
+      return (
+        <div className="form-container" id={this.id()} >
+          <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
+          <Title />
+          <Description />
+          <GroupSelect groups={this.props.items.groups} />
+          <NotifySelect />
+          <div className="form-group">
+            <CancelButton setForm = {this.props.setForm} object={this.props.form} />
+            <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
+          </div>
         </div>
-      </div>
-    );
+      );
+
+    } else {
+      this.state.type = 'edit';
+
+      return (
+        <div className="form-container" id={this.id()} >
+          <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
+          <Title title={me.title} />
+          <Description description={me.description} />
+          <GroupSelect group={me.group} groups={this.props.items.groups} />
+          <NotifySelect object={this.props.form} />
+          <div className="form-group">
+            <CancelButton setForm = {this.props.setForm} object={this.props.form} />
+            <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
+          </div>
+        </div>
+      );
+    }
   }
 }
