@@ -26,8 +26,15 @@ export default class NewProjectForm extends React.Component {
     this.props.setForm(null);
   }
 
-  id() {
-    return '#' + this.props.form.projects.name.replace(/ /g,'_') + '-form';
+  id(includeStar) {
+    var id;
+    if (this.props.form.projects.name) {
+      id = this.props.form.projects.name.replace(/ /g,'_') + '-form'; 
+    } else {
+      id = 'new-project-form';
+    }
+    
+    return includeStar ? '#' + id : id;
   }
 
 

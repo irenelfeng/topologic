@@ -59,7 +59,6 @@ class Main extends React.Component {
         groups: null
       },
     };
-
   }
 
   defaultTask(keyValues) {
@@ -104,47 +103,59 @@ class Main extends React.Component {
   }
 
   /*
-  * saves objects depending on its type. project index
-  */
-  saveObject(object, type, project = null) {
+   * saves objects depending on its type. project index
+   */
+  saveObject(object, type) {
     if (type == 'task') {
+      var project = this.state.items.projects.filter(p => {
+        return p.tasks.filter(t => t.title == object.title).length > 0;
+      })[0];
+
       if (project == null) {
-        //determine nullproject index, set project to that index.
-        this.state.items.projects.forEach((p, i) => {
-          if (p.name == null) project = i;
-        });
+        var project = this.state.items.projects.filter(p => p.name == null)[0];
       }
 
-      var idx = null;
-      this.state.items.projects[project].tasks.forEach((t, i) => {
-        if (t.title == object.title) idx = i;
-      });
+      var task = project.tasks.filter(t => t.title == object.title)[0];
 
-      if (idx != null) {
-        this.state.items.projects[project].tasks.splice(idx, 1, object);
+      if (task != null) {
+        for (var key in task) {
+          task[key] = object[key];
+        }
+      } else {
+        project.tasks.push(object);
       }
-      else this.state.items.projects[project].tasks.push(object);
     }
 
     if (type == 'project') {
-      var idx = null;
-      this.state.items.projects.forEach((p, i) => {
-        if (p.name == object.name) idx = i;
-      });
-      if (idx != null)  this.state.items.projects.splice(idx, 1, object); //if already exists, remove (prevents editing from making a double)
-      else this.state.items.projects.push(object);
+      var project = this.state.items.projects.filter(p => p.name == object.name)[0];
+
+      if (project != null) {
+        for (var key in project) {
+          project[key] = object[key];
+        }
+      } else {
+        this.state.items.projects.push(object);
+      }
     }
 
     if (type == 'group') {
-      var idx = null;
-      this.state.items.groups.forEach((g, i) => {
-        if (g.name == object.name) idx = i;
-      });
-      if (idx != null)  this.state.items.groups.splice(idx, 1, object); //if already exists, remove (prevents editing from making a double)
-      else this.state.items.groups.push(object);
+      var group = this.state.items.groups.filter(g => g.name == object.name)[0];
+
+      if (group != null) {
+        for (var key in group) {
+          group[key] = object[key];
+        }
+      } else {
+        this.state.items.groups.push(object);
+      }
     }
+
+    this.forceUpdate();
   }
 
+  /**
+   * 
+   */
   addLink(projectName, source, target) {
     var project = this.state.items.projects.filter(p => p.name == projectName)[0];
     if (project.links.filter(l => l.source == source && l.target == target).length > 0) return;
@@ -153,6 +164,9 @@ class Main extends React.Component {
     this.forceUpdate();
   }
 
+  /**
+   *
+   */
   render() {
     return (
       <div id="main">

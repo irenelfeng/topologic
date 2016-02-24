@@ -7,7 +7,7 @@ export default class Description extends React.Component {
   }
 
   render() {
-    var initValue = this.props.form.description;
+    var initValue = this.props.description;
 
     if ($('.description-container').length > 0) {
       $('.description-container').find('.task-description').val(initValue);
@@ -16,7 +16,7 @@ export default class Description extends React.Component {
     return (
       <div className="description-container form-group" >
         <div className="form-aligned-col1"> Description: </div>
-        <textarea className="task-description form-aligned-col2" placeholder="(optional)" initialValue={initValue} id={'description-' + this.props.id}/>
+        <textarea className="task-description form-aligned-col2" placeholder="(optional)" defaultValue={initValue} />
       </div>
     );
   }

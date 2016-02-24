@@ -27,7 +27,13 @@ export default class NewTaskForm extends React.Component {
   }
 
   id(includeStar) {
-    var id = this.props.form.projects.title.replace(/ /g, '_') + '-form';
+    var id;
+    if (this.props.form.projects.title) {
+      id = this.props.form.projects.title.replace(/ /g,'_') + '-form'; 
+    } else {
+      id = 'new-task-form';
+    }
+    
     return includeStar ? '#' + id : id;
   }
 
@@ -38,9 +44,9 @@ export default class NewTaskForm extends React.Component {
   save() {
     var data = {
       title: this.n().find('.form-title').val(),
-      deadline: this.n().find('.date') ? this.n().find('.date').val() : '',
-      location: this.n().find('.form-location') ? this.n().find('.form-location') : '',
-      description: this.n().find('.task-description') ? this.n().find('.task-description').value : '',
+      deadline: this.n().find('.date').val(),
+      location: this.n().find('.form-location').val(),
+      description: this.n().find('.task-description').val(),
       // group: this.n().find('.simple-value').firstChild.innerHTML,
       //notify: document.querySelector('#notify-select').value
       done: false,
@@ -80,9 +86,9 @@ export default class NewTaskForm extends React.Component {
 
             <Title title={this.props.form.projects.title} />
             <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
-            <Location />
-            <Description form={this.props.form.projects} id={this.id()}/>
-            <GroupSelect type={this.state.type}/>
+            <Location location={this.props.form.projects.location} />
+            <Description description={this.props.form.projects.description} />
+            <GroupSelect group={this.props.form.projects.group} type={this.state.type}/>
             <NotifySelect deadline={this.state.deadline}/>
             <Stickies />
 
