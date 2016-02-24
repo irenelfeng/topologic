@@ -6,8 +6,7 @@ export default class TaskItem extends React.Component {
   }
 
   selected(e){
-    var item = this.props.task;
-    this.props.editItem(this.props.task.title, item, this.type);
+    this.props.editItem(this.props.task.title, this.props.task, this.type);
   }
 
   render() {

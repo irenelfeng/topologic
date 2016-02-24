@@ -9,23 +9,23 @@ class Main extends React.Component {
     super();
 
     var sampleProject = {
-      tasks: [{
+      tasks: [this.defaultTask({
           title: 'Done Important Task',
           done: true,
           important: true
-        }, {
+        }), this.defaultTask({
           title: 'Not Done Important Task',
           done: false,
           important: true
-        }, {
+        }), this.defaultTask({
           title: 'Not Done Not Important Task',
           done: false,
           important: false
-        }, {
+        }), this.defaultTask({
           title: 'Done Not Important Task',
           done: true,
           important: false
-        }],
+        })],
       name: 'Sample Project',
       links: []
     };
@@ -35,14 +35,6 @@ class Main extends React.Component {
       name: null,
       links: []
     };
-
-    //var sampleTutorial = {
-    //  tutorials :[
-    //    {title: 'Stickies'},
-    //    {title: 'Getting started with topologic'},
-    //    {title: 'Creating Groups'}
-    //  ]
-    //}
 
     this.state = {
       active: 'projects',
@@ -68,6 +60,23 @@ class Main extends React.Component {
       },
     };
 
+  }
+
+  defaultTask(keyValues) {
+    var defaults = {
+      title: null,
+      done: false,
+      important: false,
+      description: '',
+      location: '',
+      deadline: ''
+    };
+
+    for (var key in keyValues) {
+      defaults[key] = keyValues[key];
+    }
+    
+    return defaults;
   }
 
   /*
@@ -98,7 +107,6 @@ class Main extends React.Component {
   * saves objects depending on its type. project index
   */
   saveObject(object, type, project = null) {
-
     if (type == 'task') {
       if (project == null) {
         //determine nullproject index, set project to that index.
@@ -106,12 +114,15 @@ class Main extends React.Component {
           if (p.name == null) project = i;
         });
       }
+
       var idx = null;
       this.state.items.projects[project].tasks.forEach((t, i) => {
         if (t.title == object.title) idx = i;
       });
 
-      if (idx != null) this.state.items.projects[project].tasks.splice(idx, 1, object);
+      if (idx != null) {
+        this.state.items.projects[project].tasks.splice(idx, 1, object);
+      }
       else this.state.items.projects[project].tasks.push(object);
     }
 
@@ -133,8 +144,6 @@ class Main extends React.Component {
       else this.state.items.groups.push(object);
     }
   }
-
-
 
   addLink(projectName, source, target) {
     var project = this.state.items.projects.filter(p => p.name == projectName)[0];
