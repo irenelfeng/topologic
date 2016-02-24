@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import TaskOrProject from '../form-components/task-or-project';
 import Title from '../form-components/title';
 import Description from '../form-components/description';
@@ -11,20 +12,29 @@ export default class NewProjectForm extends React.Component {
   constructor() {
     super();
     this.type = 'project';
-
   }
 
   save() {
-
     var data = {
-      name: document.querySelector('#form-title').value,
-      //description: document.querySelector('#task-description').value,
-      group: document.querySelector(".simple-value").firstChild.innerHTML,
+      name: $(this.id()).find('.form-title').val(),
+      description: $(this.id()).find('.task-description').val(),
+      group: $(this.id()).find('.simple-value').firstChild.innerHTML,
       //notify: document.querySelector('#notify-select').value
     };
 
     this.props.saveObject(data, this.type);
     this.props.setForm(null);
+  }
+
+  id(includeStar) {
+    var id;
+    if (this.props.form.projects.name) {
+      id = this.props.form.projects.name.replace(/ /g,'_') + '-form'; 
+    } else {
+      id = 'new-project-form';
+    }
+    
+    return includeStar ? '#' + id : id;
   }
 
 
@@ -34,7 +44,7 @@ export default class NewProjectForm extends React.Component {
       var toggleTask = (<TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>);
     }
     return (
-      <div id="form-container" >
+      <div className="form-container" id={this.id()} >
         <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
         <Title object={this.props.form} />
         <Description object={this.props.form} />

@@ -16,7 +16,7 @@ export default class Title extends React.Component {
 
     return (
       <div className="form-title-container">
-        <input id="form-title" placeholder="Title" value={this.props.title} />
+        <input className="form-title" placeholder="Title" value={this.props.title} onChange={this.onChange.bind(this)} />
       </div>
     );
   }

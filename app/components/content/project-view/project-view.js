@@ -11,8 +11,8 @@ export default class ProjectView extends React.Component {
   } 
 
   /*
-  * changes the form only from task -> project. 
-  */ 
+   * Changes the form from task -> project. 
+   */ 
   changeForm(key) {
     this.setState({type: key});
   }

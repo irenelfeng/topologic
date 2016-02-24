@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 export default class Description extends React.Component {
   constructor() {
@@ -6,10 +7,16 @@ export default class Description extends React.Component {
   }
 
   render() {
+    var initValue = this.props.description;
+
+    if ($('.description-container').length > 0) {
+      $('.description-container').find('.task-description').val(initValue);
+    }
+
     return (
-      <div id="description-container" className="form-group">
+      <div className="description-container form-group" >
         <div className="form-aligned-col1"> Description: </div>
-        <textarea id="task-description" className="form-aligned-col2" placeholder="(optional)" initialValue={this.props.desc} />
+        <textarea className="task-description form-aligned-col2" placeholder="(optional)" defaultValue={initValue} />
       </div>
     );
   }
