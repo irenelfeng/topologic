@@ -26,7 +26,7 @@ export default class ListContainer extends React.Component {
 
   render() {
     var items = [];
-    
+
     if (this.props.active == 'projects') {
       this.props.items.forEach(p => {
         p.tasks.forEach(t => {
@@ -45,15 +45,11 @@ export default class ListContainer extends React.Component {
     }
 
     if (this.props.active == 'tutorials') {
-      this.props.items.forEach(p => {
-        p.tasks.forEach(t => {
-          items.push(t);
-        });
-      });
+      items = this.props.items;
     }
 
     var s = (item) => this.state.selected == item ? 'selected' : '';
-    
+
     var itemComponents = {
         projects: (item) => (<TaskItem selected={s(item.title)} editItem={this.editItem.bind(this)} key={item.title} task={item}/>),
         groups: (item) => (<GroupItem selected={s(item.name)} editItem={this.editItem.bind(this)} key={item.name} group={item} />),
@@ -64,7 +60,7 @@ export default class ListContainer extends React.Component {
     // filtered items map to the current active icon items HTML
     items = items.filter(this.props.filterFn).map((item) => itemComponents[this.props.active](item));
 
-    
+
     return (
 
       <div id="list-container">
