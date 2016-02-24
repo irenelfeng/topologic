@@ -10,18 +10,19 @@ export default class GroupSelect extends React.Component {
 
   render() {
     var SimpleSelect = ReactSelectize.SimpleSelect;
-    var options = ["testing", "this", "whee"].map(function(val){
-                return {label: val, value: val}
-            });
 
     if (this.props.type == 'edit')
-      select = 'testing';
+      select = this.props.group ? this.props.group : 'Personal';
     else {
+      //var begin = {label: "Personal", value:"Personal"}
+      var options = this.props.groups.map(function(group){
+            return {label: group.name, value: group.name}
+        });
+      //$.extend(options, begin);
       var select = (<SimpleSelect
-        defaultValue = {{label: "testing", value: "testing"}}
         options = {options}
-        placeholder = "Select a group"
-        />);
+        defaultValue={{label: "Personal", value:"Personal"}}
+        placeholder = "Select a group"/>);
     }
 
     return (

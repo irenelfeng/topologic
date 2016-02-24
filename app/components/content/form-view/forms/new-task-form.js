@@ -42,12 +42,13 @@ export default class NewTaskForm extends React.Component {
   }
 
   save() {
+    debugger; 
     var data = {
       title: this.n().find('.form-title').val(),
       deadline: this.n().find('.date').val(),
       location: this.n().find('.form-location').val(),
       description: this.n().find('.task-description').val(),
-      // group: this.n().find('.simple-value').firstChild.innerHTML,
+      group: this.state.type == 'edit' ? this.n().find('#group-dropdown').html() :this.n().find('.simple-value').children(":first").html(),
       //notify: document.querySelector('#notify-select').value
       done: false,
       important: false
@@ -58,7 +59,9 @@ export default class NewTaskForm extends React.Component {
   }
 
   render() {
-    if (Object.keys(this.props.form['projects']).length == 0) {
+
+    if(Object.keys(this.props.form['projects']).length == 0){
+
       return (
         <div className="form-container" id={this.id()}>
 
@@ -67,7 +70,7 @@ export default class NewTaskForm extends React.Component {
           <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
           <Location />
           <Description />
-          <GroupSelect />
+          <GroupSelect groups={this.props.items.groups}/>
           <NotifySelect deadline={this.state.deadline}/>
 
           <div className="form-group">

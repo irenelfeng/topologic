@@ -11,8 +11,8 @@ export default class FormView extends React.Component {
   render() {
 
     var forms = {
-      'task': (<NewTaskForm form={this.props.form} saveObject={this.props.saveObject} changeForm ={this.props.changeForm} setForm={this.props.setForm} />),
-      'project': (<NewProjectForm form={this.props.form} saveObject={this.props.saveObject} changeForm = {this.props.changeForm} setForm={this.props.setForm} />),
+      'task': (<NewTaskForm items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.props.changeForm} setForm={this.props.setForm} />),
+      'project': (<NewProjectForm items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.props.changeForm} setForm={this.props.setForm} />),
       'group': (<NewGroupForm form={this.props.form} saveObject={this.props.saveObject} setForm={this.props.setForm} />)
     };
 
