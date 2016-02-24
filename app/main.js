@@ -96,11 +96,11 @@ class Main extends React.Component {
 
   /*
   * saves objects depending on its type. project index
-  */ 
+  */
   saveObject(object, type, project = null) {
 
     if (type == 'task') {
-      if (project == null) { 
+      if (project == null) {
         //determine nullproject index, set project to that index.
         this.state.items.projects.forEach((p, i) => {
           if (p.name == null) project = i;
@@ -121,7 +121,7 @@ class Main extends React.Component {
         if (p.name == object.name) idx = i;
       });
       if (idx != null)  this.state.items.projects.splice(idx, 1, object); //if already exists, remove (prevents editing from making a double)
-      else this.state.items.projects.push(object); 
+      else this.state.items.projects.push(object);
     }
 
     if (type == 'group') {
@@ -130,7 +130,7 @@ class Main extends React.Component {
         if (g.name == object.name) idx = i;
       });
       if (idx != null)  this.state.items.groups.splice(idx, 1, object); //if already exists, remove (prevents editing from making a double)
-      else this.state.items.groups.push(object); 
+      else this.state.items.groups.push(object);
     }
   }
 
@@ -150,7 +150,6 @@ class Main extends React.Component {
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
         <Content saveObject={this.saveObject.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} addLink={this.addLink.bind(this)} />
-
       </div>
     );
   }

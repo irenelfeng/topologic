@@ -31,7 +31,7 @@ export default class NewTaskForm extends React.Component {
       group: document.querySelector(".simple-value").firstChild.innerHTML,
       //notify: document.querySelector('#notify-select').value
       done: false,
-      important: true
+      important: false
     };
 
     this.props.saveObject(data, this.type);
@@ -56,7 +56,7 @@ export default class NewTaskForm extends React.Component {
         </div>
       );
     }else{
-      //edit task 
+      //edit task
       return (
           <div id="form-container">
             <Title title={this.props.form['projects'].title} />
