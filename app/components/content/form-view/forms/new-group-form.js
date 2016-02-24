@@ -17,7 +17,6 @@ export default class NewGroupForm extends React.Component {
   }
 
   save() {
-    debugger;
     var data = {
       name: document.querySelector('#form-title').value,
       description: document.querySelector('#task-description').value,
