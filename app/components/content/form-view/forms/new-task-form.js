@@ -6,15 +6,18 @@ import Location from '../form-components/location';
 import Description from '../form-components/description';
 import GroupSelect from '../form-components/group-select';
 import NotifySelect from '../form-components/notify-select';
+import DeleteButton from '../form-components/delete-button';
 import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
+import Stickies from '../form-components/stickies';
 
 export default class NewTaskForm extends React.Component {
   constructor() {
     super();
     this.type = 'task';
     this.state = {
-      deadline: false
+      deadline: false,
+      type: 'new'
     };
   }
 
@@ -56,12 +59,18 @@ export default class NewTaskForm extends React.Component {
         </div>
       );
     }else{
-      //edit task
+      this.state.type = 'edit';
       return (
           <div id="form-container">
             <Title title={this.props.form['projects'].title} />
-            <Description desc={this.props.form['projects'].desc} />
+            <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
+            <Location />
+            <Description desc={this.props.form['projects'].description} />
+            <GroupSelect type={this.state.type}/>
+            <NotifySelect deadline={this.state.deadline}/>
+            <Stickies />
             <div className="form-group">
+              <DeleteButton />
               <CancelButton setForm = {this.props.setForm} />
               <SaveButton onClick={this.save.bind(this)}/>
             </div>

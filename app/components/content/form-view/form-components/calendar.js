@@ -34,7 +34,7 @@ export default class Calendar extends React.Component {
   }
 
   onDateChange(date) {
-    this.setState({date});
+    this.setState({date: date + ", "});
   }
 
   onTimeCheck(e) {
