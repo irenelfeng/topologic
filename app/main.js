@@ -50,11 +50,15 @@ class Main extends React.Component {
         projects: [sampleProject, nullProject] ,
         groups: [{
           name: 'Sample Group',
-          members: 'John Stacy Phil George Alfred Joseph'.split(' ')
+          members: 'John Stacy Phil George Alfred Joseph'.split(' '),
+          avatar: './img/groups.png',
+          description: 'Description here'
         },
         {
           name: 'Friendly Vibrant Monkey Man',
-          members: 'Bo Stalion Greyman Frankdick'.split(' ')
+          members: 'Bo Stalion Greyman Frankdick'.split(' '),
+          avatar: './img/groups.png',
+          description: 'Different Description'
         }],
         tutorials: [
           {name: 'Stickies'},
@@ -87,11 +91,16 @@ class Main extends React.Component {
   setForm(item) {
     var form = {
       projects: null,
-      groups: null
+      groups: null,
+      tutorials: null
     };
 
     form[this.state.active] = item; //changes active tab to the item given
     this.setState({form: form});
+
+    if(item == null){
+      this.panelRef.listContainer.clearSelect(); // clear when setting form to main view
+    }
   }
 
   /*
@@ -132,6 +141,7 @@ class Main extends React.Component {
       if (idx != null)  this.state.items.groups.splice(idx, 1, object); //if already exists, remove (prevents editing from making a double)
       else this.state.items.groups.push(object);
     }
+
   }
 
 
