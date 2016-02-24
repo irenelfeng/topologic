@@ -31,7 +31,7 @@ export default class Stickies extends React.Component {
           <div className="form-aligned-col2-check"> &bull; </div>
           <div key={sticky} className="form-aligned-col2-pick sticky">
             <div> {sticky} </div>
-            <img className="icon-img" src='./img/trash.png' onClick={this.removeSticky.bind(this, i)}/>
+            <img className="icon-img trash" src='./img/trash.png' onClick={this.removeSticky.bind(this, i)}/>
           </div>
         </div>));
 
