@@ -2,58 +2,56 @@
   height 20px
 
 .project-container
-  position relative
-  height 800px
-  width 400px
   overflow scroll
+  width 400px
   margin-left 20px
-  background-color lighten(#29C8E1, 20%)
-  border-right 1px solid #29C8E1
   
   .project-box
+    height 500px
     width 100%
-    height 100%
+    background-color lighten(#29C8E1, 20%)
+    border-right 1px solid #29C8E1
     
     .project
       position relative
       height 100%
       width 100%
       
-      .task-circle
-        height 100px
-        width 120px
-        background-color white
-        border 1px solid blue
-        position absolute
-        border-radius 200px
-        flexbox(flex)
-        justify-content(center)
-        align-items(center)
-        -webkit-user-select none /* Chrome/Safari */        
-        -moz-user-select none /* Firefox */
-        -ms-user-select none /* IE10+ */
-        -o-user-select none
-        user-select none
-        padding 20px
-        
-        .task-description
-          flexbox(flex)
-          flex-direction(column)
-          
-          .sticky-plus
-            text-align center
-            
-            img 
-              padding-top 20px
-              height 20px
-        
-        .icons-container
-          align-self(flex-start)
-          flexbox(flex)
-          justify-content(center)
-          
-        img
-          height 40px
+.task-circle
+  height 100px
+  width 120px
+  background-color white
+  border 1px solid blue
+  position absolute
+  border-radius 200px
+  flexbox(flex)
+  justify-content(center)
+  align-items(center)
+  -webkit-user-select none /* Chrome/Safari */        
+  -moz-user-select none /* Firefox */
+  -ms-user-select none /* IE10+ */
+  -o-user-select none
+  user-select none
+  padding 20px
+  
+  .task-description
+    flexbox(flex)
+    flex-direction(column)
+    
+    .sticky-plus
+      text-align center
+      
+      img 
+        padding-top 20px
+        height 20px
+  
+  .icons-container
+    align-self(flex-start)
+    flexbox(flex)
+    justify-content(center)
+    
+  img
+    height 40px
           
 
 .arrow-container
@@ -62,3 +60,8 @@
   .arrow
     stroke black
     stroke-width 2
+
+.project-view-container
+  flexbox(flex)
+  flex-direction(row)
+  flex-wrap(wrap)

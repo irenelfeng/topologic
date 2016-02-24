@@ -20,7 +20,7 @@ export default class ProjectHeader extends React.Component {
     });
 
     return (
-      <div className="project-header">
+      <div className="project-header" onClick={this.props.onClick} >
 
         <div className="img-container">
           <img src={this.props.project.imgSrc} />

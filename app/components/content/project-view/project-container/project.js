@@ -1,5 +1,6 @@
 import React from 'react';
 import d3 from 'd3';
+import $ from 'jquery';
 import TaskCircle from './task-circle';
 import DragLine from './drag-line';
 import common from './common';
@@ -53,7 +54,7 @@ export default class ProjectContainer extends React.Component {
     this.links = this.props.project.links;
 
     this.width = 400;
-    this.height = 800;
+    this.height = 500;
   }
 
   configureForce() {

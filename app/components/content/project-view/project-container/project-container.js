@@ -7,16 +7,29 @@ import Dragline from './drag-line';
 export default class ProjectContainer extends React.Component { 
   constructor() {
     super();
+    this.state = {
+      collapsed: false
+    };
+  }
+
+  toggleCollapse() {
+    this.setState({collapsed: !this.state.collapsed});
   }
 
   render() {
+    var projectBox = (
+      <div id={'project-box-' + this.props.project.name.replace(/ /g, '_')} className="project-box">
+        <Project project={this.props.project} addLink={this.props.addLink} />
+      </div>
+    );
+
+    if (this.state.collapsed) projectBox = '';
+
     return (
       <div className="project-container" >
-        <ProjectHeader project={this.props.project} />
+        <ProjectHeader project={this.props.project} onClick={this.toggleCollapse.bind(this)} />
 
-        <div id={'project-box-' + this.props.project.name} className="project-box">
-          <Project project={this.props.project} addLink={this.props.addLink} />
-        </div>
+        {projectBox}
       </div>
     );
   }
