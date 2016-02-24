@@ -76,7 +76,7 @@ export default class Calendar extends React.Component {
 
     return (
       <div className="form-aligned-col2-pick">
-        <input id="date" placeholder="Pick a date" value={this.state.date + this.state.time} />
+        <input className="date" placeholder="Pick a date" value={this.state.date + this.state.time} />
         <img className="icon-img" onClick={this.onDateTimeCheck.bind(this)} src='./img/calendar.png' />
         {pickerEls}
       </div>
