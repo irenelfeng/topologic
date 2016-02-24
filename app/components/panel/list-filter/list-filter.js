@@ -17,7 +17,7 @@ export default class ListFilter extends React.Component {
       projects: (<ProjectFilter setFilter={this.props.setFilter} />),
       groups: (<GroupFilter setFilter={this.props.setFilter} />),
       notifications: (<NotifFilter setFilter={this.props.setFilter} />),
-      tutorial: (<TutorialFilter setFilter={this.props.setFilter} />)
+      tutorials: (<TutorialFilter setFilter={this.props.setFilter} />)
     }
 
     return filters[this.props.active];
