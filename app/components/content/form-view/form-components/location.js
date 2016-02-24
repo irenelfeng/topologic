@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 export default class Location extends React.Component {
   constructor() {
@@ -6,10 +7,16 @@ export default class Location extends React.Component {
   }
 
   render() {
+    var initValue = this.props.location;
+
+    if ($('.location-container').length > 0) {
+      $('.location-container').find('.form-location').val(initValue);
+    }
+
     return (
-      <div id="location-container" className="form-group">
+      <div className="location-container form-group">
         <div className="form-aligned-col1"> Location: </div>
-        <input id="form-location" className="form-aligned-col2" placeholder="(optional)"/>
+        <input className="form-location form-aligned-col2" placeholder="(optional)" defaultValue={initValue} />
       </div>
     );
   }
