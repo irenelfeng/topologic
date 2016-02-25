@@ -22,7 +22,6 @@ export default class TaskOrProject extends React.Component {
         </div>
 
         <div id="option-containers">
-
           <div id="task-option" className={'option ' + s('task')} onClick={this.onClick.bind(this)}>
             <div className="text-container"> Task </div>
           </div>
@@ -30,8 +29,8 @@ export default class TaskOrProject extends React.Component {
           <div id="project-option" className={'option ' + s('project')} onClick={this.onClick.bind(this)}>
             <div className="text-container"> Project </div>
           </div>
-
         </div>
+
       </div>
     );
   }
