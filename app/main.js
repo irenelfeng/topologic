@@ -194,6 +194,46 @@ class Main extends React.Component {
     this.forceUpdate();
   }
 
+  deleteObject(objectID,type){
+    
+    if (type == 'task') {
+      var project = this.state.items.projects.filter(p => {
+        return p.tasks.filter(t => t.title == objectID).length > 0;
+      })[0];
+
+      if (project == null) {
+        var project = this.state.items.projects.filter(p => p.name == null)[0];
+      }
+      var task = project.tasks.filter(t => t.title == objectID)[0];
+      if(task!= null){
+        var idx = project.tasks.indexOf(task);
+        project.tasks.splice(idx, 1);
+      }
+    }
+
+    if (type == 'project') {
+      var project = this.state.items.projects.filter(p => p.name == objectID)[0];
+
+      if (project != null) {
+        var idx = this.state.items.projects.indexOf(project);
+        this.state.items.projects.splice(idx, 1);
+      }
+    }
+
+    if (type == 'group') {
+
+      var group = this.state.items.groups.filter(g => g.name == objectID)[0];
+
+      if (group != null) {
+        var idx = this.state.items.groups.indexOf(group);
+        this.state.items.groups.splice(idx, 1);
+      }
+    }
+
+    this.forceUpdate();
+
+  }
+
   /**
    *
    */
@@ -213,7 +253,7 @@ class Main extends React.Component {
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content saveObject={this.saveObject.bind(this)} setForm = {this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} addLink={this.addLink.bind(this)} />
+        <Content saveObject={this.saveObject.bind(this)} deleteObject={this.deleteObject.bind(this)} setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} addLink={this.addLink.bind(this)} />
       </div>
     );
   }

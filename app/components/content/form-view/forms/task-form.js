@@ -12,6 +12,7 @@ import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
 import Stickies from '../form-components/stickies';
 
+
 export default class TaskForm extends React.Component {
   constructor() {
     super();
@@ -57,6 +58,12 @@ export default class TaskForm extends React.Component {
     this.props.setForm(null);
   }
 
+  deleteTask(){
+    var task = this.n().find('.form-title').val();
+    this.props.deleteObject(task, this.type);
+    this.props.setForm(null);
+  }
+
   render() {
     var me = this.props.form.projects;
     var deadlineActivated = (this.state.deadlineActivated == null) ? (me.deadline != '' && me.deadline != null) : this.state.deadlineActivated;
@@ -97,7 +104,7 @@ export default class TaskForm extends React.Component {
             <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} taskTitle={me.title} />
 
             <div className="form-group">
-              <DeleteButton />
+              <DeleteButton onClick={this.deleteTask.bind(this)}/>
               <CancelButton setForm = {this.props.setForm} />
               <SaveButton onClick={this.save.bind(this)}/>
             </div>
