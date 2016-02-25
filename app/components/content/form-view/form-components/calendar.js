@@ -34,7 +34,7 @@ export default class Calendar extends React.Component {
   }
 
   onDateChange(date) {
-    this.setState({date: date + ", "});
+    this.setState({date: date});
   }
 
   onTimeCheck(e) {
@@ -74,9 +74,19 @@ export default class Calendar extends React.Component {
     }
     else pickerEls = '';
 
+    var dateVal;
+    if (this.state.date == '' && this.state.time == '') {
+      dateVal = this.props.deadline;
+    } else {
+      if (this.state.date != '' && this.state.time != '')
+        dateVal = this.state.date + ',' + this.state.time;
+      else
+        dateVal = this.state.date;
+    }
+
     return (
       <div className="form-aligned-col2-pick">
-        <input className="date" placeholder="Pick a date" value={this.state.date + this.state.time} />
+        <input className="date" placeholder="Pick a date" value={dateVal} />
         <img className="icon-img" onClick={this.onDateTimeCheck.bind(this)} src='./img/calendar.png' />
         {pickerEls}
       </div>
