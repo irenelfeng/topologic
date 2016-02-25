@@ -64,6 +64,7 @@ export default class TaskCircle extends React.Component {
     ev.stopPropagation();
     ev.preventDefault();
     this.props.deleteObject(this.props.task.title, 'task');
+    this.props.forceProjectUpdate();
     this.setState({tooltip: false});
   }
 
@@ -71,6 +72,7 @@ export default class TaskCircle extends React.Component {
     ev.stopPropagation();
     ev.preventDefault();
     this.props.task.important = !this.props.task.important;
+    this.props.forceProjectUpdate();
     this.setState({tooltip: false});
   }
 
@@ -78,6 +80,7 @@ export default class TaskCircle extends React.Component {
     ev.stopPropagation();
     ev.preventDefault();    
     this.props.task.done = !this.props.task.done;
+    this.props.forceProjectUpdate();
     this.setState({tooltip: false});
   }
 

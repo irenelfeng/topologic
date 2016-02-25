@@ -16,10 +16,14 @@ export default class ProjectContainer extends React.Component {
     this.setState({collapsed: !this.state.collapsed});
   }
 
+  forceProjectUpdate() {
+    this.forceUpdate();
+  }
+
   render() {
     var projectBox = (
       <div id={'project-box-' + this.props.project.name.replace(/ /g, '_')} className="project-box">
-        <Project project={this.props.project} addLink={this.props.addLink} deleteObject={this.props.deleteObject}/>
+        <Project project={this.props.project} addLink={this.props.addLink} deleteObject={this.props.deleteObject} forceProjectUpdate={this.forceProjectUpdate.bind(this)} />
       </div>
     );
 
