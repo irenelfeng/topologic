@@ -1,45 +1,67 @@
 import React from 'react';
+import $ from 'jquery';
 
 export default class Stickies extends React.Component {
   constructor() {
     super();
     this.state = {
-        currSticky: '',
+        oldStickies: [],
         addedStickies: []
     }
   }
 
   onKeyPress(e) {
     if (e.key == 'Enter') {
-      var addedStickies = this.state.addedStickies;
-      this.state.addedStickies.push(this.state.currSticky);
+      var input = $('#sticky-val');
+      this.state.addedStickies.push(input.val());
       this.forceUpdate();
 
-      this.setState({currSticky: ''});
-    } else
-      this.setState({currSticky: this.state.currSticky + e.key});
+      input.val('');
+    }
   }
 
-  removeSticky(i, e) {
-    this.state.addedStickies.splice(i, 1);
+  removeSticky(sticky, e) {
+    var propsIdx = this.props.stickies.indexOf(sticky);
+    var addedIdx = this.state.addedStickies.indexOf(sticky);
+    if (propsIdx > -1) 
+      this.props.stickies.splice(propsIdx, 1);
+
+    if (addedIdx)
+      this.state.addedStickies.splice(addedIdx, 1);
+
     this.forceUpdate();
   }
 
+  getStickies() {
+    return this.props.stickies.concat(this.state.addedStickies);
+  }
+
   render() {
-    var addedStickies = this.state.addedStickies.map((sticky, i) =>
-        (<div className="form-aligned-col2-list-item">
-          <div className="form-aligned-col2-check"> &bull; </div>
-          <div key={sticky} className="form-aligned-col2-pick sticky">
-            <div> {sticky} </div>
-            <img className="icon-img trash" src='./img/trash.png' onClick={this.removeSticky.bind(this, i)}/>
-          </div>
-        </div>));
+    var stickies = this.props.stickies.map((sticky) => {
+      return (<div className="form-aligned-col2-list-item">
+        <div className="form-aligned-col2-check"> &bull; </div>
+        <div key={sticky} className="form-aligned-col2-pick sticky">
+          <div> {sticky} </div>
+          <img className="icon-img trash" src='./img/trash.png' onClick={this.removeSticky.bind(this, sticky)}/>
+        </div>
+      </div>);
+    });
+
+    var addedStickies = this.state.addedStickies.map((sticky) => {
+      return (<div className="form-aligned-col2-list-item">
+        <div className="form-aligned-col2-check"> &bull; </div>
+        <div key={sticky} className="form-aligned-col2-pick sticky">
+          <div> {sticky} </div>
+          <img className="icon-img trash" src='./img/trash.png' onClick={this.removeSticky.bind(this, sticky)}/>
+        </div>
+      </div>)
+    });
 
     if (this.state.addedStickies.length < 5) {
       var newSticky =
         (<div className="form-aligned-col2-list-item">
           <div className="form-aligned-col2-check"> &bull; </div>
-          <input className="form-aligned-col2-text" placeholder="Type new sticky here" onKeyPress={this.onKeyPress.bind(this)} value={this.state.currSticky} />
+          <input id="sticky-val" className="form-aligned-col2-text" placeholder="Type new sticky here" onKeyPress={this.onKeyPress.bind(this)} defaultValue={''} />
         </div>);
     } else newSticky = '';
 
@@ -47,6 +69,7 @@ export default class Stickies extends React.Component {
       <div className="form-group">
         <div className="form-aligned-col1"> Stickies: </div>
         <div className="form-aligned-col2-list">
+          {stickies}
           {addedStickies}
           {newSticky}
         </div>

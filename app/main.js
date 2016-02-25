@@ -72,7 +72,9 @@ class Main extends React.Component {
       important: false,
       description: '',
       location: '',
-      deadline: ''
+      deadline: '',
+      notify: {},
+      stickies: []
     };
 
     for (var key in keyValues) {

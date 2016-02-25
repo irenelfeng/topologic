@@ -17,13 +17,12 @@ export default class NewTaskForm extends React.Component {
     super();
     this.type = 'task';
     this.state = {
-      deadline: false,
       type: 'new'
     };
   }
 
   setDeadline(checked) {
-    this.setState({deadline: checked});
+    this.setState({deadlineActivated: checked});
   }
 
   id(includeStar) {
@@ -48,7 +47,8 @@ export default class NewTaskForm extends React.Component {
       location: this.n().find('.form-location').val(),
       description: this.n().find('.task-description').val(),
       group: this.state.type == 'edit' ? this.n().find('#group-dropdown').html() :this.n().find('.simple-value').children(":first").html(),
-      //notify: document.querySelector('#notify-select').value
+      notify: this.notifySelect.getNotifyValue(),
+      stickies: this.stickySelect.getStickies(),
       done: false,
       important: false
     };
@@ -58,17 +58,21 @@ export default class NewTaskForm extends React.Component {
   }
 
   render() {
-    if (this.props.form.projects.title == null) {
+    var me = this.props.form.projects;
+    var deadlineActivated = (this.state.deadlineActivated == null) ? (me.deadline != '' && me.deadline != null) : this.state.deadlineActivated;
+
+    if (me.title == null) {
       return (
         <div className="form-container" id={this.id()}>
 
           <TaskOrProject type={this.type} changeForm={this.props.changeForm} />
           <Title />
-          <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
+          <Deadline deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} />
           <Location />
           <Description />
           <GroupSelect groups={this.props.items.groups}/>
-          <NotifySelect deadline={this.state.deadline}/>
+          <NotifySelect deadline={deadlineActivated} notify={{}} ref={(ref) => this.notifySelect = ref}/>
+          <Stickies ref={(ref) => this.stickySelect = ref} stickies={[]} />
 
           <div className="form-group">
             <CancelButton setForm = {this.props.setForm} />
@@ -84,13 +88,13 @@ export default class NewTaskForm extends React.Component {
       return (
           <div className="form-container" id={this.id()}>
 
-            <Title title={this.props.form.projects.title} />
-            <Deadline deadline={this.state.deadline} setDeadline={this.setDeadline.bind(this)} />
-            <Location location={this.props.form.projects.location} />
-            <Description description={this.props.form.projects.description} />
-            <GroupSelect group={this.props.form.projects.group} type={this.state.type}/>
-            <NotifySelect deadline={this.state.deadline}/>
-            <Stickies />
+            <Title title={me.title} />
+            <Deadline deadline={me.deadline} deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} />
+            <Location location={me.location} />
+            <Description description={me.description} />
+            <GroupSelect group={me.group} type={this.state.type}/>
+            <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref}/>
+            <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} />
 
             <div className="form-group">
               <DeleteButton />
