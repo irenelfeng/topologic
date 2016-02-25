@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ReactSelectize from 'react-selectize';
 import Modal from 'react-modal';
 
@@ -20,9 +19,10 @@ export default class Members extends React.Component {
       }
     };
 
-    this.options = ["Turkey", "Ebert", "Sam", "Samantha", "Katrina", "Rosemary"].map(function(val){
-                return {label: val, value: val}
-            });
+    this.options = ['Turkey', 'Ebert', 'Sam', 'Samantha', 'Katrina', 'Rosemary'].map(val => {
+      return {label: val, value: val};
+    });
+
     this.state = {
       adding: false,
       members: []
@@ -32,7 +32,7 @@ export default class Members extends React.Component {
   }
 
   addMember() {
-    var member = document.querySelector(".simple-value").firstChild.innerHTML;
+    var member = document.querySelector('.simple-value').firstChild.innerHTML;
     this.state.members.push(member);
     //this.forceUpdate();
     this.closeModal();
@@ -52,7 +52,6 @@ export default class Members extends React.Component {
     this.setState({adding:false});
   }
 
-  // clear 
   getMembers(){
     var members = this.state.members;
     this.setState({members: []});
