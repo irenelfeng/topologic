@@ -7,33 +7,37 @@ import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
 import GroupAvatar from  '../form-components/group-avatar';
 import Members from  '../form-components/members';
+import DeleteButton from '../form-components/delete-button';
+import $ from 'jquery';
 
 export default class NewGroupForm extends React.Component {
   constructor() {
     super();
-    this.state = {
-      avatar: ''
-    }
+    this.type = 'group';
+
   }
 
   save() {
+    debugger;
+    var form = $('#form-container');
     var data = {
-      name: document.querySelector('#form-title').value,
-      description: document.querySelector('#task-description').value,
-      avatar: this.state.avatar,
+      name: form.find('.form-title').val(),
+      description: form.find('.task-description').val(),
+      //avatar: getvalue,
       members: this.membersRef.getMembers(),
 
     };
 
-    this.props.saveObject(data, 'group');
+    this.props.saveObject(data, this.type);
     this.props.setForm(null);
 
   }
 
-  fileUpload(upload){
-    this.state.avatar = upload;
-    this.props.form['avatar'] = upload;
-    this.forceUpdate(); 
+  delete(){
+    var form = $('#form-container');
+    var group = form.find('.form-title').val();
+    this.props.deleteObject(group, this.type);
+    this.props.setForm(null);
   }
 
   render() {
@@ -45,7 +49,7 @@ export default class NewGroupForm extends React.Component {
            </div>
           <Title />
           <Description />
-          <GroupAvatar object={this.props.form} fileUpload={this.fileUpload.bind(this)} />
+          <GroupAvatar object={this.props.form} />
           <Members ref={(ref) => this.membersRef = ref} members={[]} />
           <div className="form-group">
             <CancelButton setForm = {this.props.setForm} />
@@ -61,11 +65,12 @@ export default class NewGroupForm extends React.Component {
       <div id="form-container">
 
         <Title title={this.props.form['groups'].name} />
-        <Description desc={this.props.form['groups'].description} />
-        <GroupAvatar avatar={this.props.form['groups'].avatar} fileUpload={this.fileUpload.bind(this)} />
+        <Description description={this.props.form['groups'].description} />
+        <GroupAvatar avatar={this.props.form['groups'].avatar}/>
         <Members ref={(ref) => this.membersRef = ref} members={members} />
 
         <div className="form-group">
+          <DeleteButton onClick={this.delete.bind(this)}/>
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>

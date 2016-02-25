@@ -18,7 +18,8 @@ export default class Panel extends React.Component {
     this.defaultFns = {
       projects: (task) => !task.done,
       groups: (group) => true,
-      notifications: (notification) => notification.alarm
+      notifications: (notification) => notification.alarm,
+      tutorials: (tutorial) => true
     };
 
     this.lastActive = null;
