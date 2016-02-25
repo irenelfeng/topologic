@@ -32,6 +32,7 @@ export default class ProjectView extends React.Component {
     });
 
     var projects = projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} deleteObject={this.props.deleteObject} />));
+    debugger;
     var floatingTasks = nullProject.tasks.map((t, i) => (<FloatingTask key={i} task={t} />));
 
     return (
