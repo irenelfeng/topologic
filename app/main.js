@@ -203,8 +203,7 @@ class Main extends React.Component {
     return null;
   }
 
-  deleteObject(objectID,type){
-    
+  deleteObject(objectID, type) {
     if (type == 'task') {
       var project = this.state.items.projects.filter(p => {
         return p.tasks.filter(t => t.title == objectID).length > 0;
@@ -214,9 +213,14 @@ class Main extends React.Component {
         var project = this.state.items.projects.filter(p => p.name == null)[0];
       }
       var task = project.tasks.filter(t => t.title == objectID)[0];
-      if(task!= null){
-        var idx = project.tasks.indexOf(task);
-        project.tasks.splice(idx, 1);
+
+      if (task != null) {
+        var linksToSplice = project.links.filter(l => l.source == task || l.target == task);
+        linksToSplice.forEach(l => {
+          project.links.splice(project.links.indexOf(l), 1);
+        });
+
+        project.tasks.splice(project.tasks.indexOf(task), 1);
       }
     }
 

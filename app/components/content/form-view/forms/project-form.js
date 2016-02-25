@@ -65,7 +65,7 @@ export default class ProjectForm extends React.Component {
             <Title />
             <Description />
             <GroupSelect groups={this.props.items.groups} />
-            <NotifySelect deadline={false} notify={{}} ref={(ref) => this.notifySelect = ref}/>
+            <NotifySelect deadline={false} notify={{}} ref={(ref) => this.notifySelect = ref} taskTitle={me.title}/>
             <div className="form-group">
               <CancelButton setForm = {this.props.setForm} object={this.props.form} />
               <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
@@ -83,7 +83,7 @@ export default class ProjectForm extends React.Component {
             <Title title={me.name} />
             <Description description={me.description} />
             <GroupSelect group={me.group} groups={this.props.items.groups} />
-            <NotifySelect deadline={false} notify={this.props.form.projects.notify} ref={(ref) => this.notifySelect = ref} />
+            <NotifySelect deadline={false} notify={this.props.form.projects.notify} ref={(ref) => this.notifySelect = ref} taskTitle={me.title}/>
             <div className="form-group">
               <DeleteButton onClick={this.delete.bind(this)}/>
               <CancelButton setForm = {this.props.setForm} object={this.props.form} />

@@ -42,8 +42,10 @@ export default class Stickies extends React.Component {
     var shouldClear = (this.taskTitle != null && this.taskTitle != this.props.taskTitle);
     
     this.taskTitle = this.props.taskTitle;
-    if (shouldClear)
+    if (shouldClear) {
       this.state.addedStickies = [];
+      $('#sticky-val').val('');
+    }
 
     var stickies = this.props.stickies.map(sticky => {
       return (

@@ -67,6 +67,11 @@ export default class TaskForm extends React.Component {
 
   render() {
     var me = this.props.form.projects;
+    if (this.taskTitle != null && this.taskTitle != me.title) {
+      this.state.deadlineActivated = (me.deadline != '' && me.deadline != null);
+    }
+    this.taskTitle = me.title;
+
     var deadlineActivated = (this.state.deadlineActivated == null) ? (me.deadline != '' && me.deadline != null) : this.state.deadlineActivated;
 
     if (me.title == null) {
@@ -76,11 +81,11 @@ export default class TaskForm extends React.Component {
           <TaskOrProject type={this.type} changeForm={this.props.changeForm} />
           <Title />
           <ProjectSelect projects={this.props.items.projects}/>
-          <Deadline deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} />
+          <Deadline deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} taskTitle={me.title}/>
           <Location />
           <Description />
           <GroupSelect groups={this.props.items.groups}/>
-          <NotifySelect deadline={deadlineActivated} notify={{}} ref={(ref) => this.notifySelect = ref}/>
+          <NotifySelect deadline={deadlineActivated} notify={{}} ref={(ref) => this.notifySelect = ref} taskTitle={me.title} />
           <Stickies ref={(ref) => this.stickySelect = ref} stickies={[]} />
 
           <div className="form-group">
@@ -98,12 +103,12 @@ export default class TaskForm extends React.Component {
           <div className="form-container" id={this.id()}>
 
             <Title title={me.title} />
-            <Deadline deadline={me.deadline} deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} />
+            <Deadline deadline={me.deadline} deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} taskTitle={me.title}/>
             <Location location={me.location} />
             <Description description={me.description} />
             <GroupSelect group={me.group} groups={this.props.items.groups} type={this.state.type}/>
 
-            <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref}/>
+            <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref} taskTitle={me.title}/>
             <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} taskTitle={me.title} />
 
             <div className="form-group">
