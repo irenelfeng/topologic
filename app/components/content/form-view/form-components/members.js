@@ -25,6 +25,8 @@ export default class Members extends React.Component {
 
     this.state = {
       adding: false,
+      removing:false,
+      memberidx: -1,
       members: []
     }
 
@@ -38,19 +40,18 @@ export default class Members extends React.Component {
     this.closeModal();
   }
 
-  actuallyRemoveMember(i, e) {
+  actuallyRemoveMember() {
     // this.props.removeMember(i);
-    this.state.members.splice(i, 1);
+    this.state.members.splice(this.state.memberidx, 1);
+    this.state.memberidx = -1; //for safekeeping
     this.forceUpdate();
+    this.closeModal();
   }
 
   removeMember(i, e) {
-    console.log("here");
-    (<Modal isOpen={true} onRequestClose={this.close} style={this.customStyles}>Are you sure you want to remove the member?
-      (<div className="form-group">
-        <a className="form-button"> No </a>
-        <a className="form-button" onClick={this.actuallyRemoveMember(i, e)}> Yes </a>
-      </div>) </Modal>)
+    debugger;
+    this.setState({removing:true, memberidx: i});
+    
   }
 
   openModal(){
@@ -59,6 +60,7 @@ export default class Members extends React.Component {
 
   closeModal(){
     this.setState({adding:false});
+    this.setState({removing:false});
   }
 
   getMembers(){
@@ -72,12 +74,10 @@ export default class Members extends React.Component {
 
     var members;
 
-    if(this.firstRender){
-      this.state.members = this.props.members;
-    }
+    this.state.members = this.props.members;
 
     if(this.props.members){
-      members = this.props.members.map((m, i) => (<div key={m} onClick={this.removeMember.bind(this, i)}>{m}</div>));
+      members = this.props.members.map((m, i) => (<div key={m}>{m}<span className="remove-member" onClick={this.removeMember.bind(this, i)}>x</span></div>));
     }
 
     if(this.state.adding)
@@ -91,6 +91,14 @@ export default class Members extends React.Component {
         </div>
        </Modal>);
 
+    var removing = (<Modal isOpen={this.state.removing} onRequestClose={this.closeModal} style={this.customStyles}>
+      Are you sure you want to remove {this.state.members[this.state.memberidx]}?
+        <div className="form-group">
+          <a className="form-button" onClick={this.closeModal.bind(this)}> No </a>
+          <a className="form-button" onClick={this.actuallyRemoveMember.bind(this)}> Yes </a>
+        </div> 
+      </Modal>);
+
     return (
       <div>
         <div className="add-box" onClick={this.openModal.bind(this)} >
@@ -99,6 +107,7 @@ export default class Members extends React.Component {
         </div>
         <div id="members-box">
           {members}
+          {removing}
         </div>
       </div>
     );
