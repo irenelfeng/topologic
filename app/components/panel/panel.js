@@ -18,7 +18,8 @@ export default class Panel extends React.Component {
     this.defaultFns = {
       projects: (task) => !task.done,
       groups: (group) => true,
-      notifications: (notification) => notification.alarm
+      notifications: (notification) => notification.alarm,
+      tutorials: (tutorial) => true
     };
 
     this.lastActive = null;
@@ -46,6 +47,7 @@ export default class Panel extends React.Component {
 
   render() {
     var itemsToPass = this.props.items[this.props.active];
+    debugger;
     var href = this.headerImgs[this.props.active];
 
     var shouldReset = (this.lastActive == null || this.lastActive != this.props.active);
