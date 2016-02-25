@@ -44,7 +44,7 @@ class Main extends React.Component {
         projects: [sampleProject, nullProject] ,
         groups: [{
           name: 'Personal',
-          members: 'User',
+          members: ['User'],
           avatar: './img/groups.png',
           description: 'My group'
         },
@@ -221,7 +221,6 @@ class Main extends React.Component {
     }
 
     if (type == 'group') {
-      debugger;
 
       var group = this.state.items.groups.filter(g => g.name == objectID)[0];
 

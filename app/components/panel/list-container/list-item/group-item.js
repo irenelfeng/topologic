@@ -12,7 +12,6 @@ export default class GroupItem extends React.Component {
   }
 
   render() {
-    console.log("rerender group item");
     return (
       <div className={'list-item group-item ' + this.props.selected} onClick={this.selected.bind(this)} >
         <div className="icons-container">
