@@ -12,7 +12,7 @@ import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
 import Stickies from '../form-components/stickies';
 
-export default class NewTaskForm extends React.Component {
+export default class TaskForm extends React.Component {
   constructor() {
     super();
     this.type = 'task';
