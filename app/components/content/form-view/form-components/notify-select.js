@@ -20,7 +20,6 @@ export default class NotifySelect extends React.Component {
       beforeUnit: this.simpleSelect ? this.simpleSelect.state.value.value : null,
       beforeQuant: $('.notif-num').val()
     };
-    console.log(vals);
     return vals;
   }
 
@@ -33,11 +32,20 @@ export default class NotifySelect extends React.Component {
   }
 
   render() {
+    var beforeUnitVal = this.props.notify.beforyneUnit || 'minutes';
+    var SimpleSelect = ReactSelectize.SimpleSelect;
+
+    if (this.taskTitle != null && this.taskTitle != this.props.taskTitle) {
+      this.state.before = null;
+      this.state.onCompletion = null;
+      $('.notif-num').val('');
+      SimpleSelect.state = {label: beforeUnitVal, value: beforeUnitVal};
+    }
+    this.taskTitle = this.props.taskTitle;
+
     var before = (this.state.before == null) ? this.props.notify.before : this.state.before;
     var onCompletion = (this.state.onCompletion == null) ? this.props.notify.onCompletion : this.state.onCompletion;
 
-    var beforeUnitVal = this.props.notify.beforeUnit || 'minutes';
-    var SimpleSelect = ReactSelectize.SimpleSelect;
 
     var deadlineEls ='';
     if (this.props.deadline) {
