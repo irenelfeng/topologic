@@ -55,11 +55,13 @@ class Main extends React.Component {
         notifications: [
           {
             type: 'groups',
+            id: '0',
             description: 'Sarah has been added to Sample Group',
             link: 'Sample Group'
           }, 
           {
             type: 'projects',
+            id: '1',
             description: 'Done Important Task has been completed!',
             link: 'Done Important Task'
           }
