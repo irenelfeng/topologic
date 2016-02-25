@@ -55,20 +55,20 @@ class Main extends React.Component {
           description: 'Different Description'
         }],
         notifications: [
-          {
-            type: 'groups',
-            id: '0',
-            description: 'Sarah has been added to Sample Group',
-            link: 'Sample Group',
-            notify: true
-          }, 
-          {
-            type: 'projects',
-            id: '1',
-            description: 'Done Important Task has been completed!',
-            link: 'Done Important Task'
-          }
-        ],
+        {
+          type: 'groups',
+          id: '0',
+          description: 'Sarah has been added to Sample Group',
+          link: 'Sample Group',
+          alarm: true
+        },
+        {
+          type: 'projects',
+          id: '1',
+          description: 'Done Important Task has been completed!',
+          link: 'Done Important Task',
+          alarm: false
+        }],
         tutorials: [
           {name: 'Stickies'},
           {name: 'Getting started with topologic'},
@@ -97,7 +97,7 @@ class Main extends React.Component {
     for (var key in keyValues) {
       defaults[key] = keyValues[key];
     }
-    
+
     return defaults;
   }
 
@@ -182,7 +182,7 @@ class Main extends React.Component {
   }
 
   /**
-   * 
+   *
    */
   addLink(projectName, source, target) {
     var project = this.state.items.projects.filter(p => p.name == projectName)[0];

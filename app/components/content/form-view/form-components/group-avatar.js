@@ -8,7 +8,7 @@ export default class GroupAvatar extends React.Component {
 
   /*
   * changes the group avatar
-  */ 
+  */
   changeAvatar(e) {
     var self = this;
     var reader = new FileReader();

@@ -8,15 +8,15 @@ export default class NotifFilter extends React.Component {
     };
 
     this.filterFns = {
-      alarm: (task) => notif.alarm,
-      history: (task) => true
+      alarm: (notification) => notification.alarm,
+      history: (notification) => true
     };
   }
 
   onClick(e) {
     var option = e.target.id.split('-')[2];
     this.setState({ selected: option });
-    this.props.setFilter(this.filterFns[this.state.selected]);
+    this.props.setFilter(this.filterFns[option]);
   }
 
   render() {
