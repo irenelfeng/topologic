@@ -152,15 +152,21 @@
   height 70px
   text-align center
   background-color transparent
-
-  .form-title
-    outline none
-    border none
-    font-style italic
-    font-size 1.8em
+  flexbox(flex)
+  justify-content(center)
+  align-items(center)
+  
+  div
     width auto
-    background-color transparent
 
-  .form-title:focus
-    outline none
-    border none
+    .form-title
+      outline none
+      border none
+      font-style italic
+      font-size 1.8em
+      width 100%
+      background-color transparent
+
+    .form-title:focus
+      outline none
+      border none

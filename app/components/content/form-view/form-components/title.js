@@ -13,10 +13,13 @@ export default class Title extends React.Component {
   }
 
   render() {
+    var readOnly = (this.props.title != '' && this.props.title != null);
 
     return (
       <div className="form-title-container">
-        <input className="form-title" placeholder="Title" value={this.props.title} onChange={this.onChange.bind(this)} />
+        <div>
+          <input className="form-title" placeholder="Title" value={this.props.title} onChange={this.onChange.bind(this)} readOnly={readOnly}/>
+        </div>
       </div>
     );
   }

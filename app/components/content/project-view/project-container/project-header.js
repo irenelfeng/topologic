@@ -32,7 +32,7 @@ export default class ProjectHeader extends React.Component {
         </div>
 
         <div className="non-picture-els">
-          <span> {this.props.project.name} </span>
+          <div className="project-title"> {this.props.project.name} </div>
           <div className="progress-bar"> 
             {progressBar}
           </div>

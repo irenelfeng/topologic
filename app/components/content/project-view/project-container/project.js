@@ -21,6 +21,12 @@ export default class Project extends React.Component {
     this.laidOut = false;
   }
 
+  bringToFront(task) {
+    var idx = this.props.project.tasks.indexOf(task);
+    this.props.project.tasks.splice(idx, 1);
+    this.props.project.tasks.push(task);
+  }
+
   setDragging(item) {
     this.setState({dragging: item});
   }
@@ -122,7 +128,8 @@ export default class Project extends React.Component {
         deleteObject={this.props.deleteObject}
         beingDragged={this.state.dragging == t} 
         forceProjectUpdate={this.props.forceProjectUpdate}
-        setForm={this.props.setForm} />
+        setForm={this.props.setForm} 
+        bringToFront={this.bringToFront.bind(this)} />
     ));
 
     var arrows = this.links.map(l => {

@@ -15,6 +15,7 @@ export default class TaskCircle extends React.Component {
   }
 
   onMouseDown(ev) {
+    this.props.bringToFront(this.props.task);
     if (ev.nativeEvent.which == 1) {
       this.startDrag(ev);
 
