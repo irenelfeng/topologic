@@ -1,14 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
 
-export default class StickyView extends React.Component { 
+export default class StickyView extends React.Component {
   constructor() {
     super();
   }
 
   saveSticky() {
     var sticky = $('.sticky-form').find('textarea').val();
-    this.props.addSticky(sticky);
+    if (!sticky == '')
+      this.props.addSticky(sticky);
   }
 
   deleteSticky() {
