@@ -12,7 +12,7 @@ export default class Panel extends React.Component {
     this.headerImgs = {
       projects: ("./img/plus.png"),
       groups: ("./img/plus.png"),
-      notifications: ("./img/sort.png"),
+      //notifications: ("./img/sort.png"),
     }
 
     this.firstRender = true;
@@ -46,11 +46,12 @@ export default class Panel extends React.Component {
     if (this.firstRender) {
       this.state.filterFn = {
         projects: (task) => !task.done,
-        groups: (group) => true
-      }[this.props.active];  
-      this.firstRender = false;    
+        groups: (group) => true,
+        notifications: (notification) => notification.alarm
+      }[this.props.active];
+      this.firstRender = false;
     }
-    
+
     return (
       <div id="panel">
         <div id="panel-header-container">
