@@ -13,11 +13,9 @@ export default class GroupSelect extends React.Component {
     if (this.props.type == 'edit')
       select = this.props.group ? this.props.group : 'Personal';
     else {
-      var personal = {label: "Personal", value:"Personal"};
       var options = this.props.groups.map(function(group){
-        return {label: group.name, value: group.name}
+        return {label: group.name, value: group.name, avatar: group.avatar}
       });
-      options.push(personal)
 
       var select = React.createElement(SimpleSelect, {
         options: options,
@@ -25,7 +23,14 @@ export default class GroupSelect extends React.Component {
         placeholder: "Select a group",
         renderOption: function (group) {
           return (
-            // jessica fill in
+            <div className="group-option-item">
+              <div className="group-option-pic">
+                <img src={group.avatar} />
+              </div>
+              <div className="group-option-text">
+                {group.label}
+              </div>
+            </div>
           );
         }
       });

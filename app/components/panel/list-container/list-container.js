@@ -59,7 +59,6 @@ export default class ListContainer extends React.Component {
     // filtered items map to the current active icon items HTML
     items = items.filter(this.props.filterFn).map((item) => itemComponents[this.props.active](item));
 
-
     return (
 
       <div id="list-container">
