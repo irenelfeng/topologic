@@ -23,7 +23,7 @@ export default class NewGroupForm extends React.Component {
     var data = {
       name: form.find('.form-title').val(),
       description: form.find('.task-description').val(),
-      //avatar: getvalue,
+      avatar: this.avatarRef.getAvatar(),
       members: this.membersRef.getMembers(),
 
     };
@@ -49,7 +49,7 @@ export default class NewGroupForm extends React.Component {
            </div>
           <Title />
           <Description />
-          <GroupAvatar object={this.props.form} />
+          <GroupAvatar ref={(ref) => this.avatarRef = ref} object={this.props.form} />
           <Members ref={(ref) => this.membersRef = ref} members={[]} />
           <div className="form-group">
             <CancelButton setForm = {this.props.setForm} />
@@ -66,9 +66,8 @@ export default class NewGroupForm extends React.Component {
 
         <Title title={this.props.form['groups'].name} />
         <Description description={this.props.form['groups'].description} />
-        <GroupAvatar avatar={this.props.form['groups'].avatar}/>
+        <GroupAvatar ref={(ref) => this.avatarRef = ref} avatar={this.props.form['groups'].avatar} groupTitle={this.props.form['groups'].name}/>
         <Members ref={(ref) => this.membersRef = ref} members={members} />
-
         <div className="form-group">
           <DeleteButton onClick={this.delete.bind(this)}/>
           <CancelButton setForm = {this.props.setForm} />
