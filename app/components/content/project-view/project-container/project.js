@@ -121,7 +121,8 @@ export default class Project extends React.Component {
         dragEnded={this.dragEnded.bind(this)}
         deleteObject={this.props.deleteObject}
         beingDragged={this.state.dragging == t} 
-        forceProjectUpdate={this.props.forceProjectUpdate}/>
+        forceProjectUpdate={this.props.forceProjectUpdate}
+        setForm={this.props.setForm} />
     ));
 
     var arrows = this.links.map(l => {

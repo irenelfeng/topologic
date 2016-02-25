@@ -34,6 +34,10 @@ export default class TaskCircle extends React.Component {
     }
   }
 
+  onDoubleClick(ev) {
+    this.props.setForm(this.props.task);
+  }
+
   startDrag(ev) {
     if (!this.state.tooltip)
       this.props.setDragging(this.props.task);
@@ -122,7 +126,11 @@ export default class TaskCircle extends React.Component {
     }
 
     return (
-      <div className="task-circle" style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} onMouseDown={this.onMouseDown.bind(this)} onMouseUp={this.onMouseUp.bind(this)} >
+      <div className="task-circle" 
+        style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} 
+        onMouseDown={this.onMouseDown.bind(this)} 
+        onMouseUp={this.onMouseUp.bind(this)} 
+        onDoubleClick={this.onDoubleClick.bind(this)} >
 
         <div className="icons-container">
           <img className="person-container" src="./img/person.png" draggable="false"/>
