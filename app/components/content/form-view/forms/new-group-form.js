@@ -7,6 +7,7 @@ import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
 import GroupAvatar from  '../form-components/group-avatar';
 import Members from  '../form-components/members';
+import $ from 'jquery';
 
 export default class NewGroupForm extends React.Component {
   constructor() {
@@ -17,9 +18,11 @@ export default class NewGroupForm extends React.Component {
   }
 
   save() {
+    debugger;
+    var form = $('#form-container');
     var data = {
-      name: document.querySelector('#form-title').value,
-      description: document.querySelector('#task-description').value,
+      name: form.find('.form-title').val(),
+      description: form.find('.task-description').val(),
       avatar: this.state.avatar,
       members: this.membersRef.getMembers(),
 
@@ -66,7 +69,7 @@ export default class NewGroupForm extends React.Component {
       //if edit form
       <div id="form-container">
         <Title title={this.props.form['groups'].name} />
-        <Description desc={this.props.form['groups'].description} />
+        <Description description={this.props.form['groups'].description} />
         <GroupAvatar avatar={this.props.form['groups'].avatar} fileUpload={this.fileUpload.bind(this)} />
         <Members ref={(ref) => this.membersRef = ref} members={members} />
         <div className="form-group">

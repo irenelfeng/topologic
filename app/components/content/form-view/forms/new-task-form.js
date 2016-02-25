@@ -57,6 +57,13 @@ export default class NewTaskForm extends React.Component {
     this.props.setForm(null);
   }
 
+  deleteTask(){
+    var task = this.n().find('.form-title').val();
+    console.log("title is " +task);
+    this.props.deleteObject(task, this.type);
+    this.props.setForm(null);
+  }
+
   render() {
     var me = this.props.form.projects;
     var deadlineActivated = (this.state.deadlineActivated == null) ? (me.deadline != '' && me.deadline != null) : this.state.deadlineActivated;
@@ -97,7 +104,7 @@ export default class NewTaskForm extends React.Component {
             <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} />
 
             <div className="form-group">
-              <DeleteButton />
+              <DeleteButton onClick={this.deleteTask.bind(this)}/>
               <CancelButton setForm = {this.props.setForm} />
               <SaveButton onClick={this.save.bind(this)}/>
             </div>

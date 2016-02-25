@@ -20,7 +20,7 @@ export default class ProjectView extends React.Component {
 
   render() {
     if (this.props.form[this.props.active] != null)
-      return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} setForm={this.props.setForm} type={this.state.type} />);
+      return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type={this.state.type} />);
 
     var projects = [];
     var nullProject = null;
