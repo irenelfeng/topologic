@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import StickyView from './sticky-view';
 import common from './common';
 var xRadius = common.xRadius;
 var yRadius = common.yRadius;
@@ -8,7 +9,8 @@ export default class TaskCircle extends React.Component {
   constructor() {
     super();
     this.state = {
-      tooltip: null
+      tooltip: null,
+      sticky: null
     };
   }
 
@@ -88,8 +90,34 @@ export default class TaskCircle extends React.Component {
     this.setState({tooltip: null});
   }
 
-  addSticky(e){
+  stickyView (ev) {
+    if (this.state.sticky) {
+      if (this.state.sticky != ev.target)
+        this.setState({sticky: ev.target});
+      else
+        this.setState({sticky: null});
+    } else {
+      this.setState({sticky: ev.target});
+    }
+  }
 
+  deleteSticky (sticky) {
+    var idx = this.props.task.stickies.indexOf(sticky);
+    if (idx > -1) {
+      this.props.task.stickies.splice(idx, 1);
+      this.setState({sticky: null});
+      this.props.forceProjectUpdate();
+    }
+  }
+
+  addSticky (sticky) {
+    this.props.task.stickies.push(sticky);
+    this.setState({sticky: null});
+    this.props.forceProjectUpdate();
+  }
+
+  cancelSticky() {
+    this.setState({sticky: null});
   }
 
   render() {
@@ -125,6 +153,26 @@ export default class TaskCircle extends React.Component {
       );
     }
 
+    var stickies = '';
+    if (this.props.task.stickies.length > 0) {
+      stickies = this.props.task.stickies.map((sticky, idx) => {
+        return (
+          <div className="sticky-bullet" data={sticky} key={idx} onClick={this.stickyView.bind(this)} > • </div>
+        );
+      });
+    }
+
+    var stickyTooltip = '';
+    if (this.state.sticky) {
+      stickyTooltip = (
+        <StickyView sticky={$(this.state.sticky).attr('data')} 
+          parent={this.state.sticky}
+          deleteSticky={this.deleteSticky.bind(this)} 
+          addSticky={this.addSticky.bind(this)} 
+          cancelSticky={this.cancelSticky.bind(this) }/>
+      );
+    }
+
     return (
       <div className="task-circle" 
         style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} 
@@ -141,7 +189,10 @@ export default class TaskCircle extends React.Component {
           {this.props.task.title}
 
           <div className="sticky-plus">
-            <img src="./img/fatplus.png" onClick={this.addSticky.bind(this)} draggable="false"/>
+            {stickies}
+            <div onClick={this.stickyView.bind(this)} >
+              <img src="./img/fatplus.png" draggable="false"/>
+            </div>
           </div>
         </div>
 
@@ -150,7 +201,7 @@ export default class TaskCircle extends React.Component {
         </div>
 
         {tooltip}
-
+        {stickyTooltip}
       </div>
     );
   }
