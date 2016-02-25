@@ -38,10 +38,19 @@ export default class Members extends React.Component {
     this.closeModal();
   }
 
-  removeMember(i, e){
+  actuallyRemoveMember(i, e) {
     // this.props.removeMember(i);
     this.state.members.splice(i, 1);
     this.forceUpdate();
+  }
+
+  removeMember(i, e) {
+    console.log("here");
+    (<Modal isOpen={true} onRequestClose={this.close} style={this.customStyles}>Are you sure you want to remove the member?
+      (<div className="form-group">
+        <a className="form-button"> No </a>
+        <a className="form-button" onClick={this.actuallyRemoveMember(i, e)}> Yes </a>
+      </div>) </Modal>)
   }
 
   openModal(){
@@ -60,22 +69,22 @@ export default class Members extends React.Component {
 
   render() {
     var SimpleSelect = ReactSelectize.SimpleSelect;
-    
+
     var members;
 
     if(this.firstRender){
-      this.state.members = this.props.members; 
+      this.state.members = this.props.members;
     }
 
     if(this.props.members){
-      members = this.props.members.map((m, i) => (<div key={m}>{m}<span className="remove-member" onClick={this.removeMember.bind(this, i)}>x</span></div>));
+      members = this.props.members.map((m, i) => (<div key={m} onClick={this.removeMember.bind(this, i)}>{m}</div>));
     }
 
     if(this.state.adding)
-      var adding = (<Modal isOpen={this.state.adding} onRequestClose={this.closeModal} style={this.customStyles}> 
+      var adding = (<Modal isOpen={this.state.adding} onRequestClose={this.closeModal} style={this.customStyles}>
         <div className="form-group">
-        <SimpleSelect 
-            options = {this.options} 
+        <SimpleSelect
+            options = {this.options}
             placeholder = "Add Member" />
         <a className="form-button" onClick={this.addMember.bind(this)}>Add</a>
         <a className="form-button" onClick={this.closeModal.bind(this)}>Cancel</a>
