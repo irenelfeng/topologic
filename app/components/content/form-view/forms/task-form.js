@@ -28,11 +28,11 @@ export default class TaskForm extends React.Component {
   id(includeStar) {
     var id;
     if (this.props.form.projects.title) {
-      id = this.props.form.projects.title.replace(/ /g,'_') + '-form'; 
+      id = this.props.form.projects.title.replace(/ /g,'_') + '-form';
     } else {
       id = 'new-task-form';
     }
-    
+
     return includeStar ? '#' + id : id;
   }
 
@@ -94,7 +94,7 @@ export default class TaskForm extends React.Component {
             <Description description={me.description} />
             <GroupSelect group={me.group} type={this.state.type}/>
             <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref}/>
-            <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} />
+            <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} taskTitle={me.title} />
 
             <div className="form-group">
               <DeleteButton />

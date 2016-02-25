@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ReactSelectize from 'react-selectize';
 
 export default class GroupSelect extends React.Component {
@@ -14,15 +13,27 @@ export default class GroupSelect extends React.Component {
     if (this.props.type == 'edit')
       select = this.props.group ? this.props.group : 'Personal';
     else {
-      //var begin = {label: "Personal", value:"Personal"}
       var options = this.props.groups.map(function(group){
-            return {label: group.name, value: group.name}
-        });
-      //$.extend(options, begin);
-      var select = (<SimpleSelect
-        options = {options}
-        defaultValue={{label: "Personal", value:"Personal"}}
-        placeholder = "Select a group"/>);
+        return {label: group.name, value: group.name, avatar: group.avatar}
+      });
+
+      var select = React.createElement(SimpleSelect, {
+        options: options,
+        defaultValue: personal,
+        placeholder: "Select a group",
+        renderOption: function (group) {
+          return (
+            <div className="group-option-item">
+              <div className="group-option-pic">
+                <img src={group.avatar} />
+              </div>
+              <div className="group-option-text">
+                {group.label}
+              </div>
+            </div>
+          );
+        }
+      });
     }
 
     return (
