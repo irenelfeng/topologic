@@ -27,13 +27,15 @@ class Main extends React.Component {
           important: false
         })],
       name: 'Sample Project',
-      links: []
+      links: [],
+      notify: {}
     };
 
     var nullProject = {
       tasks : [],
       name: null,
-      links: []
+      links: [],
+      notify: {}
     };
 
     this.state = {
