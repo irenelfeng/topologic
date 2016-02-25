@@ -144,9 +144,12 @@ class Main extends React.Component {
   }
 
   /*
-   * saves objects depending on its type. project index
+   * Saves objects depending on its type
    */
   saveObject(object, type) {
+    var errors = this.validate(object, type);
+    if (errors) return errors;
+
     if (type == 'task') {
       var project = this.state.items.projects.filter(p => {
         return p.tasks.filter(t => t.title == object.title).length > 0;
@@ -192,6 +195,10 @@ class Main extends React.Component {
     }
 
     this.forceUpdate();
+  }
+
+  validate(object, type) {
+    return null;
   }
 
   /**
