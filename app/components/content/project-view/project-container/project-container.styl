@@ -32,3 +32,36 @@
   .arrow
     stroke black
     stroke-width 6
+
+.tooltip
+  height 100px
+  width 100px
+  flexbox(flex)
+
+  .column
+    flexbox(flex)
+    flex-direction(column)
+    
+    .item
+      background-color white
+      border 1px solid black
+      width 50px
+      height 50px
+      flexbox(flex)
+      justify-content(center)
+      align-items(center)
+      
+      img
+        height 80%
+      
+      &.done
+        border-top-left-radius 8px
+
+      &.drag
+        border-top-right-radius 8px
+        
+      &.important
+        border-bottom-left-radius 8px
+        
+      &.delete
+        border-bottom-right-radius 8px
