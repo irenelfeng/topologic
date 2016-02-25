@@ -44,7 +44,7 @@ class Main extends React.Component {
         projects: [sampleProject, nullProject] ,
         groups: [{
           name: 'Personal',
-          members: 'User',
+          members: ['User'],
           avatar: './img/groups.png',
           description: 'My group'
         },
