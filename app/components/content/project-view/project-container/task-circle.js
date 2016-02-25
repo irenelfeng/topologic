@@ -8,7 +8,7 @@ export default class TaskCircle extends React.Component {
   constructor() {
     super();
     this.state = {
-      tooltip: false
+      tooltip: null
     };
   }
 
@@ -17,12 +17,12 @@ export default class TaskCircle extends React.Component {
       this.startDrag(ev);
 
       if ($(ev.target).hasClass('task-circle'))
-        this.setState({tooltip: false});
+        this.setState({tooltip: null});
 
     } else if (ev.nativeEvent.which == 3) {
       ev.preventDefault();
       ev.stopPropagation();
-      this.setState({tooltip: !this.state.tooltip});
+      this.setState({tooltip: {x: ev.clientX, y: ev.clientY} });
     }
   }
 
@@ -65,7 +65,7 @@ export default class TaskCircle extends React.Component {
     ev.preventDefault();
     this.props.deleteObject(this.props.task.title, 'task');
     this.props.forceProjectUpdate();
-    this.setState({tooltip: false});
+    this.setState({tooltip: null});
   }
 
   markImportant(ev) {
@@ -73,7 +73,7 @@ export default class TaskCircle extends React.Component {
     ev.preventDefault();
     this.props.task.important = !this.props.task.important;
     this.props.forceProjectUpdate();
-    this.setState({tooltip: false});
+    this.setState({tooltip: null});
   }
 
   markDone(ev) {
@@ -81,7 +81,7 @@ export default class TaskCircle extends React.Component {
     ev.preventDefault();    
     this.props.task.done = !this.props.task.done;
     this.props.forceProjectUpdate();
-    this.setState({tooltip: false});
+    this.setState({tooltip: null});
   }
 
   addSticky(e){
@@ -95,7 +95,7 @@ export default class TaskCircle extends React.Component {
     var tooltip = '';
     if (this.state.tooltip) {
       tooltip = (
-        <div className="tooltip">
+        <div className="tooltip" style={{top: this.state.tooltip.y, left: this.state.tooltip.x }}>
 
           <div className="column">
             <div className="item done" onClick={this.markDone.bind(this)}>
