@@ -7,7 +7,7 @@ export default class Stickies extends React.Component {
     this.state = {
         oldStickies: [],
         addedStickies: []
-    }
+    };
 
     this.taskTitle = null;
   }
@@ -39,7 +39,7 @@ export default class Stickies extends React.Component {
   }
 
   render() {
-    var shouldClear = (this.taskTitle != null && this.taskTitle != this.props.taskTitle)
+    var shouldClear = (this.taskTitle != null && this.taskTitle != this.props.taskTitle);
     
     this.taskTitle = this.props.taskTitle;
     if (shouldClear)
