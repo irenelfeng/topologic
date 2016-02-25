@@ -94,7 +94,7 @@ export default class TaskForm extends React.Component {
             <Description description={me.description} />
             <GroupSelect group={me.group} type={this.state.type}/>
             <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref}/>
-            <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} />
+            <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} taskTitle={me.title} />
 
             <div className="form-group">
               <DeleteButton />
