@@ -10,28 +10,48 @@ export default class GroupSelect extends React.Component {
   render() {
     var SimpleSelect = ReactSelectize.SimpleSelect;
 
-    if (this.props.type == 'edit')
-      select = this.props.group ? this.props.group : 'Personal';
+    var options = this.props.groups.map(function(group){
+      return {label: group.name, value: group.name, avatar: group.avatar}
+    });
+
+    var avatar = options.filter(o => o.name == this.props.group)[0].avatar;
+    var name = options.filter(o => o.name == this.props.group)[0].label;
+
+    if (this.props.type == 'edit') {
+      select =
+      (<div className="group-option-item">
+        <img className="group-option-pic" src={avatar} />
+        <div className="group-option-text">
+          {name}
+        </div>
+      </div>);
+    }
     else {
-      var options = this.props.groups.map(function(group){
-        return {label: group.name, value: group.name, avatar: group.avatar}
-      });
+      var defaultGroup = options.filter(o => o.label == 'Personal')[0];
 
       var select = React.createElement(SimpleSelect, {
         options: options,
-        defaultValue: personal,
+        defaultValue: defaultGroup,
         placeholder: "Select a group",
         renderOption: function (group) {
           return (
             <div className="group-option-item">
-              <div className="group-option-pic">
-                <img src={group.avatar} />
-              </div>
+              <img className="group-option-pic" src={group.avatar} />
               <div className="group-option-text">
                 {group.label}
               </div>
             </div>
           );
+        },
+        renderValue: function(group) {
+          return (
+            <div className="group-option-item">
+              <img className="group-option-pic" src={group.avatar} />
+              <div className="group-option-text">
+                {group.label}
+              </div>
+            </div>
+          )
         }
       });
     }
@@ -39,7 +59,7 @@ export default class GroupSelect extends React.Component {
     return (
       <div id="group-select" className="form-group">
         <div className="form-aligned-col1"> Group: </div>
-        <div id="group-dropdown" className="form-aligned-col2">
+        <div className="form-aligned-col2">
           {select}
         </div>
       </div>
