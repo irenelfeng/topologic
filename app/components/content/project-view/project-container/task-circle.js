@@ -45,6 +45,11 @@ export default class TaskCircle extends React.Component {
 
   }
 
+  deleteTask(){
+    this.props.deleteObject(this.props.task.title, 'task');
+  }
+
+
   render() {
     var important = this.props.task.important ? (<img src="./img/important.png" />) : '';
 
@@ -68,7 +73,7 @@ export default class TaskCircle extends React.Component {
               <img src="./img/"/>
             </div>
 
-            <div className="item delete">
+            <div className="item delete" onClick={this.deleteTask.bind(this)}>
               <img src="./img/trash.png"/>
             </div>
           </div>

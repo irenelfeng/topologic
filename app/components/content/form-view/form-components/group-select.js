@@ -19,7 +19,7 @@ export default class GroupSelect extends React.Component {
 
       var select = React.createElement(SimpleSelect, {
         options: options,
-        defaultValue: personal,
+        //defaultValue: personal,
         placeholder: "Select a group",
         renderOption: function (group) {
           return (
