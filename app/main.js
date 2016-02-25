@@ -57,7 +57,8 @@ class Main extends React.Component {
             type: 'groups',
             id: '0',
             description: 'Sarah has been added to Sample Group',
-            link: 'Sample Group'
+            link: 'Sample Group',
+            notify: true
           }, 
           {
             type: 'projects',
