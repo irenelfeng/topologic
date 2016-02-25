@@ -27,7 +27,7 @@ export default class ProjectContainer extends React.Component {
 
     return (
       <div className="project-container" >
-        <ProjectHeader project={this.props.project} onClick={this.toggleCollapse.bind(this)} />
+        <ProjectHeader project={this.props.project} onClick={this.toggleCollapse.bind(this)} setForm={this.props.setForm} />
 
         {projectBox}
       </div>

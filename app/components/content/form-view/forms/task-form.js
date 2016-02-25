@@ -11,6 +11,7 @@ import DeleteButton from '../form-components/delete-button';
 import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
 import Stickies from '../form-components/stickies';
+import ProjectSelect from '../form-components/project-select'
 
 
 export default class TaskForm extends React.Component {
@@ -101,7 +102,7 @@ export default class TaskForm extends React.Component {
             <Location location={me.location} />
             <Description description={me.description} />
             <GroupSelect group={me.group} groups={this.props.items.groups} type={this.state.type}/>
-            
+
             <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref}/>
             <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} taskTitle={me.title} />
 

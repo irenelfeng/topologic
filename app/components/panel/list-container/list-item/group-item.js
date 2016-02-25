@@ -8,7 +8,7 @@ export default class GroupItem extends React.Component {
 
   selected(e) {
     var item = this.props.group;
-    this.props.editItem(this.props.group.name,item, this.type);
+    this.props.editItem(this.props.group.name, item, this.type);
   }
 
   render() {
