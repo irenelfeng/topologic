@@ -15,38 +15,58 @@ export default class Project extends React.Component {
     super();
     this.force = d3.layout.force();
     this.state = {
-      dragging: null
+      dragging: null,
+      drawing: null
     };
     this.laidOut = false;
   }
 
-  setDragging(data) {
-    this.setState({dragging: data});
+  setDragging(item) {
+    this.setState({dragging: item});
+  }
+
+  setDrawing(data) {
+    this.setState({drawing: data});
   }
 
   onMouseMove(ev) {
-    if (this.state.dragging) {
+    if (this.state.drawing) {
       var parent = document.querySelector(('#project-' + this.props.project.name).replace(' ','_')).getBoundingClientRect();
-      var f = this.state.dragging.from;
+      var f = this.state.drawing.from;
       var t = {
         x: ev.clientX - parent.left,
         y: ev.clientY - parent.top
       };
-      this.setState({dragging: {from: f, to: t}});
+      this.setState({drawing: {from: f, to: t}});
+    }
+
+    if (this.state.dragging) {
+      var parent = document.querySelector(('#project-' + this.props.project.name).replace(' ','_')).getBoundingClientRect();
+      this.state.dragging.x = ev.clientX - parent.left;
+      this.state.dragging.y = ev.clientY - parent.top;
+      this.forceUpdate();
     }
   }
 
   onMouseUp(ev) {
+    if (this.state.drawing) {
+      this.setState({drawing: null});
+    }
+
     if (this.state.dragging) {
       this.setState({dragging: null});
     }
   }
 
-  dragEnded(endTask) {
-    if (this.state.dragging) {
-      this.setState({dragging: null});
-      this.props.addLink(this.props.project.name, this.state.dragging.from, endTask);
+  drawEnded(endTask) {
+    if (this.state.drawing) {
+      this.setState({drawing: null});
+      this.props.addLink(this.props.project.name, this.state.drawing.from, endTask);
     }
+  }
+
+  dragEnded() {
+    this.setState({dragging: null});
   }
 
   configureData() {
@@ -58,11 +78,6 @@ export default class Project extends React.Component {
   }
 
   configureForce() {
-    // ok, assuming everything configured correctly
-    // var parentDiv = document.querySelector('#project-box-' + this.props.project.name);
-    // var width = parentDiv.offsetWidth;
-    // var height = parentDiv.offsetHeight;
-    // somehow we need to wait until the enclosing box is rendered before i am
     this.force.size([this.width, this.height])
       .nodes(this.tasks)
       .links(this.links)
@@ -77,7 +92,6 @@ export default class Project extends React.Component {
   }
 
   runForce() {
-    // compute the static layout
     this.force.start();
     for (var i = 0; i < numTicks; i++) {
       this.force.tick();
@@ -98,7 +112,16 @@ export default class Project extends React.Component {
       this.laidOut = true;
     }
 
-    var taskCircles = this.tasks.map(t => (<TaskCircle task={t} key={'task-circle-' + t.title} setDragging={this.setDragging.bind(this)} dragEnded={this.dragEnded.bind(this)} deleteObject={this.props.deleteObject} />));
+    var taskCircles = this.tasks.map(t => (
+      <TaskCircle task={t} 
+        key={'task-circle-' + t.title} 
+        setDrawing={this.setDrawing.bind(this)} 
+        setDragging={this.setDragging.bind(this)}
+        drawEnded={this.drawEnded.bind(this)} 
+        dragEnded={this.dragEnded.bind(this)}
+        deleteObject={this.props.deleteObject}
+        beingDragged={this.state.dragging == t} />
+    ));
 
     var arrows = this.links.map(l => {
       var idString = 'link-' + l.source.title + '-' + l.target.title;
@@ -106,8 +129,8 @@ export default class Project extends React.Component {
     });
 
     var dragline = '';
-    if (this.state.dragging) {
-      dragline = (<DragLine source={this.state.dragging.from} target={this.state.dragging.to} />);
+    if (this.state.drawing) {
+      dragline = (<DragLine source={this.state.drawing.from} target={this.state.drawing.to} />);
     }
 
     return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import common from './common';
 var xRadius = common.xRadius;
 var yRadius = common.yRadius;
@@ -14,19 +15,37 @@ export default class TaskCircle extends React.Component {
   onMouseDown(ev) {
     if (ev.nativeEvent.which == 1) {
       this.startDrag(ev);
+
+      if ($(ev.target).hasClass('task-circle'))
+        this.setState({tooltip: false});
+
     } else if (ev.nativeEvent.which == 3) {
       ev.preventDefault();
-      this.setState({tooltip: true});
+      ev.stopPropagation();
+      this.setState({tooltip: !this.state.tooltip});
     }
   }
 
   onMouseUp(ev) {
-    this.endDrag(ev);
+    if (this.props.beingDragged) {
+      this.endDrag(ev);
+    } else {
+      this.endDraw(ev);
+    }
   }
 
   startDrag(ev) {
+    if (!this.state.tooltip)
+      this.props.setDragging(this.props.task);
+  }
+
+  endDrag(ev) {
+    this.props.setDragging(null);
+  }
+
+  startDraw(ev) {
     var parent = ev.target.offsetParent.getBoundingClientRect();
-    this.props.setDragging({
+    this.props.setDrawing({
       from: this.props.task,
       to: {
         x: ev.clientX - parent.left,
@@ -35,24 +54,40 @@ export default class TaskCircle extends React.Component {
     });
   }
 
-  endDrag(ev) {
+  endDraw(ev) {
     ev.stopPropagation();
     ev.preventDefault();
-    this.props.dragEnded(this.props.task);
+    this.props.drawEnded(this.props.task);
+  }
+
+  deleteTask(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.props.deleteObject(this.props.task.title, 'task');
+    this.setState({tooltip: false});
+  }
+
+  markImportant(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.props.task.important = !this.props.task.important;
+    this.setState({tooltip: false});
+  }
+
+  markDone(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();    
+    this.props.task.done = !this.props.task.done;
+    this.setState({tooltip: false});
   }
 
   addSticky(e){
 
   }
 
-  deleteTask(){
-    this.props.deleteObject(this.props.task.title, 'task');
-  }
-
-
   render() {
-    var important = this.props.task.important ? (<img src="./img/important.png" />) : '';
-    var done = this.props.task.done ? (<img src="./img/done.png" />) : '';
+    var important = this.props.task.important ? (<img src="./img/important.png" draggable="false"/>) : '';
+    var done = this.props.task.done ? (<img src="./img/done.png" draggable="false"/>) : '';
 
     var tooltip = '';
     if (this.state.tooltip) {
@@ -60,22 +95,22 @@ export default class TaskCircle extends React.Component {
         <div className="tooltip">
 
           <div className="column">
-            <div className="item done">
-              <img src="./img/done.png"/>
+            <div className="item done" onClick={this.markDone.bind(this)}>
+              <img src="./img/done.png" draggable="false"/>
             </div>
 
-            <div className="item important">
-              <img src="./img/important.png"/>
+            <div className="item important" onClick={this.markImportant.bind(this)}>
+              <img src="./img/important.png"draggable="false"/>
             </div>
           </div>
 
           <div className="column">
-            <div className="item drag">
-              <img src="./img/"/>
+            <div className="item drag" onMouseDown={this.startDraw.bind(this)}>
+              <img src="./img/projects.png" draggable="false"/>
             </div>
 
             <div className="item delete" onClick={this.deleteTask.bind(this)}>
-              <img src="./img/trash.png"/>
+              <img src="./img/trash.png" draggable="false"/>
             </div>
           </div>
 
@@ -84,10 +119,10 @@ export default class TaskCircle extends React.Component {
     }
 
     return (
-      <div oncontextmenu="return false;" className="task-circle" style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} onMouseDown={this.onMouseDown.bind(this)} onMouseUp={this.onMouseUp.bind(this)} >
+      <div className="task-circle" style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} onMouseDown={this.onMouseDown.bind(this)} onMouseUp={this.onMouseUp.bind(this)} >
 
         <div className="icons-container">
-          <img className="person-container" src="./img/person.png"/>
+          <img className="person-container" src="./img/person.png" draggable="false"/>
           {important}
         </div>
 
@@ -95,14 +130,13 @@ export default class TaskCircle extends React.Component {
           {this.props.task.title}
 
           <div className="sticky-plus">
-            <img src="./img/fatplus.png" onClick={this.addSticky.bind(this)} />
+            <img src="./img/fatplus.png" onClick={this.addSticky.bind(this)} draggable="false"/>
           </div>
         </div>
 
         <div className="icons-container">
           {done}
         </div>
-
 
         {tooltip}
 
