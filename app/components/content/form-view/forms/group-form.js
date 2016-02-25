@@ -74,7 +74,7 @@ export default class GroupForm extends React.Component {
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>
 
-      </div> 
+      </div>
     );
   }
 }
