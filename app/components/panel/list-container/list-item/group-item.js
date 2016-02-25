@@ -20,7 +20,7 @@ export default class GroupItem extends React.Component {
         </div>
         <div className="text-container">
           <span className="group-title"> {this.props.group.name} </span>
-          <span className="group-members"> {this.props.group.members} </span>
+          {this.props.group.members}
         </div>
       </div>
     );
