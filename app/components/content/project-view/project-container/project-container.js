@@ -18,6 +18,7 @@ export default class ProjectContainer extends React.Component {
 
   forceProjectUpdate() {
     this.forceUpdate();
+    this.props.forcePanelUpdate();
   }
 
   render() {

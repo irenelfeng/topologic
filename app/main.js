@@ -261,7 +261,14 @@ class Main extends React.Component {
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content saveObject={this.saveObject.bind(this)} deleteObject={this.deleteObject.bind(this)} setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} form={this.state.form} addLink={this.addLink.bind(this)} />
+        <Content saveObject={this.saveObject.bind(this)} 
+          deleteObject={this.deleteObject.bind(this)} 
+          setForm={this.setForm.bind(this)} 
+          active={this.state.active} 
+          items={this.state.items} 
+          form={this.state.form} 
+          addLink={this.addLink.bind(this)} 
+          forcePanelUpdate={function(){this.forceUpdate()}.bind(this)} />
       </div>
     );
   }
