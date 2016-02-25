@@ -69,11 +69,18 @@ class Main extends React.Component {
           link: 'Done Important Task',
           alarm: false
         }],
-        tutorials: [
-          {name: 'Stickies'},
-          {name: 'Getting started with topologic'},
-          {name: 'Creating Groups'}
-          ]
+        tutorials: [{
+            name: 'Getting started:',
+            subtitle: 'hit the ground running'
+        },
+          {
+            name: 'Stickies:',
+            subtitle: 'learn how to use stickies'
+        },
+          {
+            name: 'Creating Groups:',
+            subtitle: 'add the people you want'
+          }]
       },
       form: {
         projects: null,
