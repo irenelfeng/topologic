@@ -70,7 +70,7 @@ export default class Calendar extends React.Component {
           </a>
         </div>);
 
-      var pickerEls = (<Modal isOpen={this.state.picker} onRequestClose={this.closeModal} style={this.customStyles}> {date} {addTime} {time} {done} </Modal>);
+      var pickerEls = (<Modal isOpen={this.state.picker} onRequestClose={this.doneClick.bind(this)} style={this.customStyles}> {date} {addTime} {time} {done} </Modal>);
     }
     else pickerEls = '';
 

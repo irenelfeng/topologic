@@ -18,7 +18,6 @@ export default class GroupForm extends React.Component {
   }
 
   save() {
-    debugger;
     var form = $('#form-container');
     var data = {
       name: form.find('.form-title').val(),

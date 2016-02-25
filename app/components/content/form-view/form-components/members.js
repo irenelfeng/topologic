@@ -81,7 +81,7 @@ export default class Members extends React.Component {
     }
 
     if(this.state.adding)
-      var adding = (<Modal isOpen={this.state.adding} onRequestClose={this.closeModal} style={this.customStyles}>
+      var adding = (<Modal isOpen={this.state.adding} onRequestClose={this.closeModal.bind(this)} style={this.customStyles}>
         <div className="form-group">
         <SimpleSelect
             options = {this.options}
@@ -91,7 +91,7 @@ export default class Members extends React.Component {
         </div>
        </Modal>);
 
-    var removing = (<Modal isOpen={this.state.removing} onRequestClose={this.closeModal} style={this.customStyles}>
+    var removing = (<Modal isOpen={this.state.removing} onRequestClose={this.closeModal.bind(this)} style={this.customStyles}>
       Are you sure you want to remove {this.state.members[this.state.memberidx]}?
         <div className="form-group">
           <a className="form-button" onClick={this.closeModal.bind(this)}> No </a>
