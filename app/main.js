@@ -199,6 +199,7 @@ class Main extends React.Component {
 
   validate(object, type) {
     return null;
+  }
 
   deleteObject(objectID,type){
     
