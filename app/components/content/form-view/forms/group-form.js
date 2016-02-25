@@ -33,7 +33,7 @@ export default class NewGroupForm extends React.Component {
 
   }
 
-  deleteTask(){
+  delete(){
     var form = $('#form-container');
     var group = form.find('.form-title').val();
     this.props.deleteObject(group, this.type);
@@ -73,7 +73,7 @@ export default class NewGroupForm extends React.Component {
         <GroupAvatar avatar={this.props.form['groups'].avatar}/>
         <Members ref={(ref) => this.membersRef = ref} members={members} />
         <div className="form-group">
-          <DeleteButton onClick={this.deleteTask.bind(this)}/>
+          <DeleteButton onClick={this.delete.bind(this)}/>
           <CancelButton setForm = {this.props.setForm} />
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>

@@ -6,6 +6,22 @@ var yRadius = common.yRadius;
 export default class TaskCircle extends React.Component { 
   constructor() {
     super();
+    this.state = {
+      tooltip: false
+    };
+  }
+
+  onMouseDown(ev) {
+    if (ev.nativeEvent.which == 1) {
+      this.startDrag(ev);
+    } else if (ev.nativeEvent.which == 3) {
+      ev.preventDefault();
+      this.setState({tooltip: true});
+    }
+  }
+
+  onMouseUp(ev) {
+    this.endDrag(ev);
   }
 
   startDrag(ev) {
@@ -27,14 +43,42 @@ export default class TaskCircle extends React.Component {
 
   addSticky(e){
 
-
   }
 
   render() {
     var important = this.props.task.important ? (<img src="./img/important.png" />) : '';
 
+    var tooltip = '';
+    if (this.state.tooltip) {
+      tooltip = (
+        <div className="tooltip">
+
+          <div className="column">
+            <div className="item done">
+              <img src="./img/"/>
+            </div>
+
+            <div className="item important">
+              <img src="./img/important.png"/>
+            </div>
+          </div>
+
+          <div className="column">
+            <div className="item drag">
+              <img src="./img/"/>
+            </div>
+
+            <div className="item delete">
+              <img src="./img/trash.png"/>
+            </div>
+          </div>
+
+        </div>
+      );
+    }
+
     return (
-      <div className="task-circle" style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} onMouseDown={this.startDrag.bind(this)} onMouseUp={this.endDrag.bind(this)} >
+      <div oncontextmenu="return false;" className="task-circle" style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} onMouseDown={this.onMouseDown.bind(this)} onMouseUp={this.onMouseUp.bind(this)} >
 
         <div className="icons-container">
           <img className="person-container" src="./img/person.png"/>
@@ -48,6 +92,8 @@ export default class TaskCircle extends React.Component {
             <img src="./img/fatplus.png" onClick={this.addSticky.bind(this)} />
           </div>
         </div>
+
+        {tooltip}
 
       </div>
     );

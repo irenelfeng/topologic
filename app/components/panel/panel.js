@@ -12,10 +12,16 @@ export default class Panel extends React.Component {
     this.headerImgs = {
       projects: ("./img/plus.png"),
       groups: ("./img/plus.png"),
-      notifications: ("./img/sort.png"),
-    }
+      //notifications: ("./img/sort.png"),
+    };
 
-    this.firstRender = true;
+    this.defaultFns = {
+      projects: (task) => !task.done,
+      groups: (group) => true,
+      notifications: (notification) => notification.alarm
+    };
+
+    this.lastActive = null;
   }
 
   setFilter(fn) {
@@ -33,7 +39,6 @@ export default class Panel extends React.Component {
     this.listContainer.clearSelect();
   }
 
-  // on click for the header panel image
   onHeader() {
     this.listContainer.clearSelect();
     this.props.setForm({});
@@ -43,14 +48,12 @@ export default class Panel extends React.Component {
     var itemsToPass = this.props.items[this.props.active];
     var href = this.headerImgs[this.props.active];
 
-    if (this.firstRender) {
-      this.state.filterFn = {
-        projects: (task) => !task.done,
-        groups: (group) => true
-      }[this.props.active];  
-      this.firstRender = false;    
-    }
-    
+    var shouldReset = (this.lastActive == null || this.lastActive != this.props.active);
+    this.lastActive = this.props.active;
+
+    if (shouldReset)
+      this.state.filterFn = this.defaultFns[this.props.active];
+
     return (
       <div id="panel">
         <div id="panel-header-container">

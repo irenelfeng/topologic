@@ -13,7 +13,7 @@ import CancelButton from '../form-components/cancel-button';
 import Stickies from '../form-components/stickies';
 
 
-export default class NewTaskForm extends React.Component {
+export default class TaskForm extends React.Component {
   constructor() {
     super();
     this.type = 'task';
@@ -101,7 +101,7 @@ export default class NewTaskForm extends React.Component {
             <Description description={me.description} />
             <GroupSelect group={me.group} type={this.state.type}/>
             <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref}/>
-            <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} />
+            <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} taskTitle={me.title} />
 
             <div className="form-group">
               <DeleteButton onClick={this.deleteTask.bind(this)}/>
