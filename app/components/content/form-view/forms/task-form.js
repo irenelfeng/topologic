@@ -28,11 +28,11 @@ export default class TaskForm extends React.Component {
   id(includeStar) {
     var id;
     if (this.props.form.projects.title) {
-      id = this.props.form.projects.title.replace(/ /g,'_') + '-form'; 
+      id = this.props.form.projects.title.replace(/ /g,'_') + '-form';
     } else {
       id = 'new-task-form';
     }
-    
+
     return includeStar ? '#' + id : id;
   }
 

@@ -43,6 +43,12 @@ class Main extends React.Component {
       items: {
         projects: [sampleProject, nullProject] ,
         groups: [{
+          name: 'Personal',
+          members: 'User',
+          avatar: './img/groups.png',
+          description: 'My group'
+        },
+        {
           name: 'Sample Group',
           members: 'John Stacy Phil George Alfred Joseph'.split(' '),
           avatar: './img/groups.png',
