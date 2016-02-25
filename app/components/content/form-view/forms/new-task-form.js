@@ -12,6 +12,7 @@ import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
 import Stickies from '../form-components/stickies';
 
+
 export default class NewTaskForm extends React.Component {
   constructor() {
     super();
@@ -59,7 +60,6 @@ export default class NewTaskForm extends React.Component {
 
   deleteTask(){
     var task = this.n().find('.form-title').val();
-    console.log("title is " +task);
     this.props.deleteObject(task, this.type);
     this.props.setForm(null);
   }

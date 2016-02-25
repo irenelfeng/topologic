@@ -185,12 +185,10 @@ class Main extends React.Component {
       var project = this.state.items.projects.filter(p => {
         return p.tasks.filter(t => t.title == objectID).length > 0;
       })[0];
-      console.log(project);
 
       if (project == null) {
         var project = this.state.items.projects.filter(p => p.name == null)[0];
       }
-
       var task = project.tasks.filter(t => t.title == objectID)[0];
       if(task!= null){
         var idx = project.tasks.indexOf(task);
@@ -198,33 +196,27 @@ class Main extends React.Component {
       }
     }
 
-    // if (type == 'project') {
-    //   var project = this.state.items.projects.filter(p => p.name == object.name)[0];
+    if (type == 'project') {
+      var project = this.state.items.projects.filter(p => p.name == objectID)[0];
 
-    //   if (project != null) {
-    //     for (var key in project) {
-    //       project[key] = object[key];
-    //     }
-    //   } else {
-    //     this.state.items.projects.push(object);
-    //   }
-    // }
+      if (project != null) {
+        var idx = this.state.items.projects.indexOf(project);
+        this.state.items.projects.splice(idx, 1);
+      }
+    }
 
-    // if (type == 'group') {
-    //   var group = this.state.items.groups.filter(g => g.name == object.name)[0];
+    if (type == 'group') {
+      debugger;
 
-    //   if (group != null) {
-    //     for (var key in group) {
-    //       group[key] = object[key];
-    //     }
-    //   } else {
-    //     this.state.items.groups.push(object);
-    //   }
-    // }
+      var group = this.state.items.groups.filter(g => g.name == objectID)[0];
+
+      if (group != null) {
+        var idx = this.state.items.groups.indexOf(group);
+        this.state.items.groups.splice(idx, 1);
+      }
+    }
 
     this.forceUpdate();
-
-      
 
   }
 

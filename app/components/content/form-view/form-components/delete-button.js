@@ -8,7 +8,7 @@ export default class DeleteButton extends React.Component {
   render() {
     return (
       <a onClick={this.props.onClick} className="form-button" id="delete-button">
-        Delete Task
+        Delete
       </a>
     );
   }

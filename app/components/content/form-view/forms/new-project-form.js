@@ -7,6 +7,8 @@ import GroupSelect from '../form-components/group-select';
 import NotifySelect from '../form-components/notify-select';
 import SaveButton from '../form-components/save-button';
 import CancelButton from '../form-components/cancel-button';
+import DeleteButton from '../form-components/delete-button';
+
 
 export default class NewProjectForm extends React.Component {
   constructor() {
@@ -46,6 +48,12 @@ export default class NewProjectForm extends React.Component {
     this.props.setForm(null);
   }
 
+  delete(){
+    var project = this.n().find('.form-title').val();
+    this.props.deleteObject(project, this.type);
+    this.props.setForm(null);
+  }
+
   render() {
     var me = this.props.form.projects;
 
@@ -75,6 +83,7 @@ export default class NewProjectForm extends React.Component {
           <GroupSelect group={me.group} groups={this.props.items.groups} />
           <NotifySelect object={this.props.form} />
           <div className="form-group">
+            <DeleteButton onClick={this.delete.bind(this)}/>
             <CancelButton setForm = {this.props.setForm} object={this.props.form} />
             <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
           </div>
