@@ -52,6 +52,18 @@ class Main extends React.Component {
           avatar: './img/groups.png',
           description: 'Different Description'
         }],
+        notifications: [
+          {
+            type: 'groups',
+            description: 'Sarah has been added to Sample Group',
+            link: 'Sample Group'
+          }, 
+          {
+            type: 'projects',
+            description: 'Done Important Task has been completed!',
+            link: 'Done Important Task'
+          }
+        ],
         tutorials: [
           {name: 'Stickies'},
           {name: 'Getting started with topologic'},
