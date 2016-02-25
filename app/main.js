@@ -28,7 +28,9 @@ class Main extends React.Component {
         })],
       name: 'Sample Project',
       links: [],
-      notify: {}
+      notify: {},
+      avatar: '',
+      description: ''
     };
 
     var nullProject = {

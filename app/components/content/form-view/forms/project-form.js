@@ -78,16 +78,17 @@ export default class ProjectForm extends React.Component {
       this.state.type = 'edit';
 
       return (
-        <div className="form-container" id={this.id()} >
-          <TaskOrProject type={this.type} changeForm = {this.props.changeForm}/>
-          <Title title={me.title} />
-          <Description description={me.description} />
-          <GroupSelect group={me.group} groups={this.props.items.groups} />
-          <NotifySelect deadline={false} notify={this.props.form.projects.notify} ref={(ref) => this.notifySelect = ref} />
-          <div className="form-group">
-            <DeleteButton onClick={this.delete.bind(this)}/>
-            <CancelButton setForm = {this.props.setForm} object={this.props.form} />
-            <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
+        <div className="form-box">
+          <div className="form-container" id={this.id()} >
+            <Title title={me.name} />
+            <Description description={me.description} />
+            <GroupSelect group={me.group} groups={this.props.items.groups} />
+            <NotifySelect deadline={false} notify={this.props.form.projects.notify} ref={(ref) => this.notifySelect = ref} />
+            <div className="form-group">
+              <DeleteButton onClick={this.delete.bind(this)}/>
+              <CancelButton setForm = {this.props.setForm} object={this.props.form} />
+              <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} object={this.props.form} />
+            </div>
           </div>
         </div>
       );

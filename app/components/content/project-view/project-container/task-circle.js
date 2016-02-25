@@ -45,8 +45,14 @@ export default class TaskCircle extends React.Component {
 
   }
 
+  deleteTask(){
+    this.props.deleteObject(this.props.task.title, 'task');
+  }
+
+
   render() {
     var important = this.props.task.important ? (<img src="./img/important.png" />) : '';
+    var done = this.props.task.done ? (<img src="./img/done.png" />) : '';
 
     var tooltip = '';
     if (this.state.tooltip) {
@@ -55,7 +61,7 @@ export default class TaskCircle extends React.Component {
 
           <div className="column">
             <div className="item done">
-              <img src="./img/"/>
+              <img src="./img/done.png"/>
             </div>
 
             <div className="item important">
@@ -68,7 +74,7 @@ export default class TaskCircle extends React.Component {
               <img src="./img/"/>
             </div>
 
-            <div className="item delete">
+            <div className="item delete" onClick={this.deleteTask.bind(this)}>
               <img src="./img/trash.png"/>
             </div>
           </div>
@@ -92,6 +98,11 @@ export default class TaskCircle extends React.Component {
             <img src="./img/fatplus.png" onClick={this.addSticky.bind(this)} />
           </div>
         </div>
+
+        <div className="icons-container">
+          {done}
+        </div>
+
 
         {tooltip}
 

@@ -10,7 +10,7 @@ var numTicks = 10000;
 var xRadius = common.xRadius;
 var yRadius = common.yRadius;
 
-export default class ProjectContainer extends React.Component { 
+export default class Project extends React.Component { 
   constructor() {
     super();
     this.force = d3.layout.force();
@@ -98,7 +98,7 @@ export default class ProjectContainer extends React.Component {
       this.laidOut = true;
     }
 
-    var taskCircles = this.tasks.map(t => (<TaskCircle task={t} key={'task-circle-' + t.title} setDragging={this.setDragging.bind(this)} dragEnded={this.dragEnded.bind(this)} />));
+    var taskCircles = this.tasks.map(t => (<TaskCircle task={t} key={'task-circle-' + t.title} setDragging={this.setDragging.bind(this)} dragEnded={this.dragEnded.bind(this)} deleteObject={this.props.deleteObject} />));
 
     var arrows = this.links.map(l => {
       var idString = 'link-' + l.source.title + '-' + l.target.title;

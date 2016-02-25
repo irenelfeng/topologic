@@ -6,8 +6,8 @@ export default class TutorialFilter extends React.Component {
   }
 
   onChange(e) {
-    var text = e.target.value;
-    this.props.setFilter((tutorial) => tutorial.name.indexOf(text) > -1);
+    var text = e.target.value.toLowerCase();
+    this.props.setFilter((tutorial) => tutorial.name.toLowerCase().indexOf(text) > -1);
   }
 
   render() {

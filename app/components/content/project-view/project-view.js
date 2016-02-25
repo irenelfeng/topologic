@@ -19,8 +19,14 @@ export default class ProjectView extends React.Component {
   }
 
   render() {
-    if (this.props.form[this.props.active] != null)
-      return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type={this.state.type} />);
+    if (this.props.form.projects != null)
+      //determine whether the form is task or project. very hacky and icky i know. 
+      if(Object.keys(this.props.form.projects).length == 0) // a new task/project {}
+        return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type={this.state.type} />);
+      else if(this.props.form.projects.title)
+        return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type='task' />);
+      else
+        return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type='project'/>);
 
     var projects = [];
     var nullProject = null;
@@ -31,7 +37,7 @@ export default class ProjectView extends React.Component {
         nullProject = p;
     });
 
-    var projects = projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} />));
+    var projects = projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} deleteObject={this.props.deleteObject} setForm={this.props.setForm} />));
     var floatingTasks = nullProject.tasks.map((t, i) => (<FloatingTask key={i} task={t} />));
 
     return (

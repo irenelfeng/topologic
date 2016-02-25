@@ -3,6 +3,11 @@ import React from 'react';
 export default class ProjectHeader extends React.Component { 
   constructor() {
     super();
+    this.type = 'project';
+  }
+
+  editForm(){
+    this.props.setForm(this.props.project);
   }
 
   render() {
@@ -31,6 +36,9 @@ export default class ProjectHeader extends React.Component {
           <div className="progress-bar"> 
             {progressBar}
           </div>
+        </div>
+        <div className="edit-container">
+          <img onClick={this.editForm.bind(this)} src="./img/edit.png" />
         </div>
 
       </div>

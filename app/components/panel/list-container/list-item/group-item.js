@@ -8,14 +8,14 @@ export default class GroupItem extends React.Component {
 
   selected(e) {
     var item = this.props.group;
-    this.props.editItem(this.props.group.name,item, this.type);
+    this.props.editItem(this.props.group.name, item, this.type);
   }
 
   render() {
     return (
       <div className={'list-item group-item ' + this.props.selected} onClick={this.selected.bind(this)} >
         <div className="icons-container">
-          <img className="person-container" src={this.props.group.imgSrc}/>
+          <img className="person-container" src={this.props.group.avatar}/>
         </div>
         <div className="text-container">
           <span className="group-title"> {this.props.group.name} </span>

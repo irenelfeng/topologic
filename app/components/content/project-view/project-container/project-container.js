@@ -19,7 +19,7 @@ export default class ProjectContainer extends React.Component {
   render() {
     var projectBox = (
       <div id={'project-box-' + this.props.project.name.replace(/ /g, '_')} className="project-box">
-        <Project project={this.props.project} addLink={this.props.addLink} />
+        <Project project={this.props.project} addLink={this.props.addLink} deleteObject={this.props.deleteObject}/>
       </div>
     );
 
@@ -27,7 +27,7 @@ export default class ProjectContainer extends React.Component {
 
     return (
       <div className="project-container" >
-        <ProjectHeader project={this.props.project} onClick={this.toggleCollapse.bind(this)} />
+        <ProjectHeader project={this.props.project} onClick={this.toggleCollapse.bind(this)} setForm={this.props.setForm} />
 
         {projectBox}
       </div>

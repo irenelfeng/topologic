@@ -1,35 +1,46 @@
 import React from 'react';
 import $ from 'jquery';
 
+const default_img = './img/groups.png';
+
 export default class GroupAvatar extends React.Component {
   constructor() {
     super();
-    const default_img = './img/groups.png';
     this.state = {
       fileURL: default_img
     }
-    this.GroupTitle = '';
+    this.groupTitle = null;
   }
 
   /*
   * changes the group avatar
   */
   changeAvatar(e) {
+
     var form = $('#group-avatar');
     var img = form.find('#avatar-link').val();
-    this.setState=({fileURL: img});
+    this.state.fileURL = img; 
+    this.forceUpdate();
+  }
+
+  getAvatar() {
+    return this.state.fileURL;
   }
 
 
   render() {
-    // if(this.props.object){
-    //   this.state.fileURL = this.props.object.avatar;
-    // }
+
     var shouldClear = (this.groupTitle != null && this.groupTitle != this.props.groupTitle);
-    
-    this.groupTitle = this.props.groupTitle;
-    if (shouldClear)
+    this.groupTitle = this.props.groupTitle;   
+    if (shouldClear){
+      var form = $('#group-avatar');
+      form.find('#avatar-link').val('');
       this.state.fileURL = default_img;
+    }
+
+    if(this.state.fileURL == default_img){
+      this.state.fileURL = this.props.avatar;
+    }
 
     return (
       <div id="group-avatar" className="form-group">
