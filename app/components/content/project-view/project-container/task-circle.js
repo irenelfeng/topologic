@@ -174,6 +174,13 @@ export default class TaskCircle extends React.Component {
       );
     }
 
+    var stickyPlus = (
+      <div >
+        <img src="./img/fatplus.png" draggable="false"/>
+      </div>
+    );
+    if (stickies.length >= 5) stickyPlus = '';
+
     return (
       <div className="task-circle" 
         style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} 
@@ -191,9 +198,7 @@ export default class TaskCircle extends React.Component {
 
           <div className="sticky-plus" onClick={this.stickyView.bind(this)}>
             {stickies}
-            <div >
-              <img src="./img/fatplus.png" draggable="false"/>
-            </div>
+            {stickyPlus}
           </div>
         </div>
 

@@ -25,7 +25,7 @@ export default class ProjectHeader extends React.Component {
     });
 
     return (
-      <div className="project-header" onClick={this.props.onClick} >
+      <div className="project-header" onClick={this.props.onClick} onDoubleClick={this.editForm.bind(this)}>
 
         <div className="img-container">
           <img src={this.props.project.imgSrc} />
