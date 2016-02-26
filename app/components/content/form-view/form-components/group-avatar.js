@@ -29,7 +29,6 @@ export default class GroupAvatar extends React.Component {
 
 
   render() {
-
     var shouldClear = (this.groupTitle != null && this.groupTitle != this.props.groupTitle);
     this.groupTitle = this.props.groupTitle;   
     if (shouldClear){
