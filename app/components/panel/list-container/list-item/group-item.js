@@ -12,6 +12,19 @@ export default class GroupItem extends React.Component {
   }
 
   render() {
+    var maxChars = 40;
+    var theChosenOnes = [];
+    var truncated = 0;
+    this.props.group.members.forEach(m => {
+      if (theChosenOnes.join(', ').length <= maxChars)
+        theChosenOnes.push(m);
+      else
+        truncated++;
+    });
+
+    if (truncated > 0)
+      theChosenOnes.push('+' + truncated.toString() + ' more');
+
     return (
       <div className={'list-item group-item ' + this.props.selected} onClick={this.selected.bind(this)} >
         <div className="icons-container">
@@ -19,7 +32,7 @@ export default class GroupItem extends React.Component {
         </div>
         <div className="text-container">
           <span className="group-title"> {this.props.group.name} </span>
-          {this.props.group.members}
+          {theChosenOnes.join(', ')}
         </div>
       </div>
     );
