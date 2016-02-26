@@ -158,7 +158,9 @@ class Main extends React.Component {
       })[0];
 
       var futureProject = this.state.items.projects.filter(p => p.name == object.project)[0];
-      var task = currentProject.tasks.filter(t => t.title == object.title)[0];
+      var task;
+      if (currentProject)
+        task = currentProject.tasks.filter(t => t.title == object.title)[0];
 
       if (task != null && currentProject != futureProject) {
         var linksToSplice = currentProject.links.filter(l => l.source == task || l.target == task);
@@ -174,7 +176,7 @@ class Main extends React.Component {
           task[key] = object[key];
         }
       } else {
-        project.tasks.push(object);
+        futureProject.tasks.push(object);
       }
     }
 
