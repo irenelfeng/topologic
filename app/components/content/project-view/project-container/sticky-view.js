@@ -4,14 +4,11 @@ import $ from 'jquery';
 export default class StickyView extends React.Component {
   constructor() {
     super();
-    this.state = {
-      showSticky: true
-    }
   }
 
   saveSticky() {
     var sticky = $('.sticky-form').find('textarea').val();
-    if (!sticky == '')
+    if (sticky != '')
       this.props.addSticky(sticky);
   }
 
@@ -23,10 +20,6 @@ export default class StickyView extends React.Component {
     if (ev.key == 'Enter') {
       this.saveSticky()
     }
-  }
-
-  closeSticky() {
-    this.setState({showSticky: false})
   }
 
   render() {
@@ -65,15 +58,14 @@ export default class StickyView extends React.Component {
         </div>
       );
 
-      if (this.state.showSticky) {
-        var sticky =
-        (<div className="sticky-view" style={{top: pos.top, left: pos.left}}>
+      var sticky = (
+        <div className="sticky-view" style={{top: pos.top, left: pos.left}}>
           {main1}
           <div className="sticky-buttons">
-            {main2} <div className="sticky-cancel" onClick={this.closeSticky.bind(this)}> OK </div>
+            {main2} <div className="sticky-cancel" onClick={this.props.cancelSticky}> OK </div>
           </div>
-        </div>);
-      } else sticky = '';
+        </div>
+      );
 
       return (
         <div>{sticky}</div>
