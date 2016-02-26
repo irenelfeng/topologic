@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import StickyView from './sticky-view';
+import Modal from 'react-modal';
 import common from './common';
 var xRadius = common.xRadius;
 var yRadius = common.yRadius;
@@ -11,6 +12,19 @@ export default class TaskCircle extends React.Component {
     this.state = {
       tooltip: null,
       sticky: null
+    };
+
+    this.customStyles = {
+      content : {
+        position                   : 'absolute',
+        top                        : '50%',
+        left                       : '50%',
+        background                 : '#29C8E1',
+        borderRadius               : '10px',
+        outline                    : 'none',
+        height                     : '100px',
+        width                      : '150px'
+      }
     };
   }
 
@@ -67,9 +81,7 @@ export default class TaskCircle extends React.Component {
     this.props.drawEnded(this.props.task);
   }
 
-  deleteTask(ev) {
-    ev.stopPropagation();
-    ev.preventDefault();
+  deleteTask() {
     this.props.deleteObject(this.props.task.title, 'task');
     this.props.forceProjectUpdate();
     this.setState({tooltip: null});
@@ -106,7 +118,7 @@ export default class TaskCircle extends React.Component {
     var idx = this.props.task.stickies.indexOf(sticky);
     if (idx > -1) {
       this.props.task.stickies.splice(idx, 1);
-      this.setState({sticky: null});
+      this.setState({sticky: null, removing: false});
       this.props.forceProjectUpdate();
     }
   }
@@ -121,7 +133,27 @@ export default class TaskCircle extends React.Component {
     this.setState({sticky: null});
   }
 
+  openModal(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.setState({removing:true});
+  }
+
+  closeModal() {
+    this.setState({removing:false});
+  }
+
   render() {
+    var removing = (
+      <Modal isOpen={this.state.removing} onRequestClose={this.closeModal.bind(this)} style={this.customStyles}>
+      Are you sure you want to delete? 
+        <div className="form-group">
+          <a className="form-button" onClick={this.closeModal.bind(this)}> No </a>
+          <a className="form-button" onClick={this.deleteTask.bind(this)}> Yes </a>
+        </div> 
+      </Modal>
+    );
+
     var important = this.props.task.important ? (<img src="./img/important.png" draggable="false"/>) : '';
     var done = this.props.task.done ? (<img src="./img/done.png" draggable="false"/>) : '';
 
@@ -145,7 +177,7 @@ export default class TaskCircle extends React.Component {
               <img src="./img/projects.png" draggable="false"/>
             </div>
 
-            <div className="item delete" onClick={this.deleteTask.bind(this)}>
+            <div className="item delete" onClick={this.openModal.bind(this)}>
               <img src="./img/trash.png" draggable="false"/>
             </div>
           </div>
@@ -168,7 +200,7 @@ export default class TaskCircle extends React.Component {
       stickyTooltip = (
         <StickyView sticky={$(this.state.sticky).attr('data')} 
           parent={this.state.sticky}
-          deleteSticky={this.deleteSticky.bind(this)} 
+          deleteSticky={this.openModal.bind(this)} 
           addSticky={this.addSticky.bind(this)} 
           cancelSticky={this.cancelSticky.bind(this) }/>
       );
@@ -208,6 +240,7 @@ export default class TaskCircle extends React.Component {
 
         {tooltip}
         {stickyTooltip}
+        {removing}
       </div>
     );
   }
