@@ -4,7 +4,10 @@ import ReactSelectize from 'react-selectize';
 export default class GroupSelect extends React.Component {
   constructor() {
     super();
+  }
 
+  getGroupValue() {
+    return this.simpleSelect.state.value.value;
   }
 
   render() {
@@ -13,16 +16,14 @@ export default class GroupSelect extends React.Component {
     var options = this.props.groups.map(function(group){
       return {label: group.name, value: group.name, avatar: group.avatar}
     });
-
-    var avatar = options.filter(o => o.name == this.props.group)[0].avatar;
-    var name = options.filter(o => o.name == this.props.group)[0].label;
+    var group = this.props.groups.filter(g => g.name == this.props.group)[0];
 
     if (this.props.type == 'edit') {
       select =
       (<div className="group-option-item">
-        <img className="group-option-pic" src={avatar} />
+        <img className="group-option-pic" src={group.avatar} />
         <div className="group-option-text">
-          {name}
+          {group.name}
         </div>
       </div>);
     }
@@ -53,7 +54,8 @@ export default class GroupSelect extends React.Component {
               </div>
             </div>
           )
-        }
+        },
+        ref: ref => this.simpleSelect = ref
       });
     }
 

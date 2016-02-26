@@ -48,17 +48,17 @@ export default class TaskForm extends React.Component {
       deadline: this.n().find('.date').val(),
       location: this.n().find('.form-location').val(),
       description: this.n().find('.task-description').val(),
-      group: this.state.type == 'edit' ? this.n().find('#group-dropdown').html() :this.n().find('.simple-value').children(":first").html(),
+      group: this.groupSelect.getGroupValue(),
       project: this.projectSelect.getProjectValue(),
       notify: this.notifySelect.getNotifyValue(),
       stickies: this.stickySelect.getStickies(),
       done: false,
       important: false
     };
-
+    console.log(data);
     var errors = this.props.saveObject(data, this.type);
     // show errors
-
+    
     this.props.setForm(null);
   }
 
@@ -90,7 +90,7 @@ export default class TaskForm extends React.Component {
           <Deadline deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} taskTitle={me.title}/>
           <Location />
           <Description />
-          <GroupSelect groups={this.props.items.groups}/>
+          <GroupSelect groups={this.props.items.groups} ref={(ref) => this.groupSelect = ref}/>
           <NotifySelect deadline={deadlineActivated} notify={{}} ref={(ref) => this.notifySelect = ref} taskTitle={me.title} />
           <Stickies ref={(ref) => this.stickySelect = ref} stickies={[]} />
 
