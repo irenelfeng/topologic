@@ -35,9 +35,10 @@ export default class GroupSelect extends React.Component {
     else {
       var defaultGroup = options.filter(o => o.label == 'Personal')[0];
 
+      // hey ben, i added the ref for the simpleselect because we would get a null groupvalue :)
       var select = React.createElement(SimpleSelect, {
         options: options,
-
+        ref: (ref) => this.simpleSelect = ref,
         defaultValue: defaultGroup,
         placeholder: "Select a group",
         renderOption: function (group) {
