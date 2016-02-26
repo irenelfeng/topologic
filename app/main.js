@@ -106,7 +106,8 @@ class Main extends React.Component {
       location: '',
       deadline: '',
       notify: {},
-      stickies: []
+      stickies: [],
+      group: 'Personal'
     };
 
     for (var key in keyValues) {

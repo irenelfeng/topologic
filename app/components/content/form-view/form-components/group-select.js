@@ -7,19 +7,24 @@ export default class GroupSelect extends React.Component {
   }
 
   getGroupValue() {
-    return this.simpleSelect.state.value.value;
+    if (this.simpleSelect)
+      return this.simpleSelect.state.value.value;
+    else
+      return this.group.name;
   }
 
   render() {
     var SimpleSelect = ReactSelectize.SimpleSelect;
 
-    var options = this.props.groups.map(function(group){
+    var options = this.props.groups.map(group => {
       return {label: group.name, value: group.name, avatar: group.avatar}
     });
+
     var group = this.props.groups.filter(g => g.name == this.props.group)[0];
+    this.group = group;
 
     if (this.props.type == 'edit') {
-      select =
+      var select =
       (<div className="group-option-item">
         <img className="group-option-pic" src={group.avatar} />
         <div className="group-option-text">
@@ -55,8 +60,8 @@ export default class GroupSelect extends React.Component {
             </div>
           )
         },
-        ref: ref => this.simpleSelect = ref
       });
+      this.simpleSelect = select;
     }
 
     return (

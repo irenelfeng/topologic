@@ -113,7 +113,7 @@ export default class TaskForm extends React.Component {
             <Deadline deadline={me.deadline} deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} taskTitle={me.title}/>
             <Location location={me.location} />
             <Description description={me.description} />
-            <GroupSelect group={me.group} groups={this.props.items.groups} type={this.state.type}/>
+            <GroupSelect group={me.group} groups={this.props.items.groups} type={this.state.type} ref={(ref) => this.groupSelect = ref}/>
 
             <NotifySelect deadline={deadlineActivated} notify={me.notify}ref={(ref) => this.notifySelect = ref} taskTitle={me.title}/>
             <Stickies stickies={me.stickies} ref={(ref) => this.stickySelect = ref} taskTitle={me.title} />
