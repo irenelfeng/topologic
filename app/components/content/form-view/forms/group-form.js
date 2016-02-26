@@ -10,7 +10,7 @@ import Members from  '../form-components/members';
 import DeleteButton from '../form-components/delete-button';
 import $ from 'jquery';
 
-export default class NewGroupForm extends React.Component {
+export default class GroupForm extends React.Component {
   constructor() {
     super();
     this.type = 'group';
@@ -74,7 +74,7 @@ export default class NewGroupForm extends React.Component {
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>
 
-      </div> 
+      </div>
     );
   }
 }

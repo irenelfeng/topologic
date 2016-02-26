@@ -4,25 +4,25 @@
   background-color lighten(#29C8E1, 10%)
   flexbox(flex)
   cursor pointer
-  
+
   .img-container
     width 20%
-    
+
     img
       width 50%
-  
+
   .edit-container
     width 10%
     display flex
     justify-content center
     align-items center
-    
-    img 
+
+    img
       width 60%
 
   .non-picture-els
     width 80%
-    
+
     .project-title
       padding-top 5px
       padding-bottom 5px
@@ -34,14 +34,14 @@
 
       .progress-bar-item
         width 100%
-        
+
         &.done
           background-color black
 
 
 .arrow-container
   position absolute
-  
+
   .arrow
     stroke black
     stroke-width 6
@@ -62,7 +62,7 @@
   .column
     flexbox(flex)
     flex-direction(column)
-    
+
     .item
       background-color white
       border 1px solid black
@@ -71,31 +71,38 @@
       flexbox(flex)
       justify-content(center)
       align-items(center)
-      
+
       img
         height 80%
-      
+
       &.done
         border-top-left-radius 8px
 
       &.drag
         border-top-right-radius 8px
-        
+
       &.important
         border-bottom-left-radius 8px
-        
+
       &.delete
         border-bottom-right-radius 8px
 
 .sticky-view
   position fixed
-  height 60px
-  width 100px
-  background-color 'blue'
-  
+  height 70px
+  width 150px
+  padding 5px
+  background-color #29C8E1
+  border 1px solid black
+
   .sticky-buttons
     flexbox(flex)
     justify-content(space-around)
-    
+
     .sticky-cancel, .sticky-done
-      background-color white
+      width 70px
+      height 30px
+      background-color lighten(#29C8E1, 80%)
+      border 1px solid #29C8E1
+      text-align center
+      cursor pointer

@@ -14,7 +14,7 @@ export default class NotifyItem extends React.Component {
     return (
       <div className={'list-item notify-item '+this.props.selected} onClick={this.selected.bind(this)}>
         <div className="icons-container">
-          <img className="notif-container" src="./img/notifications.png" />
+          <img className="notif-container" src="./img/alarm.png" />
         </div>
         <div className="text-container">
           <span className="notif-link"> {this.props.notification.link} </span>
