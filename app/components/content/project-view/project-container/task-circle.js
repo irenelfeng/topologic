@@ -213,6 +213,13 @@ export default class TaskCircle extends React.Component {
     );
     if (stickies.length >= 5) stickyPlus = '';
 
+    var groupType;
+    if(this.props.task.group == "Personal"){
+      groupType = (<img className="person-container" src="./img/person.png" draggable="false"/>);
+    }else{
+      groupType = (<img className="person-container" src="./img/groups.png" draggable="false"/>);
+    }
+
     return (
       <div className="task-circle" 
         style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} 
@@ -221,7 +228,7 @@ export default class TaskCircle extends React.Component {
         onDoubleClick={this.onDoubleClick.bind(this)} >
 
         <div className="icons-container">
-          <img className="person-container" src="./img/person.png" draggable="false"/>
+          {groupType}
           {important}
         </div>
 

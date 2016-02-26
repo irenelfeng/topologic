@@ -16,10 +16,12 @@ export default class TaskItem extends React.Component {
       projectSection = (<span className="project-title"> {this.props.task.p.name} </span>);
     }
 
+    var group = this.props.groups.filter(g => g.name == this.props.task.group)[0];
+
     return (
       <div className={'list-item task-item ' +this.props.selected} onClick={this.selected.bind(this)}>
         <div className="icons-container">
-          <img className="person-container" src="./img/person.png"/>
+          <img className="person-container" src={group.avatar}/>
         </div>
         <div className="text-container">
           {projectSection}

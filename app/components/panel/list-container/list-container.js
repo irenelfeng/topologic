@@ -50,7 +50,7 @@ export default class ListContainer extends React.Component {
     var s = (item) => this.state.selected == item ? 'selected' : '';
 
     var itemComponents = {
-        projects: (item) => (<TaskItem selected={s(item.title)} editItem={this.editItem.bind(this)} key={item.title} task={item}/>),
+        projects: (item) => (<TaskItem selected={s(item.title)} editItem={this.editItem.bind(this)} key={item.title} task={item} groups={this.props.groups}/>),
         groups: (item) => (<GroupItem selected={s(item.name)} editItem={this.editItem.bind(this)} key={item.name} group={item} />),
         notifications: (item) => (<NotifyItem selected={s(item.id)} key={item.id} notification={item} />),
         tutorials: (item) => (<TutorialItem selected={s(item.id)} key={item.id} tutorial={item} />)
