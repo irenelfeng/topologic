@@ -35,7 +35,7 @@ class Main extends React.Component {
 
     var nullProject = {
       tasks : [],
-      name: null,
+      name: 'Miscellaneous',
       links: [],
       notify: {}
     };
@@ -153,15 +153,21 @@ class Main extends React.Component {
     if (errors.length > 0) return errors;
 
     if (type == 'task') {
-      var project = this.state.items.projects.filter(p => {
+      var currentProject = this.state.items.projects.filter(p => {
         return p.tasks.filter(t => t.title == object.title).length > 0;
       })[0];
 
-      if (project == null) {
-        var project = this.state.items.projects.filter(p => p.name == null)[0];
-      }
+      var futureProject = this.state.items.projects.filter(p => p.name == object.project)[0];
+      var task = currentProject.tasks.filter(t => t.title == object.title)[0];
 
-      var task = project.tasks.filter(t => t.title == object.title)[0];
+      if (task != null && currentProject != futureProject) {
+        var linksToSplice = currentProject.links.filter(l => l.source == task || l.target == task);
+        linksToSplice.forEach(l => {
+          currentProject.links.splice(project.links.indexOf(l), 1);
+        });
+        currentProject.tasks.splice(currentProject.tasks.indexOf(task), 1);
+        futureProject.tasks.push(task);
+      }
 
       if (task != null) {
         for (var key in task) {

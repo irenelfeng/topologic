@@ -50,7 +50,7 @@ export default class DragLine extends React.Component {
 
     return (
       <svg className="arrow-container" id={'link-' + Math.round(s.x) + '-' + Math.round(t.x)} style={{left: left, top: top, width: width, height: height}}> 
-        <line className="arrow" x1={a.x1 + 30} y1={a.y1 + 30} x2={a.x2 - 30} y2={a.y2 - 30} markerEnd="url(#arrow)"/>
+        <line className="arrow" x1={a.x1} y1={a.y1} x2={a.x2} y2={a.y2 } markerEnd="url(#arrow)"/>
 
         <defs> 
           <marker id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto">

@@ -49,6 +49,7 @@ export default class TaskForm extends React.Component {
       location: this.n().find('.form-location').val(),
       description: this.n().find('.task-description').val(),
       group: this.state.type == 'edit' ? this.n().find('#group-dropdown').html() :this.n().find('.simple-value').children(":first").html(),
+      project: this.projectSelect.getProjectValue(),
       notify: this.notifySelect.getNotifyValue(),
       stickies: this.stickySelect.getStickies(),
       done: false,
@@ -75,6 +76,9 @@ export default class TaskForm extends React.Component {
     this.taskTitle = me.title;
 
     var deadlineActivated = (this.state.deadlineActivated == null) ? (me.deadline != '' && me.deadline != null) : this.state.deadlineActivated;
+    var currentProject = this.props.items.projects.filter(p => {
+      return (p.tasks.filter(t => t.title == this.props.form.projects.title).length > 0);
+    })[0];
 
     if (me.title == null) {
       return (
@@ -82,7 +86,7 @@ export default class TaskForm extends React.Component {
 
           <TaskOrProject type={this.type} changeForm={this.props.changeForm} />
           <Title />
-          <ProjectSelect projects={this.props.items.projects}/>
+          <ProjectSelect projects={this.props.items.projects} current={currentProject} ref={(ref) => this.projectSelect = ref}/>
           <Deadline deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} taskTitle={me.title}/>
           <Location />
           <Description />
@@ -105,6 +109,7 @@ export default class TaskForm extends React.Component {
           <div className="form-container" id={this.id()}>
 
             <Title title={me.title} />
+            <ProjectSelect projects={this.props.items.projects} current={currentProject} ref={(ref) => this.projectSelect = ref}/>
             <Deadline deadline={me.deadline} deadlineActivated={deadlineActivated} setDeadline={this.setDeadline.bind(this)} taskTitle={me.title}/>
             <Location location={me.location} />
             <Description description={me.description} />
