@@ -150,7 +150,7 @@ class Main extends React.Component {
    */
   saveObject(object, type) {
     var errors = this.validate(object, type);
-    if (errors) return errors;
+    if (errors.length > 0) return errors;
 
     if (type == 'task') {
       var project = this.state.items.projects.filter(p => {
@@ -197,10 +197,34 @@ class Main extends React.Component {
     }
 
     this.forceUpdate();
+    return null;
   }
 
   validate(object, type) {
-    return null;
+    var errors = [];
+    if (type == 'project') {
+      if (object.name == '') {
+        errors.push('Title cannot be blank.');
+      }
+    }
+
+    if (type == 'task') {
+      if (object.title == '') {
+        errors.push('Title cannot be blank.');
+      }
+
+      if (object.project == null) {
+        errors.push('Task must have a project');
+      }
+    }
+
+    if (type == 'group') {
+      if (object.title = '') {
+        errors.push('Title cannot be blank.');
+      }
+    }
+
+    return errors;
   }
 
   deleteObject(objectID, type) {

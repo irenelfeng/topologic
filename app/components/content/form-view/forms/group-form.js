@@ -18,7 +18,6 @@ export default class GroupForm extends React.Component {
   }
 
   save() {
-    debugger;
     var form = $('#form-container');
     var data = {
       name: form.find('.form-title').val(),
@@ -28,9 +27,9 @@ export default class GroupForm extends React.Component {
 
     };
 
-    this.props.saveObject(data, this.type);
+    var errors = this.props.saveObject(data, this.type);
+    // show errors
     this.props.setForm(null);
-
   }
 
   delete(){
