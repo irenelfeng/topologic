@@ -200,7 +200,7 @@ export default class TaskCircle extends React.Component {
       stickyTooltip = (
         <StickyView sticky={$(this.state.sticky).attr('data')} 
           parent={this.state.sticky}
-          deleteSticky={this.openModal.bind(this)} 
+          deleteSticky={this.deleteSticky.bind(this)} 
           addSticky={this.addSticky.bind(this)} 
           cancelSticky={this.cancelSticky.bind(this) }/>
       );
