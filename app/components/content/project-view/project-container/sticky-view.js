@@ -1,14 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
 
-export default class StickyView extends React.Component { 
+export default class StickyView extends React.Component {
   constructor() {
     super();
   }
 
   saveSticky() {
     var sticky = $('.sticky-form').find('textarea').val();
-    this.props.addSticky(sticky);
+    if (sticky != '')
+      this.props.addSticky(sticky);
   }
 
   deleteSticky() {
@@ -38,6 +39,12 @@ export default class StickyView extends React.Component {
           <div className="sticky-done" onClick={this.saveSticky.bind(this)}> Done </div>
         </div>
       );
+
+      return (
+        <div className="sticky-view" style={{top: pos.top, left: pos.left}}>
+          {main1} {main2}
+        </div>);
+
     } else {
       main1 = (
         <div className="sticky-text">
@@ -50,12 +57,19 @@ export default class StickyView extends React.Component {
           <img src="./img/trash.png" />
         </div>
       );
-    }
 
-    return (
-      <div className="sticky-view" style={{top: pos.top, left: pos.left}}>
-        {main1} {main2}
-      </div>
-    );
+      var sticky = (
+        <div className="sticky-view" style={{top: pos.top, left: pos.left}}>
+          {main1}
+          <div className="sticky-buttons">
+            {main2} <div className="sticky-cancel" onClick={this.props.cancelSticky}> OK </div>
+          </div>
+        </div>
+      );
+
+      return (
+        <div>{sticky}</div>
+      );
+    }
   }
 }

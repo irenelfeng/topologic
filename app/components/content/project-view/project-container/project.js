@@ -48,8 +48,8 @@ export default class Project extends React.Component {
 
     if (this.state.dragging) {
       var parent = document.querySelector(('#project-' + this.props.project.name).replace(' ','_')).getBoundingClientRect();
-      this.state.dragging.x = ev.clientX - parent.left;
-      this.state.dragging.y = ev.clientY - parent.top;
+      this.state.dragging.x = ev.clientX - parent.left - xRadius / 2;
+      this.state.dragging.y = ev.clientY - parent.top - yRadius / 2;
       this.forceUpdate();
     }
   }

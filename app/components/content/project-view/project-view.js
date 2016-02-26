@@ -1,7 +1,6 @@
 import React from 'react';
 import FormView from '../form-view/form-view';
 import ProjectContainer from './project-container/project-container';
-import FloatingTask from './floating-task';
 
 export default class ProjectView extends React.Component { 
   constructor() {
@@ -38,12 +37,10 @@ export default class ProjectView extends React.Component {
     });
 
     var projects = projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} deleteObject={this.props.deleteObject} setForm={this.props.setForm} forcePanelUpdate={this.props.forcePanelUpdate} />));
-    var floatingTasks = nullProject.tasks.map((t, i) => (<FloatingTask key={i} task={t} />));
 
     return (
       <div className="project-view-container"> 
         {projects}
-        {floatingTasks}
       </div>
     );
   }

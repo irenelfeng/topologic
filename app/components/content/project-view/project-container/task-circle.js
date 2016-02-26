@@ -189,9 +189,9 @@ export default class TaskCircle extends React.Component {
         <div className="task-description" >
           {this.props.task.title}
 
-          <div className="sticky-plus">
+          <div className="sticky-plus" onClick={this.stickyView.bind(this)}>
             {stickies}
-            <div onClick={this.stickyView.bind(this)} >
+            <div >
               <img src="./img/fatplus.png" draggable="false"/>
             </div>
           </div>

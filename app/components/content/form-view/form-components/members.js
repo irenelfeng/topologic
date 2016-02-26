@@ -19,6 +19,19 @@ export default class Members extends React.Component {
       }
     };
 
+    this.smallerCustomStyles = {
+      content : {
+        position                   : 'absolute',
+        top                        : '40%',
+        left                       : '50%',
+        right                      : '30%',
+        bottom                     : '40%',
+        background                 : '#29C8E1',
+        borderRadius               : '10px',
+        outline                    : 'none'
+      }
+    };
+
     this.options = ['Turkey', 'Ebert', 'Sam', 'Samantha', 'Katrina', 'Rosemary'].map(val => {
       return {label: val, value: val};
     });
@@ -51,7 +64,7 @@ export default class Members extends React.Component {
   removeMember(i, e) {
     debugger;
     this.setState({removing:true, memberidx: i});
-    
+
   }
 
   openModal(){
@@ -91,12 +104,13 @@ export default class Members extends React.Component {
         </div>
        </Modal>);
 
-    var removing = (<Modal isOpen={this.state.removing} onRequestClose={this.closeModal.bind(this)} style={this.customStyles}>
+
+    var removing = (<Modal isOpen={this.state.removing} onRequestClose={this.closeModal} style={this.smallerCustomStyles}>
       Are you sure you want to remove {this.state.members[this.state.memberidx]}?
         <div className="form-group">
           <a className="form-button" onClick={this.closeModal.bind(this)}> No </a>
           <a className="form-button" onClick={this.actuallyRemoveMember.bind(this)}> Yes </a>
-        </div> 
+        </div>
       </Modal>);
 
     return (

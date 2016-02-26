@@ -44,7 +44,9 @@ export default class ProjectForm extends React.Component {
       links: this.props.form.projects.links || []
     };
 
-    this.props.saveObject(data, this.type);
+    var errors = this.props.saveObject(data, this.type);
+    // show errors
+    
     this.props.setForm(null);
   }
 

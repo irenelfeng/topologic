@@ -55,7 +55,9 @@ export default class TaskForm extends React.Component {
       important: false
     };
 
-    this.props.saveObject(data, this.type);
+    var errors = this.props.saveObject(data, this.type);
+    // show errors
+
     this.props.setForm(null);
   }
 

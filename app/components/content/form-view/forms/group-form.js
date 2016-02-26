@@ -27,9 +27,9 @@ export default class GroupForm extends React.Component {
 
     };
 
-    this.props.saveObject(data, this.type);
+    var errors = this.props.saveObject(data, this.type);
+    // show errors
     this.props.setForm(null);
-
   }
 
   delete(){
@@ -73,7 +73,7 @@ export default class GroupForm extends React.Component {
           <SaveButton onClick={this.save.bind(this)} setForm = {this.props.setForm} />
         </div>
 
-      </div> 
+      </div>
     );
   }
 }
