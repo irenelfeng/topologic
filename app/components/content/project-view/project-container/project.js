@@ -19,6 +19,7 @@ export default class Project extends React.Component {
       drawing: null
     };
     this.laidOut = false;
+    this.taskCircles = {};
   }
 
   bringToFront(task) {
@@ -66,6 +67,11 @@ export default class Project extends React.Component {
 
   drawEnded(endTask) {
     if (this.state.drawing) {
+      for (var tc in this.taskCircles) {
+        this.taskCircles[tc].state.tooltip = null;
+        this.taskCircles[tc].state.sticky = null;
+      }
+
       this.setState({drawing: null});
       this.props.addLink(this.props.project.name, this.state.drawing.from, endTask);
     }
@@ -129,7 +135,8 @@ export default class Project extends React.Component {
         beingDragged={this.state.dragging == t} 
         forceProjectUpdate={this.props.forceProjectUpdate}
         setForm={this.props.setForm} 
-        bringToFront={this.bringToFront.bind(this)} />
+        bringToFront={this.bringToFront.bind(this)} 
+        ref={(ref) => this.taskCircles[t.title] = ref} />
     ));
 
     var arrows = this.links.map(l => {

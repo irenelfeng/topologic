@@ -9,7 +9,6 @@ export default class DragLine extends React.Component {
     super();
   }
 
-
   render() {
     var s = this.props.source, t = this.props.target;
     
@@ -26,26 +25,33 @@ export default class DragLine extends React.Component {
     if (top == s.y && left == s.x) {
       a.x1 = 0; a.y1 = 0;
       a.x2 = width; a.y2 = height;
+
+      a.x1 += xRadius; a.x2 -= xRadius; 
+      a.y1 += yRadius; a.y2 -= yRadius;
     }
     // if bottom left to top right
     else if (bottom == s.y && left == s.x) {
       a.x1 = 0; a.y1 = height;
       a.x2 = width; a.y2 = 0;
+
+      a.x1 += xRadius; a.x2 -= xRadius;
+      a.y1 -= yRadius; a.y2 += yRadius;
     }
     // if top right to bottom left
     else if (top == s.y && right == s.x) {
       a.x1 = width; a.y1 = 0;
       a.x2 = 0; a.y2 = height;
+
+      a.x1 -= xRadius; a.x2 += xRadius;
+      a.y1 += yRadius; a.y2 -= yRadius;
     }
     // if bottom right to top left
     else if (bottom == s.y && right == s.x) {
       a.x1 = width; a.y1 = height;
       a.x2 = 0; a.y2 = 0;
-    }
 
-    a.x1 -= xRadius / 2; a.y1 -= yRadius / 2;
-    if (this.props.target.name != null) {
-      a.x2 -= xRadius / 2; x.y2 -= yRadius / 2;
+      a.x1 -= xRadius; a.x2 += xRadius;
+      a.y1 -= yRadius; a.y2 += yRadius;
     }
 
     return (
@@ -54,7 +60,7 @@ export default class DragLine extends React.Component {
 
         <defs> 
           <marker id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto">
-            <path d="M0,-5L10,0L0,5" className="arrowHead" /> 
+            <path d="M 0 0 L 10 5 L 0 10 z" className="arrowHead" /> 
           </marker>
         </defs>
 
