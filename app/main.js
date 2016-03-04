@@ -8,6 +8,9 @@ class Main extends React.Component {
   constructor() {
     super();
 
+    /**
+     * Hard coded inital data – should be moved to .json
+     */
     var sampleProject = {
       tasks: [this.defaultTask({
           title: 'Done Important Task',
@@ -97,6 +100,11 @@ class Main extends React.Component {
     };
   }
 
+  /**
+   * Wrapper for default task
+   * Avoids having to retype all of these default values
+   * @param  {Object} keyValues [defualt values to overwrite]
+   */
   defaultTask(keyValues) {
     var defaults = {
       title: null,
@@ -118,7 +126,10 @@ class Main extends React.Component {
   }
 
   /*
-  * Sidebar icon clicked, setform to null, change the icon.
+  * Sidebar icon click behavior
+  * Actions:
+  *   – set form to null
+  *   – change the icon to what was clicked
   */
   setActive(icon) {
     this.setState({active: icon});
@@ -148,6 +159,12 @@ class Main extends React.Component {
 
   /*
    * Saves objects depending on its type
+   * If there is already an object with this type and title:
+   *   Write over its properties
+   * Otherwise:
+   *   Create a new one
+   *
+   * Note: no DB interactions here, just modifying the state
    */
   saveObject(object, type) {
     var errors = this.validate(object, type);
@@ -209,6 +226,12 @@ class Main extends React.Component {
     return null;
   }
 
+  /**
+   * Validates form values
+   * @param  {Object} object [object containing form results to validate]
+   * @param  {String} type   [type of object]
+   * @return {Array}        [array of error strings that are what went wrong]
+   */
   validate(object, type) {
     var errors = [];
     if (type == 'project') {
@@ -236,6 +259,11 @@ class Main extends React.Component {
     return errors;
   }
 
+  /**
+   * Delete's object of type `type` with id `objectId`
+   * @param  {String} objectID 
+   * @param  {String} type 
+   */
   deleteObject(objectID, type) {
     if (type == 'task') {
       var project = this.state.items.projects.filter(p => {
@@ -280,7 +308,7 @@ class Main extends React.Component {
   }
 
   /**
-   *
+   * Add a link between task `source` and `target` inside project `projectName`
    */
   addLink(projectName, source, target) {
     var project = this.state.items.projects.filter(p => p.name == projectName)[0];
@@ -291,7 +319,7 @@ class Main extends React.Component {
   }
 
   /**
-   *
+   * Main's render function
    */
   render() {
     return (

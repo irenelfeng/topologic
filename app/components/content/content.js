@@ -7,6 +7,10 @@ export default class Content extends React.Component {
     super();
   }
 
+  /**
+   * Set the filter to use function `fn` in the panels
+   * @param {Function} fn
+   */
   setFilter(fn) {
     if (fn != this.state.filterFn) {
       this.setState({
@@ -15,6 +19,9 @@ export default class Content extends React.Component {
     }
   }
 
+  /**
+   * Either render group view or project view depending on props.active
+   */
   render() {
     var views = {
       projects: (

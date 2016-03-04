@@ -11,7 +11,7 @@ export default class ProjectView extends React.Component {
   } 
 
   /*
-   * Changes the form from task -> project. 
+   * Changes the form type from task -> project. 
    */ 
   changeForm(key) {
     this.setState({type: key});
@@ -19,25 +19,25 @@ export default class ProjectView extends React.Component {
 
   render() {
     if (this.props.form.projects != null)
-      //determine whether the form is task or project. very hacky and icky i know. 
-      if(Object.keys(this.props.form.projects).length == 0) // a new task/project {}
+      /**
+       * If there's nothing, must be a new form     
+       */
+      if (Object.keys(this.props.form.projects).length == 0) 
         return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type={this.state.type} />);
-      else if(this.props.form.projects.title)
+      /**
+       * If this.props.form.projects.title is set, it's a project form
+       * (tasks have the `name` property)
+       */
+      else if (this.props.form.projects.title)
         return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type='task' />);
+      /**
+       * Must be a task edit form!
+       */
       else
         return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type='project'/>);
 
-    var projects = [];
-    var nullProject = null;
-    this.props.projects.forEach(p => {
-      if (p.name != null)
-        projects.push(p)
-      else
-        nullProject = p;
-    });
-
-    var projects = projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} deleteObject={this.props.deleteObject} setForm={this.props.setForm} forcePanelUpdate={this.props.forcePanelUpdate} />));
-
+    
+    var projects = this.props.projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} deleteObject={this.props.deleteObject} setForm={this.props.setForm} forcePanelUpdate={this.props.forcePanelUpdate} />));
     return (
       <div className="project-view-container"> 
         {projects}
