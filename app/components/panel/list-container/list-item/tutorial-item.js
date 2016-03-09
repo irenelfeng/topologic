@@ -8,7 +8,7 @@ export default class TutorialItem extends React.Component {
 
   selected(e) {
     var item = this.props.tutorials;
-    this.props.editItem(this.props.tutorials.subtitle,item, this.type);
+    this.props.editItem(this.props.tutorials.subtitle, item, this.type);
   }
 
 render() {
