@@ -16,6 +16,7 @@ export default class TaskItem extends React.Component {
       projectSection = (<span className="project-title"> {this.props.task.p.name} </span>);
     }
 
+    // should change to project.avatar if have time.
     var group = this.props.groups.filter(g => g.name == this.props.task.group)[0];
 
     return (

@@ -67,7 +67,7 @@ class Main extends React.Component {
         }],
         notifications: [
         {
-          type: 'groups',
+          type: 'group',
           id: '0',
           description: 'Sarah has been added to Sample Group',
           link: 'Sample Group',
@@ -75,7 +75,7 @@ class Main extends React.Component {
           alarm: true
         },
         {
-          type: 'projects',
+          type: 'task',
           id: '1',
           description: 'Done Important Task has been completed!',
           link: 'Done Important Task',
@@ -148,10 +148,31 @@ class Main extends React.Component {
     var form = {
       projects: null,
       groups: null,
+      notifications: null,
       tutorials: null
     };
 
     form[this.state.active] = item; //changes active tab to the item given
+    debugger;
+    if(this.state.active == "notifications" && item != null){
+      /* changes active tab to the item given through clicking on notifications
+      * there is no notification view.
+      */
+      if(item.type == 'group'){
+        form['groups'] = this.state.items.groups.filter(g => g.name == item.link)[0];
+      }else if(item.type == 'project'){
+        form['projects'] = this.state.items.projects.filter(g => g.name == item.link)[0];
+      }else if(item.type == 'task'){
+        var task;
+        var currentProject = this.state.items.projects.filter(p => {
+          return p.tasks.filter(t => t.title == item.link).length > 0;
+        })[0];
+        if (currentProject)
+          task = currentProject.tasks.filter(t => t.title == item.link)[0];
+        form['projects'] = task;
+      }
+    }
+
     this.setState({form: form});
 
     if(item == null){

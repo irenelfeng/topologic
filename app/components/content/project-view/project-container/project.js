@@ -131,7 +131,8 @@ export default class Project extends React.Component {
     return this.tasks.filter(t => t.title == title)[0];
   }
 
-  render() {    
+  render() {
+    console.log(this.laidOut);   
     if (!this.laidOut) {
       this.configureData();
       this.configureForce();

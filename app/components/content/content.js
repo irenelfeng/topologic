@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectView from './project-view/project-view';
 import GroupView from './group-view/group-view';
+import FormView from './form-view/form-view';
 
 export default class Content extends React.Component { 
   constructor() {
@@ -23,6 +24,11 @@ export default class Content extends React.Component {
    * Either render group view or project view depending on props.active
    */
   render() {
+    /**
+      * Logic for rendering a group or project from notification based on its type. 
+    */
+    var notifType = this.props.form.notifications ? this.props.form.notifications.type : '';
+
     var views = {
       projects: (
         <ProjectView active={this.props.active}
@@ -37,13 +43,16 @@ export default class Content extends React.Component {
 
       groups: (
         <GroupView 
-          active={this.props.active}
           saveObject={this.props.saveObject}
           deleteObject={this.props.deleteObject}
           setForm={this.props.setForm}
           form={this.props.form}
           groups={this.props.items.groups}
-          forcePanelUpdate={this.props.forcePanelUpdate} />)
+          forcePanelUpdate={this.props.forcePanelUpdate} />),
+
+      notifications: (
+        <FormView form={this.props.form} items={this.props.items} saveObject={this.props.saveObject} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type={notifType}/>
+          ),
     };
 
     return (

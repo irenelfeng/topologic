@@ -15,7 +15,7 @@ export default class TaskCircle extends React.Component {
       hover: false
     };
 
-    this.customStyles = {
+    this.stickyStyle = {
       content : {
         position                   : 'absolute',
         top                        : '50%',
@@ -140,7 +140,7 @@ export default class TaskCircle extends React.Component {
     this.props.task.radius = 50;
 
     var removing = (
-      <Modal isOpen={this.state.removing} onRequestClose={this.closeModal.bind(this)} style={this.customStyles}>
+      <Modal isOpen={this.state.removing} onRequestClose={this.closeModal.bind(this)} style={this.stickyStyle}>
       Are you sure you want to delete? 
         <div className="form-group">
           <a className="form-button" onClick={this.closeModal.bind(this)}> No </a>
