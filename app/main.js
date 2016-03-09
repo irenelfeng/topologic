@@ -357,6 +357,7 @@ class Main extends React.Component {
           form={this.state.form}
           addLink={this.addLink.bind(this)}
           forcePanelUpdate={function(){this.forceUpdate()}.bind(this)} />
+        <div id="sticky-view"> </div>
       </div>
     );
   }
