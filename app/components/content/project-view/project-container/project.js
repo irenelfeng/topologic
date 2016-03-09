@@ -127,7 +127,6 @@ export default class Project extends React.Component {
   */
   constraints() {
     var ly = yRadius*2;
-    console.log(ly);
 
     var links = this.force.links();
     var width = this.width;

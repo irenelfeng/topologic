@@ -153,7 +153,6 @@ class Main extends React.Component {
     };
 
     form[this.state.active] = item; //changes active tab to the item given
-    debugger;
     if(this.state.active == "notifications" && item != null){
       /* changes active tab to the item given through clicking on notifications
       * there is no notification view.
