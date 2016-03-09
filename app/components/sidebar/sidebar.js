@@ -11,7 +11,7 @@ export default class Sidebar extends React.Component {
       <div id='sidebar'>
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='projects'/>
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='groups'/>
-        <Icon setActive ={this.props.setActive} active={this.props.active} icon='notifications'/>
+        <Icon setActive ={this.props.setActive} active={this.props.active} icon='notifications' notifications={this.props.notifications}/>
         <Icon setActive ={this.props.setActive} active={this.props.active} icon='tutorials'/>
       </div>
     );

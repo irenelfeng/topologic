@@ -11,7 +11,8 @@ export default class TaskCircle extends React.Component {
     super();
     this.state = {
       tooltip: null,
-      sticky: null
+      sticky: null,
+      hover: false
     };
 
     this.stickyStyle = {
@@ -40,14 +41,6 @@ export default class TaskCircle extends React.Component {
       ev.preventDefault();
       ev.stopPropagation();
       this.setState({tooltip: {x: ev.clientX, y: ev.clientY} });
-    }
-  }
-
-  onMouseUp(ev) {
-    if (this.props.beingDragged) {
-      this.endDrag(ev);
-    } else {
-      this.endDraw(ev);
     }
   }
 
@@ -144,6 +137,8 @@ export default class TaskCircle extends React.Component {
   }
 
   render() {
+    this.props.task.radius = 50;
+
     var removing = (
       <Modal isOpen={this.state.removing} onRequestClose={this.closeModal.bind(this)} style={this.stickyStyle}>
       Are you sure you want to delete? 
@@ -154,48 +149,50 @@ export default class TaskCircle extends React.Component {
       </Modal>
     );
 
-    var important = this.props.task.important ? (<img src="./img/important.png" draggable="false"/>) : '';
-    var done = this.props.task.done ? (<img src="./img/done.png" draggable="false"/>) : '';
+    var iconSize = 30;
 
-    var tooltip = '';
+    var tooltip = null;
     if (this.state.tooltip) {
       tooltip = (
-        <div className="tooltip" style={{top: this.state.tooltip.y, left: this.state.tooltip.x }}>
+        <g className="tooltip" transform="translate(20,20)">
+          <rect height={iconSize * 2} width={iconSize * 2} rx="20" ry="20" style={{fill:'white',stroke:'black', strokeWidth:2}}>
+          </rect>
 
-          <div className="column">
-            <div className="item done" onClick={this.markDone.bind(this)}>
-              <img src="./img/done.png" draggable="false"/>
-            </div>
+          <g className="item done" onClick={this.markDone.bind(this)}>
+            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
+            <image xlinkHref="img/done.png" height="30px" width="30px" />
+          </g>
 
-            <div className="item important" onClick={this.markImportant.bind(this)}>
-              <img src="./img/important.png"draggable="false"/>
-            </div>
-          </div>
+          <g className="item important" onClick={this.markImportant.bind(this)} transform="translate(0,20)">
+            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
+            <image xlinkHref="img/important.png" height="30px" width="30px" />
+          </g>
 
-          <div className="column">
-            <div className="item drag" onMouseDown={this.startDraw.bind(this)}>
-              <img src="./img/projects.png" draggable="false"/>
-            </div>
+          <g className="item drag" onMouseDown={this.startDraw.bind(this)} transform="translate(20,0)">
+            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
+            <image xlinkHref="img/projects.png" height="30px" width="30px" />
+          </g>
 
-            <div className="item delete" onClick={this.openModal.bind(this)}>
-              <img src="./img/trash.png" draggable="false"/>
-            </div>
-          </div>
-
-        </div>
+          <g className="item delete" onClick={this.openModal.bind(this)} transform="translate(20,20)">
+            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
+            <image xlinkHref="img/trash.png" height="30px" width="30px" />
+          </g>
+        </g>
       );
     }
 
-    var stickies = '';
+    var stickies = null;
     if (this.props.task.stickies.length > 0) {
       stickies = this.props.task.stickies.map((sticky, idx) => {
         return (
-          <div className="sticky-bullet" data={sticky} key={idx} onClick={this.stickyView.bind(this)} > • </div>
+          <g className="sticky-bullet" data={sticky} key={idx} >
+            <text> • </text>
+          </g>
         );
       });
     }
 
-    var stickyTooltip = '';
+    var stickyTooltip = null;
     if (this.state.sticky) {
       stickyTooltip = (
         <StickyView sticky={$(this.state.sticky).attr('data')} 
@@ -206,49 +203,71 @@ export default class TaskCircle extends React.Component {
       );
     }
 
+    /**
+     * Icons and what not
+     */
     var stickyPlus = (
-      <div >
-        <img src="./img/fatplus.png" draggable="false"/>
-      </div>
+      <g className="sticky-plus" onClick={this.stickyView.bind(this)} >
+        <image xlinkHref="img/fatplus.png" height="20px" width="20px"/>
+      </g>
     );
-    if (stickies.length >= 5) stickyPlus = '';
+    if (stickies && stickies.length >= 5) stickyPlus = null;
 
     var groupType;
     if(this.props.task.group == "Personal"){
-      groupType = (<img className="person-container" src="./img/person.png" draggable="false"/>);
+      groupType = (<image className="person-container" xlinkHref="img/person.png" height="30px" width="30px" />);
     }else{
-      groupType = (<img className="person-container" src="./img/groups.png" draggable="false"/>);
+      groupType = (<image className="person-container" xlinkHref="img/groups.png" height="30px" width="30px" />);
+    }
+
+    var important = this.props.task.important ? (<image xlinkHref="img/important.png" height="30px" width="30px"/>) : null;
+    var done = this.props.task.done ? (<image xlinkHref="img/done.png" height="30px" width="30px"/>) : null;
+
+    stickyTooltip = null;
+  
+    var fill = "white";
+    var stroke = "#1569C7";
+    var strokeWidth = 2;
+
+    if (this.props.hover) {
+      fill = '#CCC';
+      stroke = "#2554C7";
+      strokeWidth += 1;
     }
 
     return (
-      <div className="task-circle" 
-        style={{left: this.props.task.x - (xRadius), top: this.props.task.y - (yRadius)}} 
-        onMouseDown={this.onMouseDown.bind(this)} 
-        onMouseUp={this.onMouseUp.bind(this)} 
-        onDoubleClick={this.onDoubleClick.bind(this)} >
+      <g transform={`translate(${this.props.task.x},${this.props.task.y})`}>
+        <circle className="task-circle"
+          r={this.props.task.radius}
+          onMouseDown={this.onMouseDown.bind(this)} 
+          onDoubleClick={this.onDoubleClick.bind(this)} 
+          fill={fill}
+          stroke={stroke}
+          strokeWidth={strokeWidth}>
+        </circle>
 
-        <div className="icons-container">
-          {groupType}
-          {important}
-        </div>
+        <g className="icons-container" transform="translate(-40, -50)">
+          <g transform="translate(-20, 0)">{groupType}</g>
+          <g transform="translate(0, 0)">{important}</g>
+        </g>
 
-        <div className="task-description" >
-          {this.props.task.title}
+        <g className="task-description" >
+          <text textAnchor="middle">{this.props.task.title}</text>
+        </g>
 
-          <div className="sticky-plus" onClick={this.stickyView.bind(this)}>
-            {stickies}
-            {stickyPlus}
-          </div>
-        </div>
+        <g className="stickies" onClick={this.stickyView.bind(this)} transform="translate(0, 20)">
+          {stickies}
+          {stickyPlus}
+        </g>
 
-        <div className="icons-container">
+        <g className="done-container" transform="translate(30, -50)">
           {done}
-        </div>
+        </g>
 
         {tooltip}
-        {stickyTooltip}
         {removing}
-      </div>
+        {stickyTooltip}
+      </g>
     );
   }
 }

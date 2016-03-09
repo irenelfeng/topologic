@@ -16,7 +16,8 @@ export default class Project extends React.Component {
     this.force = d3.layout.force();
     this.state = {
       dragging: null,
-      drawing: null
+      drawing: null,
+      hoveringOver: null
     };
     this.laidOut = false;
     this.taskCircles = {};
@@ -37,31 +38,45 @@ export default class Project extends React.Component {
   }
 
   onMouseMove(ev) {
+    var parent = document.querySelector(('#project-' + this.props.project.name).replace(' ','_')).getBoundingClientRect();
+    var mousePos = {
+      x: ev.clientX - parent.left,
+      y: ev.clientY - parent.top
+    };
+
     if (this.state.drawing) {
-      var parent = document.querySelector(('#project-' + this.props.project.name).replace(' ','_')).getBoundingClientRect();
       var f = this.state.drawing.from;
-      var t = {
-        x: ev.clientX - parent.left,
-        y: ev.clientY - parent.top
-      };
-      this.setState({drawing: {from: f, to: t}});
+      this.setState({drawing: {from: f, to: mousePos}});
     }
 
     if (this.state.dragging) {
-      var parent = document.querySelector(('#project-' + this.props.project.name).replace(' ','_')).getBoundingClientRect();
-      this.state.dragging.x = ev.clientX - parent.left - xRadius / 2;
-      this.state.dragging.y = ev.clientY - parent.top - yRadius / 2;
+      this.state.dragging.x = mousePos.x ;
+      this.state.dragging.y = mousePos.y;
       this.forceUpdate();
     }
+
+    var hoveringOver = null;
+    this.tasks.forEach(t => {
+      if (t.x + t.radius > mousePos.x && t.x - t.radius < mousePos.x 
+        && t.y + t.radius > mousePos.y && t.y - t.radius < mousePos.y) {
+        hoveringOver = t;
+      }
+    });
+
+    this.setState({hoveringOver});
   }
 
   onMouseUp(ev) {
-    if (this.state.drawing) {
-      this.setState({drawing: null});
-    }
-
     if (this.state.dragging) {
       this.setState({dragging: null});
+    }
+
+    if (this.state.drawing) {
+      if (this.state.hoveringOver) {
+        this.drawEnded(this.state.hoveringOver);
+      } else {
+        this.setState({drawing: null});
+      }
     }
   }
 
@@ -137,6 +152,7 @@ export default class Project extends React.Component {
         forceProjectUpdate={this.props.forceProjectUpdate}
         setForm={this.props.setForm} 
         bringToFront={this.bringToFront.bind(this)} 
+        hover={this.state.hoveringOver == t}
         ref={(ref) => this.taskCircles[t.title] = ref} />
     ));
 
@@ -145,17 +161,23 @@ export default class Project extends React.Component {
       return (<DragLine source={l.source} target={l.target} key={idString} ref={idString} />);
     });
 
-    var dragline = '';
+    var dragline = null;
     if (this.state.drawing) {
       dragline = (<DragLine source={this.state.drawing.from} target={this.state.drawing.to} />);
     }
 
     return (
-      <div id={('project-' + this.props.project.name).replace(' ', '_')} className="project" style={{width: this.width - (xRadius / 2) , height: this.height - (yRadius / 2)}} onMouseMove={this.onMouseMove.bind(this)} onMouseUp={this.onMouseUp.bind(this)} >
-        {taskCircles}
-        {arrows}
+      <svg id={('project-' + this.props.project.name).replace(' ', '_')} className="project" onMouseMove={this.onMouseMove.bind(this)} onMouseUp={this.onMouseUp.bind(this)} >
         {dragline}
-      </div>
+        {arrows}
+        {taskCircles}
+
+        <defs> 
+          <marker id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" className="arrowHead" /> 
+          </marker>
+        </defs>
+      </svg>
     );
   }
 }

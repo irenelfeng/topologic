@@ -347,7 +347,7 @@ class Main extends React.Component {
   render() {
     return (
       <div id="main">
-        <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
+        <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} notifications={this.state.items.notifications} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
         <Content saveObject={this.saveObject.bind(this)}
           deleteObject={this.deleteObject.bind(this)}

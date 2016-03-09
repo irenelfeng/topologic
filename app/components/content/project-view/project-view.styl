@@ -39,8 +39,14 @@
   box-shadow 3px 3px 5px #666
   
   .task-description
+    height 100%
+    width 100%
     flexbox(flex)
     flex-direction(column)
+    -webkit-user-select none
+    -moz-user-select none
+    -ms-user-select none
+    user-select none
     
     .sticky-plus
       padding-top 20px
@@ -55,13 +61,7 @@
         img 
           height 20px
   
-  .icons-container
-    align-self(flex-start)
-    flexbox(flex)
-    justify-content(center)
-    
-  img
-    height 40px
+
 
 .project-view-container
   flexbox(flex)
