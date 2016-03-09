@@ -109,13 +109,8 @@ export default class Project extends React.Component {
       .nodes(this.tasks)
       .links(this.links)
       .charge(-300)
-      .gravity(0.01)
-      .on('tick', (ev) => {
-        this.tasks.forEach(t => {
-          t.x = Math.max(xRadius / 2, Math.min(this.width - xRadius * 2, t.x));
-          t.y = Math.max(yRadius / 2, Math.min(this.height - yRadius * 2, t.y));
-        });
-      });
+      .gravity(0.0)
+      .on('tick', this.constraints.bind(this));
   }
 
   runForce() {
@@ -127,12 +122,37 @@ export default class Project extends React.Component {
     this.force.stop();
   }
 
+  /*
+  * calculates constraints for each node (task)
+  */
+  constraints() {
+    var ly = yRadius*2;
+    console.log(ly);
+
+    var links = this.force.links();
+    var width = this.width;
+    var height = this.height;
+
+    // constrain the hierarchy
+    this.force.links().forEach(function(l) {
+      var parent = l.target;
+      var child = l.source;
+      child.y = parent.y + ly;
+    });
+
+    // constrain to window
+    this.force.nodes().forEach(function(n) {
+      n.x = Math.max(xRadius / 2, Math.min(width - xRadius * 2, n.x));
+      n.y = Math.max(yRadius / 2, Math.min(height - yRadius * 2, n.y));
+    });
+  }
+
+
   taskWithTitle(title) {
     return this.tasks.filter(t => t.title == title)[0];
   }
 
   render() {
-    console.log(this.laidOut);   
     if (!this.laidOut) {
       this.configureData();
       this.configureForce();
