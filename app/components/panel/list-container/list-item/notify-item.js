@@ -5,6 +5,10 @@ export default class NotifyItem extends React.Component {
     super();
   }
 
+  /*
+  * on selected, pass in the id to editItem to be colored selected. 
+  * needs to get 
+  */
   selected(e) {
     this.props.editItem(this.props.notification.id, this.props.notification, "notification");
     this.props.notification.unread = false;
