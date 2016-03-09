@@ -6,7 +6,7 @@ export default class NotifyItem extends React.Component {
   }
 
   selected(e) {
-    console.log("hi");
+    this.props.editItem(this.props.notification.id,this.props.notification, "notification");
   }
 
   render() {
