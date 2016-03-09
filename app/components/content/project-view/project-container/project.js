@@ -100,50 +100,49 @@ export default class Project extends React.Component {
     this.tasks = this.props.project.tasks;
     this.links = this.props.project.links;
 
-    this.width = 400;
-    this.height = 500;
+    this.width = 600;
+    this.height = 700;
   }
 
   configureForce() {
     this.force.size([this.width, this.height])
       .nodes(this.tasks)
       .links(this.links)
-      .charge(-300)
-      .gravity(0.0)
+      .charge(-175)
+      .linkStrength(0.05)
+      .gravity(0)
       .on('tick', this.constraints.bind(this));
   }
 
   runForce() {
     this.force.start();
-    for (var i = 0; i < numTicks; i++) {
-      this.force.tick();
-    }
-
-    this.force.stop();
   }
 
   /*
   * calculates constraints for each node (task)
   */
-  constraints() {
-    var ly = yRadius*2;
+  constraints(ev) {
+    var percent = 10 * ev.alpha;
 
-    var links = this.force.links();
-    var width = this.width;
-    var height = this.height;
+    var roots = this.tasks.slice();
 
     // constrain the hierarchy
-    this.force.links().forEach(function(l) {
-      var parent = l.target;
-      var child = l.source;
-      child.y = parent.y + ly;
+    this.links.forEach(l => {
+      l.source.y += percent * ((l.target.y + 150) - l.source.y);
+      roots.splice(roots.indexOf(l.source), 1);
+    });
+
+    roots.forEach(t => {
+      t.y = 0;
     });
 
     // constrain to window
-    this.force.nodes().forEach(function(n) {
-      n.x = Math.max(xRadius / 2, Math.min(width - xRadius * 2, n.x));
-      n.y = Math.max(yRadius / 2, Math.min(height - yRadius * 2, n.y));
+    this.tasks.forEach(t => {
+      t.x = Math.max(xRadius, Math.min(this.width - xRadius * 2, t.x));
+      t.y = Math.max(yRadius, Math.min(this.height - yRadius * 2, t.y));
     });
+
+    this.forceUpdate();
   }
 
 
@@ -158,6 +157,8 @@ export default class Project extends React.Component {
       this.runForce();
       this.laidOut = true;
     }
+
+    this.force.start();
 
     var taskCircles = this.tasks.map(t => (
       <TaskCircle task={t} 
