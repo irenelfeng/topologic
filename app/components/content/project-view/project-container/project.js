@@ -193,8 +193,8 @@ export default class Project extends React.Component {
         {taskCircles}
 
         <defs> 
-          <marker id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" className="arrowHead" /> 
+          <marker orient="auto" id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" >
+            <path d="M0,-5L10,0L0,5z" className="arrowHead" orient="auto" /> 
           </marker>
         </defs>
       </svg>

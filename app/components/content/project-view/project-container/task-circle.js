@@ -3,6 +3,7 @@ import $ from 'jquery';
 import StickyView from './sticky-view';
 import Modal from 'react-modal';
 import common from './common';
+import ReactDOM from 'react-dom';
 var xRadius = common.xRadius;
 var yRadius = common.yRadius;
 
@@ -155,27 +156,29 @@ export default class TaskCircle extends React.Component {
     if (this.state.tooltip) {
       tooltip = (
         <g className="tooltip" transform="translate(20,20)">
-          <rect height={iconSize * 2} width={iconSize * 2} rx="20" ry="20" style={{fill:'white',stroke:'black', strokeWidth:2}}>
+          <rect height={iconSize * 2 + 10} width={iconSize * 2 + 10} rx="20" ry="20" style={{fill:'white',stroke:'black', strokeWidth:2}}>
           </rect>
 
-          <g className="item done" onClick={this.markDone.bind(this)}>
-            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
-            <image xlinkHref="img/done.png" height="30px" width="30px" />
-          </g>
+          <g transform="translate(5,5)">
+            <g className="item done" onClick={this.markDone.bind(this)}>
+              <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none'}}/>
+              <image xlinkHref="img/done.png" height="30px" width="30px" />
+            </g>
 
-          <g className="item important" onClick={this.markImportant.bind(this)} transform="translate(0,20)">
-            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
-            <image xlinkHref="img/important.png" height="30px" width="30px" />
-          </g>
+            <g className="item important" onClick={this.markImportant.bind(this)} transform="translate(0,30)">
+              <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none'}}/>
+              <image xlinkHref="img/important.png" height="30px" width="30px" />
+            </g>
 
-          <g className="item drag" onMouseDown={this.startDraw.bind(this)} transform="translate(20,0)">
-            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
-            <image xlinkHref="img/projects.png" height="30px" width="30px" />
-          </g>
+            <g className="item drag" onMouseDown={this.startDraw.bind(this)} transform="translate(30,0)">
+              <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none'}}/>
+              <image xlinkHref="img/projects.png" height="30px" width="30px" />
+            </g>
 
-          <g className="item delete" onClick={this.openModal.bind(this)} transform="translate(20,20)">
-            <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none', stroke:'black', strokeWidth:2}}/>
-            <image xlinkHref="img/trash.png" height="30px" width="30px" />
+            <g className="item delete" onClick={this.openModal.bind(this)} transform="translate(30,30)">
+              <rect rx="20" ry="20" height={iconSize} width={iconSize} style={{fill: 'none'}}/>
+              <image xlinkHref="img/trash.png" height="30px" width="30px" />
+            </g>
           </g>
         </g>
       );
@@ -192,15 +195,12 @@ export default class TaskCircle extends React.Component {
       });
     }
 
-    var stickyTooltip = null;
     if (this.state.sticky) {
-      stickyTooltip = (
-        <StickyView sticky={$(this.state.sticky).attr('data')} 
-          parent={this.state.sticky}
-          deleteSticky={this.deleteSticky.bind(this)} 
-          addSticky={this.addSticky.bind(this)} 
-          cancelSticky={this.cancelSticky.bind(this) }/>
-      );
+      ReactDOM.render(<StickyView sticky={$(this.state.sticky).attr('data')}
+        parent={this.state.sticky}
+        deleteSticky={this.deleteSticky.bind(this)} 
+        addSticky={this.addSticky.bind(this)} 
+        cancelSticky={this.cancelSticky.bind(this) }/>, document.getElementById('sticky-view'));
     }
 
     /**
@@ -222,8 +222,6 @@ export default class TaskCircle extends React.Component {
 
     var important = this.props.task.important ? (<image xlinkHref="img/important.png" height="30px" width="30px"/>) : null;
     var done = this.props.task.done ? (<image xlinkHref="img/done.png" height="30px" width="30px"/>) : null;
-
-    stickyTooltip = null;
   
     var fill = "white";
     var stroke = "#1569C7";
@@ -266,7 +264,6 @@ export default class TaskCircle extends React.Component {
 
         {tooltip}
         {removing}
-        {stickyTooltip}
       </g>
     );
   }

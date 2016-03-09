@@ -68,7 +68,7 @@ export default class StickyView extends React.Component {
       );
 
       return (
-        <div>{sticky}</div>
+        <div className="sticky-view-container">{sticky}</div>
       );
     }
   }
