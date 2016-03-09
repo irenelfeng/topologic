@@ -11,60 +11,9 @@ export default class DragLine extends React.Component {
 
   render() {
     var s = this.props.source, t = this.props.target;
-    
-    var left = Math.min(s.x, t.x);
-    var top = Math.min(s.y, t.y);
-    var right = Math.max(s.x, t.x);
-    var bottom = Math.max(s.y, t.y);
-
-    var width = right - left;
-    var height = bottom - top;
-
-    var a = {};
-    // if top left to bottom right
-    if (top == s.y && left == s.x) {
-      a.x1 = 0; a.y1 = 0;
-      a.x2 = width; a.y2 = height;
-
-      a.x1 += xRadius; a.x2 -= xRadius; 
-      a.y1 += yRadius; a.y2 -= yRadius;
-    }
-    // if bottom left to top right
-    else if (bottom == s.y && left == s.x) {
-      a.x1 = 0; a.y1 = height;
-      a.x2 = width; a.y2 = 0;
-
-      a.x1 += xRadius; a.x2 -= xRadius;
-      a.y1 -= yRadius; a.y2 += yRadius;
-    }
-    // if top right to bottom left
-    else if (top == s.y && right == s.x) {
-      a.x1 = width; a.y1 = 0;
-      a.x2 = 0; a.y2 = height;
-
-      a.x1 -= xRadius; a.x2 += xRadius;
-      a.y1 += yRadius; a.y2 -= yRadius;
-    }
-    // if bottom right to top left
-    else if (bottom == s.y && right == s.x) {
-      a.x1 = width; a.y1 = height;
-      a.x2 = 0; a.y2 = 0;
-
-      a.x1 -= xRadius; a.x2 += xRadius;
-      a.y1 -= yRadius; a.y2 += yRadius;
-    }
 
     return (
-      <svg className="arrow-container" id={'link-' + Math.round(s.x) + '-' + Math.round(t.x)} style={{left: left, top: top, width: width, height: height}}> 
-        <line className="arrow" x1={a.x1} y1={a.y1} x2={a.x2} y2={a.y2 } markerEnd="url(#arrow)"/>
-
-        <defs> 
-          <marker id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" className="arrowHead" /> 
-          </marker>
-        </defs>
-
-      </svg>
+      <line className="arrow" x1={s.x} y1={s.y} x2={t.x} y2={t.y} style={{stroke:'black', strokeWidth:3}} markerEnd="url(#arrow)"/>
     );
   }
 }
