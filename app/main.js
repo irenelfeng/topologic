@@ -71,6 +71,7 @@ class Main extends React.Component {
           id: '0',
           description: 'Sarah has been added to Sample Group',
           link: 'Sample Group',
+          unread: true,
           alarm: true
         },
         {
@@ -78,6 +79,7 @@ class Main extends React.Component {
           id: '1',
           description: 'Done Important Task has been completed!',
           link: 'Done Important Task',
+          unread: true,
           alarm: false
         }],
         tutorials: [{
@@ -261,8 +263,8 @@ class Main extends React.Component {
 
   /**
    * Delete's object of type `type` with id `objectId`
-   * @param  {String} objectID 
-   * @param  {String} type 
+   * @param  {String} objectID
+   * @param  {String} type
    */
   deleteObject(objectID, type) {
     if (type == 'task') {
@@ -324,15 +326,15 @@ class Main extends React.Component {
   render() {
     return (
       <div id="main">
-        <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} />
+        <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} notifications={this.state.items.notifications} />
         <Panel setForm={this.setForm.bind(this)} active={this.state.active} items={this.state.items} ref={(ref) => this.panelRef = ref} />
-        <Content saveObject={this.saveObject.bind(this)} 
-          deleteObject={this.deleteObject.bind(this)} 
-          setForm={this.setForm.bind(this)} 
-          active={this.state.active} 
-          items={this.state.items} 
-          form={this.state.form} 
-          addLink={this.addLink.bind(this)} 
+        <Content saveObject={this.saveObject.bind(this)}
+          deleteObject={this.deleteObject.bind(this)}
+          setForm={this.setForm.bind(this)}
+          active={this.state.active}
+          items={this.state.items}
+          form={this.state.form}
+          addLink={this.addLink.bind(this)}
           forcePanelUpdate={function(){this.forceUpdate()}.bind(this)} />
       </div>
     );
