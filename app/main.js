@@ -374,6 +374,7 @@ class Main extends React.Component {
    *   Return true
    */
   noCycles(project, me, illegalSet) {
+    if (illegalSet.has(me)) return false;
     var thingsIDirectlyPointTo = new Set(project.links.filter(l => l.source == me).map(l => l.target));
     if (intersection(thingsIDirectlyPointTo, illegalSet).size > 0) return false;
 
