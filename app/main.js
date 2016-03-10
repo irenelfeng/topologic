@@ -378,7 +378,7 @@ class Main extends React.Component {
     if (intersection(thingsIDirectlyPointTo, illegalSet).size > 0) return false;
 
     var allgood = true;
-    var childsIllegalSet = new Set([...illegalSet].push(me));
+    var childsIllegalSet = union(illegalSet, new Set([me]));
     thingsIDirectlyPointTo.forEach(child => {
       if (!this.noCycles(project, child, childsIllegalSet)) {
         allgood = false;
