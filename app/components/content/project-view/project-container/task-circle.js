@@ -179,10 +179,12 @@ export default class TaskCircle extends React.Component {
 
     var doneConstraint = (
       <Modal isOpen={this.state.doneWaring} onRequestClose={this.closeDoneModal.bind(this)} style={this.stickyStyle}>
-      You are marking this task as done but haven't finished you marked were required
+      You are marking this task as completed but haven't finished the dependent tasks.
+
+      Would you like to mark those as completed too?
         <div className="form-group">
           <a className="form-button" onClick={this.closeDoneModal.bind(this)}> Cancel </a>
-          <a className="form-button" onClick={this.markMeAndTasksIDependOnAsDone.bind(this)}> Mark All Done </a>
+          <a className="form-button" onClick={this.markMeAndTasksIDependOnAsDone.bind(this)}> Yes </a>
         </div> 
       </Modal>
     );
