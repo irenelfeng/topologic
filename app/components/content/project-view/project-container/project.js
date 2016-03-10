@@ -129,9 +129,14 @@ export default class Project extends React.Component {
     // constrain the hierarchy
     this.links.forEach(l => {
       l.source.y += percent * ((l.target.y + 150) - l.source.y);
-      roots.splice(roots.indexOf(l.source), 1);
+      // remove source from roots
+      if(roots.indexOf(l.source) > -1)
+        roots.splice(roots.indexOf(l.source), 1);
     });
 
+    console.log(roots);
+
+    // make roots at the top
     roots.forEach(t => {
       t.y = 0;
     });
