@@ -7,7 +7,7 @@ export default class GroupView extends React.Component {
   }
 
   render() {
-    if (this.props.form[this.props.active])
+    if (this.props.form.groups)
       return (<FormView form={this.props.form} saveObject={this.props.saveObject} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type='group'/>);
 
     return (
