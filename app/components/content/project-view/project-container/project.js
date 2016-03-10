@@ -150,6 +150,10 @@ export default class Project extends React.Component {
     return this.tasks.filter(t => t.title == title)[0];
   }
 
+  deleteLink(source, target) {
+    this.props.deleteLink(this.props.project.name, source, target);
+  }
+
   render() {
     if (!this.laidOut) {
       this.configureData();
@@ -178,7 +182,7 @@ export default class Project extends React.Component {
 
     var arrows = this.links.map(l => {
       var idString = 'link-' + l.source.title + '-' + l.target.title;
-      return (<DragLine source={l.source} target={l.target} key={idString} ref={idString} />);
+      return (<DragLine source={l.source} target={l.target} key={idString} ref={idString} deleteLink={this.deleteLink.bind(this)} />);
     });
 
     var dragline = null;

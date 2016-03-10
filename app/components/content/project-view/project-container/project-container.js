@@ -26,6 +26,7 @@ export default class ProjectContainer extends React.Component {
       <div id={'project-box-' + this.props.project.name.replace(/ /g, '_')} className="project-box">
         <Project project={this.props.project}
           addLink={this.props.addLink}
+          deleteLink={this.props.deleteLink}
           deleteObject={this.props.deleteObject}
           forceProjectUpdate={this.forceProjectUpdate.bind(this)}
           setForm={this.props.setForm} />

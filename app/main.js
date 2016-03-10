@@ -341,6 +341,18 @@ class Main extends React.Component {
   }
 
   /**
+   * Delete a link between task `source` and `target` inside project `projectName`
+   */
+  deleteLink(projectName, source, target) {
+    var project = this.state.items.projects.filter(p => p.name == projectName)[0];
+    var linkToDelete = project.links.filter(l => l.source == source && l.target == target)[0];
+
+    if (!linkToDelete) return;
+    project.links.splice(project.links.indexOf(linkToDelete), 1);
+    this.forceUpdate();
+  }
+
+  /**
    * Main's render function
    */
   render() {
@@ -355,6 +367,7 @@ class Main extends React.Component {
           items={this.state.items}
           form={this.state.form}
           addLink={this.addLink.bind(this)}
+          deleteLink={this.deleteLink.bind(this)}
           forcePanelUpdate={function(){this.forceUpdate()}.bind(this)} />
         <div id="sticky-view"> </div>
       </div>

@@ -37,7 +37,7 @@ export default class ProjectView extends React.Component {
         return (<FormView items={this.props.items} form={this.props.form} saveObject={this.props.saveObject} changeForm={this.changeForm.bind(this)} deleteObject={this.props.deleteObject} setForm={this.props.setForm} type='project'/>);
 
     
-    var projects = this.props.projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} deleteObject={this.props.deleteObject} setForm={this.props.setForm} forcePanelUpdate={this.props.forcePanelUpdate} />));
+    var projects = this.props.projects.map((p, i) => (<ProjectContainer key={i} project={p} addLink={this.props.addLink} deleteLink={this.props.deleteLink} deleteObject={this.props.deleteObject} setForm={this.props.setForm} forcePanelUpdate={this.props.forcePanelUpdate} />));
     return (
       <div className="project-view-container"> 
         {projects}

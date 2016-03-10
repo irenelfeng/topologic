@@ -39,6 +39,7 @@ export default class Content extends React.Component {
           items={this.props.items}
           projects={this.props.items.projects}
           addLink={this.props.addLink}
+          deleteLink={this.props.deleteLink}
           forcePanelUpdate={this.props.forcePanelUpdate} />),
 
       groups: (
