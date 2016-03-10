@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Sidebar from './components/sidebar/sidebar';
 import Panel from './components/panel/panel';
+import Modal from 'react-modal';
 import Content from './components/content/content';
 
 class Main extends React.Component {
@@ -44,6 +45,7 @@ class Main extends React.Component {
     };
 
     this.state = {
+      removing: false,
       active: 'projects',
       items: {
         projects: [sampleProject, nullProject] ,
@@ -99,6 +101,19 @@ class Main extends React.Component {
         projects: null,
         groups: null
       },
+    };
+
+    this.modalStyle = {
+      content : {
+        position                   : 'absolute',
+        top                        : '50%',
+        left                       : '50%',
+        background                 : '#29C8E1',
+        borderRadius               : '10px',
+        outline                    : 'none',
+        height                     : '100px',
+        width                      : '150px'
+      }
     };
   }
 
@@ -336,9 +351,43 @@ class Main extends React.Component {
     var project = this.state.items.projects.filter(p => p.name == projectName)[0];
     if (project.links.filter(l => l.source == source && l.target == target).length > 0) return;
 
-    project.links.push({source: source, target: target});
-    this.forceUpdate();
+    // check for cycles
+    var nocycles = this.noCycles(project, target, new Set([source]));
+    if (nocycles) {
+      project.links.push({source: source, target: target});
+      this.forceUpdate();
+    } else {
+      this.setState({removing: true});
+    }
   }
+
+  closeModal() {
+    this.setState({removing: false});
+  }
+
+  /**
+   * Return true if task `me` can't point to anything in `illegalSet`
+   * Algorithm:
+   *   If I don't directly point to anything in `illegalSet`
+   *     AND
+   *   None of my children point to anything in `illegalSet`
+   *   Return true
+   */
+  noCycles(project, me, illegalSet) {
+    var thingsIDirectlyPointTo = new Set(project.links.filter(l => l.source == me).map(l => l.target));
+    if (intersection(thingsIDirectlyPointTo, illegalSet).size > 0) return false;
+
+    var allgood = true;
+    var childsIllegalSet = new Set([...illegalSet].push(me));
+    thingsIDirectlyPointTo.forEach(child => {
+      if (!this.noCycles(project, child, childsIllegalSet)) {
+        allgood = false;
+      }
+    });
+
+    return allgood;
+  }
+
 
   /**
    * Delete a link between task `source` and `target` inside project `projectName`
@@ -356,6 +405,18 @@ class Main extends React.Component {
    * Main's render function
    */
   render() {
+    var removing = null;
+    if (this.state.removing) {
+      var removing = (
+        <Modal isOpen={this.state.removing} onRequestClose={this.closeModal.bind(this)} style={this.modalStyle}>
+        What you are trying to do would destroy the universe as we know it.
+          <div className="form-group">
+            <a className="form-button" onClick={this.closeModal.bind(this)}> Sorry </a>
+          </div> 
+        </Modal>
+      );      
+    }
+
     return (
       <div id="main">
         <Sidebar setActive={this.setActive.bind(this)} active={this.state.active} notifications={this.state.items.notifications} />
@@ -370,6 +431,7 @@ class Main extends React.Component {
           deleteLink={this.deleteLink.bind(this)}
           forcePanelUpdate={function(){this.forceUpdate()}.bind(this)} />
         <div id="sticky-view"> </div>
+        {removing}
       </div>
     );
   }
@@ -382,3 +444,11 @@ ReactDOM.render(
   <Main/>,
   document.getElementById('app')
 );
+
+function union(setA, setB) {
+  return new Set([...setA, ...setB]);
+}
+
+function intersection(setA, setB) {
+  return new Set([...setA].filter(x => setB.has(x)));
+}
