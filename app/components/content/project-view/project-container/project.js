@@ -158,6 +158,16 @@ export default class Project extends React.Component {
     this.props.deleteLink(this.props.project.name, source, target);
   }
 
+  getTasksThisDependsOn(task) {
+    var thingsThatPointToMe = new Set(this.props.project.links.filter(l => l.target == task).map(l => l.source));
+    var result = new Set(Array.from(thingsThatPointToMe));
+
+    thingsThatPointToMe.forEach(thing => {
+      result = union(result, this.getTasksThisDependsOn(thing))
+    });
+    return result;
+  }
+
   render() {
     if (!this.laidOut) {
       this.configureData();
@@ -176,7 +186,8 @@ export default class Project extends React.Component {
         drawEnded={this.drawEnded.bind(this)} 
         dragEnded={this.dragEnded.bind(this)}
         deleteObject={this.props.deleteObject}
-        beingDragged={this.state.dragging == t} 
+        beingDragged={this.state.dragging == t}
+        getTasksThisDependsOn={this.getTasksThisDependsOn.bind(this)}
         forceProjectUpdate={this.props.forceProjectUpdate}
         setForm={this.props.setForm} 
         bringToFront={this.bringToFront.bind(this)} 
@@ -208,4 +219,12 @@ export default class Project extends React.Component {
       </svg>
     );
   }
+}
+
+function union(setA, setB) {
+  return new Set([...setA, ...setB]);
+}
+
+function intersection(setA, setB) {
+  return new Set([...setA].filter(x => setB.has(x)));
 }

@@ -13,7 +13,8 @@ export default class TaskCircle extends React.Component {
     this.state = {
       tooltip: null,
       sticky: null,
-      hover: false
+      hover: false,
+      doneWaring: false
     };
 
     this.stickyStyle = {
@@ -91,10 +92,36 @@ export default class TaskCircle extends React.Component {
 
   markDone(ev) {
     ev.stopPropagation();
-    ev.preventDefault();    
+    ev.preventDefault(); 
+
+    if (!this.props.task.done) {
+      var tasksIDependOn = Array.from(this.props.getTasksThisDependsOn(this.props.task));
+
+      if (tasksIDependOn.length > 0) {
+        if (tasksIDependOn.filter(t => !t.done).length > 0) {
+          this.setState({doneWaring: true});
+          return;
+        }
+      }
+    }
+
     this.props.task.done = !this.props.task.done;
     this.props.forceProjectUpdate();
     this.setState({tooltip: null});
+  }
+
+  markMeAndTasksIDependOnAsDone() {
+    var tasksIDependOn = Array.from(this.props.getTasksThisDependsOn(this.props.task));
+    tasksIDependOn.forEach(t => {
+      t.done = true;
+    });
+    this.props.task.done = true;
+    this.closeDoneModal();
+    this.forceProjectUpdate();
+  }
+
+  closeDoneModal() {
+    this.setState({doneWaring: false});
   }
 
   stickyView (ev) {
@@ -146,6 +173,16 @@ export default class TaskCircle extends React.Component {
         <div className="form-group">
           <a className="form-button" onClick={this.closeModal.bind(this)}> No </a>
           <a className="form-button" onClick={this.deleteTask.bind(this)}> Yes </a>
+        </div> 
+      </Modal>
+    );
+
+    var doneConstraint = (
+      <Modal isOpen={this.state.doneWaring} onRequestClose={this.closeDoneModal.bind(this)} style={this.stickyStyle}>
+      You are marking this task as done but haven't finished you marked were required
+        <div className="form-group">
+          <a className="form-button" onClick={this.closeDoneModal.bind(this)}> Cancel </a>
+          <a className="form-button" onClick={this.markMeAndTasksIDependOnAsDone.bind(this)}> Mark All Done </a>
         </div> 
       </Modal>
     );
@@ -264,6 +301,7 @@ export default class TaskCircle extends React.Component {
 
         {tooltip}
         {removing}
+        {doneConstraint}
       </g>
     );
   }
