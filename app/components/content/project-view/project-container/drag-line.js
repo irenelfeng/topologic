@@ -70,7 +70,7 @@ export default class DragLine extends React.Component {
 
     return (
       <g>
-        <line onClick={this.openModal.bind(this)} className="arrow" x1={s.x} y1={s.y} x2={t.x} y2={t.y + incY} style={{stroke:'black', strokeWidth:3}} markerEnd="url(#arrow)"/>
+        <line onClick={this.openModal.bind(this)} className="dependency" x1={s.x} y1={s.y} x2={t.x} y2={t.y + incY} markerEnd="url(#arrow)"/>
         {removing}
       </g>
     );

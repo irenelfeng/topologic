@@ -63,6 +63,7 @@ export default class Project extends React.Component {
       }
     });
 
+
     this.setState({hoveringOver});
   }
 
@@ -134,8 +135,6 @@ export default class Project extends React.Component {
         roots.splice(roots.indexOf(l.source), 1);
     });
 
-    console.log(roots);
-
     // make roots at the top
     roots.forEach(t => {
       t.y = 0;
@@ -202,8 +201,8 @@ export default class Project extends React.Component {
         {taskCircles}
 
         <defs> 
-          <marker orient="auto" id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" >
-            <path d="M0,-5L10,0L0,5z" className="arrowHead" orient="auto" /> 
+          <marker className="arrowHead" orient="auto" id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" >
+            <path d="M0,-5L10,0L0,5z" orient="auto" /> 
           </marker>
         </defs>
       </svg>

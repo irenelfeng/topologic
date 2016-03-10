@@ -249,8 +249,8 @@ export default class TaskCircle extends React.Component {
           <g transform="translate(0, 0)">{important}</g>
         </g>
 
-        <g className="task-description" >
-          <text textAnchor="middle">{this.props.task.title}</text>
+        <g className="task-description" transform="translate(-40, -30)" >
+          <foreignObject width={this.props.task.radius*2*Math.cos(Math.PI / 4)} height={this.props.task.radius*2* Math.cos(Math.PI / 4)}>{this.props.task.title}</foreignObject>
         </g>
 
         <g className="stickies" onClick={this.stickyView.bind(this)} transform="translate(0, 20)">
