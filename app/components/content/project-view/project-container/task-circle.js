@@ -117,7 +117,6 @@ export default class TaskCircle extends React.Component {
     });
     this.props.task.done = true;
     this.closeDoneModal();
-    this.forceProjectUpdate();
   }
 
   closeDoneModal() {
